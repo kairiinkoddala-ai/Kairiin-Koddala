@@ -6,6 +6,13 @@
       "env": {},
       "working_directory": null,
       "start_on_launch": true
+    },
+    "retune": {
+      "command": "npx",
+      "args": ["retune"],
+      "env": {},
+      "disabled": false,
+      "autoApprove": []
     }
   }
 }

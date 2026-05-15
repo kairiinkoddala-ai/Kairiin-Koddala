@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import FlowingMenu from "../components/FlowingMenu/FlowingMenu.jsx";
 
 const aboutEntries = await getCollection("about");
 const about = aboutEntries[0];
@@ -10,58 +11,129 @@ const projects = await getCollection("projects");
 const sortedProjects = projects.sort(
   (a, b) => (a.data.sortOrder ?? 99) - (b.data.sortOrder ?? 99)
 );
+
+const menuItems = sortedProjects.map((project) => ({
+  link: `/projects/${project.id}`,
+  text: project.data.title,
+  image: project.data.coverImage.src,
+}));
 ---
 
 <Layout title={`${about.data.name} — ${about.data.title}`}>
-  <main class="max-w-3xl mx-auto px-6 py-16">
-    <header class="mb-16">
-      <h1 class="text-3xl font-bold text-wrap-balance">{about.data.name}</h1>
-      <p class="text-lg text-gray-600 mt-1">{about.data.title}</p>
+  <!-- Skip to main content -->
+  <a href="#main-content" class="skip-to-main">Skip to main content</a>
 
-      <div class="prose prose-gray mt-6">
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <div class="top-bar-left">
+      <a href="mailto:{about.data.contact.email}" class="availability-badge">
+        Available for Work
+      </a>
+    </div>
+    <div class="top-bar-right">
+      {about.data.socials.map((social) => (
+        <a href={social.url} target="_blank" rel="noopener noreferrer">
+          {social.platform.substring(0, 2).toUpperCase()}
+        </a>
+      ))}
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>
+        <span class="hero-line">{about.data.title}</span>
+        <span class="hero-line">from Tallinn</span>
+        <span class="hero-line">working globally.</span>
+      </h1>
+      <p class="hero-subtitle">{about.data.name}</p>
+    </section>
+
+    <!-- Selected Work -->
+    <section class="projects-section">
+      <div class="section-header">
+        <h2>Selected</h2>
+        <h2>Work</h2>
+      </div>
+
+      <div class="flowing-menu-wrap">
+        <FlowingMenu
+          client:load
+          items={menuItems}
+          speed={18}
+          bgColor="#E8E4D4"
+          textColor="#1A1A1A"
+          marqueeBgColor="#E8402A"
+          marqueeTextColor="#E8E4D4"
+          borderColor="#c8c2ae"
+        />
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+      <div class="section-header" style="padding-left: 0; padding-right: 0;">
+        <h2>About</h2>
+        <h2>{about.data.name.split(' ')[0]}</h2>
+      </div>
+
+      <div class="about-content">
         <AboutContent />
       </div>
 
-      <nav class="flex flex-wrap gap-4 mt-6" aria-label="Social links">
-        {about.data.socials.map((social) => (
-          <a
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-sm font-medium text-blue-600 hover:text-blue-800 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 rounded"
-          >
-            {social.platform} ↗
-          </a>
-        ))}
-      </nav>
-
-      <div class="flex flex-wrap gap-2 mt-6">
-        {about.data.skills.map((skill) => (
-          <span class="text-sm bg-gray-100 px-2 py-1 rounded">{skill}</span>
-        ))}
+      <div style="margin-top: var(--space-xl);">
+        <h3 style="font-size: 11px; letter-spacing: 0.15em; color: var(--color-text-dim); margin-bottom: var(--space-lg);">Skills</h3>
+        <p style="color: var(--color-text-muted); letter-spacing: 0.05em;">
+          {about.data.skills.join(' · ')}
+        </p>
       </div>
-    </header>
+    </section>
 
-    <section aria-labelledby="projects-heading">
-      <h2 id="projects-heading" class="text-2xl font-semibold mb-8">Projects</h2>
-      <div class="space-y-10">
-        {sortedProjects.map((project) => (
-          <article>
-            <a
-              href={`/projects/${project.id}`}
-              class="group block rounded-lg focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-            >
-              <h3 class="text-xl font-medium group-hover:text-blue-600 transition-colors">{project.data.title}</h3>
-              <p class="text-gray-600 mt-1">{project.data.description}</p>
-              <div class="flex flex-wrap gap-2 mt-3">
-                {project.data.tags.map((tag) => (
-                  <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded">{tag}</span>
-                ))}
-              </div>
-            </a>
-          </article>
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <h2 class="contact-title">Get in Touch</h2>
+
+      <div class="contact-grid">
+        {about.data.contact.phone && (
+          <a href={`tel:${about.data.contact.phone}`} class="contact-item">
+            <span class="contact-item-value">
+              {about.data.contact.phone.split('').join(' ')}
+            </span>
+            <span class="contact-item-label">Call</span>
+          </a>
+        )}
+
+        <a href={`mailto:${about.data.contact.email}`} class="contact-item">
+          <span class="contact-item-value">
+            {about.data.contact.email.split('').join(' ')}
+          </span>
+          <span class="contact-item-label">Mail</span>
+        </a>
+
+        {about.data.socials.map((social) => (
+          <a href={social.url} target="_blank" rel="noopener noreferrer" class="contact-item">
+            <span class="contact-item-value">
+              {social.platform.toUpperCase().split('').join(' ')}
+            </span>
+            <span class="contact-item-label">Follow</span>
+          </a>
         ))}
       </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-socials">
+        {about.data.socials.map((social) => (
+          <a href={social.url} target="_blank" rel="noopener noreferrer">
+            {social.platform.substring(0, 2).toUpperCase()}
+          </a>
+        ))}
+      </div>
+      <span class="footer-credit">
+        © {new Date().getFullYear()} {about.data.name}
+      </span>
+    </footer>
   </main>
 </Layout>
