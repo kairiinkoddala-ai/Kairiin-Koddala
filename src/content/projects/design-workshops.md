@@ -17,7 +17,7 @@ problem: "How do you make abstract design concepts accessible and engaging for y
 solution: "Developed an innovative workshop format combining visual storytelling, hands-on exercises, and interactive discussions. The workshops break down complex design systems into digestible modules using real-world examples and collaborative activities."
 outcome: "Successfully facilitated workshops for 100+ participants, developing a replicable format that increases engagement and comprehension. Participants report better understanding of design systems and increased confidence in applying design thinking."
 featured: true
-sortOrder: 3
+sortOrder: 5
 publishedAt: 2024-06-01
 ---
 

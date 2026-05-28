@@ -2,14 +2,14 @@
 
 /* Jacob Turner Template - Warm Retro Palette */
 :root {
-  /* Colors — warm cream/olive/coral scheme */
-  --color-bg: #E8E4D4;
-  --color-bg-secondary: #5C4A1E;
-  --color-text: #1A1A1A;
-  --color-text-muted: #4a3f2f;
-  --color-text-dim: #7a6a52;
-  --color-border: #c8c2ae;
-  --color-accent: #E8402A;
+  /* Colors — light cream / dusty pink / dark brownish-green */
+  --color-bg: #F2EDE6;
+  --color-bg-secondary: #2E2D1E;
+  --color-text: #1e1c14;
+  --color-text-muted: #4a4535;
+  --color-text-dim: #7a7260;
+  --color-border: #d6cfc4;
+  --color-accent: #C97FA8;
   
   /* Spacing */
   --space-xs: 4px;
@@ -164,7 +164,102 @@ a:hover {
 }
 
 /* ========================================
-   TOP BAR - Marquee + Social Links
+   PILL NAV (floating, bottom-fixed)
+   ======================================== */
+.pill-nav {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0;
+  background: #F2EDE6;
+  border-radius: 999px;
+  padding: 0 var(--space-xl);
+  height: 48px;
+  min-width: min(720px, calc(100vw - 48px));
+  box-shadow: 0 4px 32px rgba(46, 45, 30, 0.18), 0 1px 4px rgba(46, 45, 30, 0.1);
+}
+
+.pill-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color var(--duration) var(--ease);
+  white-space: nowrap;
+}
+
+.pill-nav-item:hover {
+  color: var(--color-text);
+}
+
+.pill-nav-item.is-active {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.pill-nav-num {
+  color: var(--color-text-dim);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.pill-nav-item.is-active .pill-nav-num {
+  color: var(--color-text-muted);
+}
+
+/* Language toggle button */
+.pill-nav-lang {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-text);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  height: 26px;
+  cursor: pointer;
+  transition: background var(--duration) var(--ease), color var(--duration) var(--ease);
+  flex-shrink: 0;
+}
+
+.pill-nav-lang:hover {
+  background: var(--color-accent);
+  color: #F2EDE6;
+}
+
+@media (max-width: 480px) {
+  .pill-nav {
+    padding: 0 var(--space-md);
+    bottom: 16px;
+  }
+  .pill-nav-label {
+    display: none;
+  }
+  .pill-nav-num {
+    font-size: 11px;
+  }
+}
+
+/* ========================================
+   TOP BAR - kept for back-compat on project pages
    ======================================== */
 .top-bar {
   position: fixed;
@@ -176,28 +271,22 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   padding: var(--space-md) var(--container-padding);
-  background: var(--color-bg);
-  border-bottom: 1px solid var(--color-border);
+  background: #2E2D1E;
+  border-bottom: 1px solid rgba(201, 127, 168, 0.2);
   height: 48px;
-}
-
-.top-bar-left {
-  display: flex;
-  align-items: center;
-  gap: var(--space-sm);
 }
 
 .top-bar-left a {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--color-text);
+  color: rgba(201, 127, 168, 0.7);
   transition: opacity var(--duration) var(--ease);
 }
 
 .top-bar-left a:hover {
   opacity: 0.6;
-  color: var(--color-text);
+  color: rgba(201, 127, 168, 0.7);
 }
 
 .availability-badge {
@@ -207,7 +296,7 @@ a:hover {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--color-text);
+  color: rgba(201, 127, 168, 0.7);
   overflow: hidden;
   white-space: nowrap;
 }
@@ -221,11 +310,6 @@ a:hover {
   animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-
 .top-bar-right {
   display: flex;
   align-items: center;
@@ -236,27 +320,76 @@ a:hover {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-text-muted);
+  color: rgba(201, 127, 168, 0.5);
   transition: color var(--duration) var(--ease);
 }
 
 .top-bar-right a:hover {
-  color: var(--color-text);
+  color: #C97FA8;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
 /* ========================================
-   HERO SECTION
+   HERO SECTION — metaballs + video mask
    ======================================== */
+
+/*
+ * Layer structure (bottom → top):
+ * .hero          — section container (position: relative, overflow: hidden)
+ * .hero-video    — Layer 1: background video (position: absolute, object-fit: cover)
+ * .hero-canvas   — Layer 2: canvas overlay (position: absolute, z-index: 1)
+ *                  Filled with olive; metaballs punch transparent holes via
+ *                  globalCompositeOperation = 'destination-out'
+ * .hero-content  — Layer 3: text (position: relative, z-index: 2)
+ */
+
 .hero {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: var(--space-4xl) var(--container-padding) var(--space-3xl);
+  padding: var(--space-3xl) var(--container-padding) calc(var(--space-3xl) + 80px);
+  background-color: #2E2D1E;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
 }
 
-.hero h1 {
+/* Layer 1 — background video */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Layer 2 — canvas overlay (metaballs erase it) */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Layer 3 — text content */
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content h1 {
   margin-bottom: 0;
+  color: #C97FA8;
 }
 
 .hero-line {
@@ -269,7 +402,15 @@ a:hover {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--color-text-muted);
+  color: rgba(201, 127, 168, 0.55);
+}
+
+/* Remove old static-image blob styles */
+.hero-bg,
+.hero-blob-wrap,
+.hero-blob,
+.hero-blob-img {
+  display: none;
 }
 
 /* ========================================
@@ -317,7 +458,7 @@ a:hover {
 .project-row:hover .project-number,
 .project-row:hover .project-tags,
 .project-row:hover .project-view {
-  color: #E8E4D4;
+  color: #F2EDE6;
 }
 
 .project-row-inner {
@@ -424,14 +565,16 @@ a:hover {
   max-width: 800px;
 }
 
-.about-content p {
+.about-content p,
+.about-bio-text p {
   font-size: clamp(1rem, 1.5vw, 1.25rem);
   line-height: 1.8;
   color: var(--color-text-muted);
   margin-bottom: var(--space-lg);
 }
 
-.about-content p:last-child {
+.about-content p:last-child,
+.about-bio-text p:last-child {
   margin-bottom: 0;
 }
 
@@ -776,4 +919,71 @@ a:hover {
     opacity: 1 !important;
     transform: none !important;
   }
+}
+
+/* ========================================
+   CV / CURRICULUM VITAE SECTION
+   ======================================== */
+.cv-section {
+  padding-bottom: var(--space-4xl);
+}
+
+.cv-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3xl);
+  padding: 0 var(--container-padding);
+}
+
+@media (min-width: 768px) {
+  .cv-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+  }
+}
+
+.cv-column-label {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--color-text-dim);
+  margin-bottom: var(--space-lg);
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.cv-entry {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-lg) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.cv-entry-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.cv-entry-role {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text);
+}
+
+.cv-entry-company {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.03em;
+}
+
+.cv-entry-years {
+  font-size: 11px;
+  color: var(--color-text-dim);
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }

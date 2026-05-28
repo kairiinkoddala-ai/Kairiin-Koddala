@@ -1,6 +1,6 @@
 ---
 title: "Service Design at Estonian Tax and Customs Board"
-description: "Standardised development processes and redesigned internal documentation systems at MTA to improve collaboration across product teams, including a comprehensive 14-page visual guide translating service design principles for technical audiences."
+description: "Redesigned the internal Confluence environment used across all MTA digital product teams, and built the first responsive mobile prototype at MTA — the Customs Duty Calculator — which shipped to production. Also created a 14-page visual guide translating service design principles for technical audiences."
 coverImage: ./images/cover-mta.jpg
 tags:
   - Service Design
@@ -10,15 +10,15 @@ tools:
   - Figma
   - Confluence
   - Miro
-role: Service Designer (Intern)
+role: Service Design Intern
 timeline:
   startDate: 2024-01-01
   endDate: 2024-06-30
 problem: "The Estonian Tax and Customs Board needed to improve how development processes were documented and communicated across multiple product teams. Existing documentation was scattered and difficult to navigate, making it challenging for developers and partners to understand service design principles."
 solution: "Redesigned the entire Wiki documentation structure used by all MTA product teams, creating a standardised framework for documenting development processes. Visualised a comprehensive 14-page guide that translated complex service design principles into clear, accessible materials for technical audiences."
-outcome: "Increased web traffic through improved Search Console performance and boosted Google rating by +0.1. The standardised documentation is now used across all MTA product teams, significantly improving onboarding and cross-team collaboration."
+outcome: "The Customs Duty Calculator mobile prototype shipped to live production (avalik.emta.ee/tollimaksukalkulaator). The redesigned Confluence environment is in active daily use across all MTA digital product teams. Improved Search Console performance and boosted Google rating by +0.1."
 featured: true
-sortOrder: 6
+sortOrder: 8
 publishedAt: 2024-07-01
 ---
 

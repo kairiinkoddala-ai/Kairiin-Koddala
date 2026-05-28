@@ -30,7 +30,7 @@ links:
   - label: Live Brand Guidelines
     url: https://example.com/guidelines
 featured: true
-sortOrder: 1
+sortOrder: 3
 publishedAt: 2025-01-20
 ---
 

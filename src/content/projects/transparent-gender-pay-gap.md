@@ -19,7 +19,7 @@ problem: "Estonia has one of the highest gender pay gaps in the EU at 13.1%, dow
 solution: "Developed Transparent — a digital service for parents and small businesses — based on extensive mixed-methods research including 369 survey respondents, 4 expert interviews, field studies, stakeholder mapping, and co-design workshops. The service increases transparency in hiring and compensation while providing parents with tools and community support."
 outcome: "Research uncovered systemic biases at multiple touchpoints in the hiring process. The project delivered a complete service blueprint, business model canvas, and interactive UI prototype. The co-design process with stakeholders validated four key intervention areas: parental leave sharing awareness, incentive systems, workplace support during leave, and transparent compensation tools."
 featured: true
-sortOrder: 5
+sortOrder: 7
 publishedAt: 2025-03-01
 ---
 

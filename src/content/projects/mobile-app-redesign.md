@@ -25,7 +25,7 @@ links:
   - label: Figma Prototype
     url: https://figma.com/proto/example
 featured: true
-sortOrder: 2
+sortOrder: 4
 publishedAt: 2024-07-10
 ---
 

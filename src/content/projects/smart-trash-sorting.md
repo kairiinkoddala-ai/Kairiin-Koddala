@@ -18,7 +18,7 @@ problem: "Confusion about waste sorting leads to contamination in recycling stre
 solution: "Created a mobile app with AI-powered image recognition to identify items and provide instant sorting instructions, including a comprehensive database of materials, local recycling rules, and gamification to encourage proper sorting habits."
 outcome: "The app significantly improved sorting accuracy and user confidence. Users reported feeling more certain about their sorting decisions, leading to increased recycling participation and reduced contamination — 40% improvement in sorting accuracy across 25,000+ scans."
 featured: true
-sortOrder: 4
+sortOrder: 6
 publishedAt: 2023-09-01
 ---
 

@@ -32,7 +32,7 @@ const formatDate = (date: Date) =>
   <a href="#main-content" class="skip-to-main">Skip to main content</a>
 
   <!-- Back Link Header -->
-  <a href="/" class="back-link">← Back</a>
+  <a href="/Kairiin-Koddala/" class="back-link">← Back</a>
 
   <main id="main-content" class="project-detail">
     <!-- Project Hero -->
@@ -114,7 +114,7 @@ const formatDate = (date: Date) =>
         </div>
 
         {otherProjects.map((p, index) => (
-          <a href={`/projects/${p.id}`} class="project-row">
+          <a href={`/Kairiin-Koddala/projects/${p.id}`} class="project-row">
             <div class="project-row-inner">
               <div class="project-row-left">
                 <span class="project-number">{index + 1} /</span>
@@ -130,47 +130,47 @@ const formatDate = (date: Date) =>
     )}
 
     <!-- Contact Section -->
-    <section class="contact-section">
-      <h2 class="contact-title">Get in Touch</h2>
+    <section class="contact-section" style="background: var(--color-bg-secondary); border-top: none;">
+      <h2 class="contact-title" style="color: #F2EDE6;">Get in Touch</h2>
 
       <div class="contact-grid">
         {about.data.contact.phone && (
-          <a href={`tel:${about.data.contact.phone}`} class="contact-item">
-            <span class="contact-item-value">
+          <a href={`tel:${about.data.contact.phone}`} class="contact-item" style="border-top-color: rgba(242,237,230,0.15);">
+            <span class="contact-item-value" style="color: #F2EDE6;">
               {about.data.contact.phone.split('').join(' ')}
             </span>
-            <span class="contact-item-label">Call</span>
+            <span class="contact-item-label" style="color: rgba(242,237,230,0.5);">Call</span>
           </a>
         )}
 
-        <a href={`mailto:${about.data.contact.email}`} class="contact-item">
-          <span class="contact-item-value">
+        <a href={`mailto:${about.data.contact.email}`} class="contact-item" style="border-top-color: rgba(242,237,230,0.15);">
+          <span class="contact-item-value" style="color: #F2EDE6;">
             {about.data.contact.email.split('').join(' ')}
           </span>
-          <span class="contact-item-label">Mail</span>
+          <span class="contact-item-label" style="color: rgba(242,237,230,0.5);">Mail</span>
         </a>
 
         {about.data.socials.map((social) => (
-          <a href={social.url} target="_blank" rel="noopener noreferrer" class="contact-item">
-            <span class="contact-item-value">
+          <a href={social.url} target="_blank" rel="noopener noreferrer" class="contact-item" style="border-top-color: rgba(242,237,230,0.15);">
+            <span class="contact-item-value" style="color: #F2EDE6;">
               {social.platform.toUpperCase().split('').join(' ')}
             </span>
-            <span class="contact-item-label">Follow</span>
+            <span class="contact-item-label" style="color: rgba(242,237,230,0.5);">Follow</span>
           </a>
         ))}
       </div>
     </section>
 
     <!-- Footer -->
-    <footer class="site-footer">
+    <footer class="site-footer" style="background: var(--color-bg-secondary); border-top-color: rgba(242,237,230,0.15);">
       <div class="footer-socials">
         {about.data.socials.map((social) => (
-          <a href={social.url} target="_blank" rel="noopener noreferrer">
+          <a href={social.url} target="_blank" rel="noopener noreferrer" style="color: rgba(242,237,230,0.5);">
             {social.platform.substring(0, 2).toUpperCase()}
           </a>
         ))}
       </div>
-      <span class="footer-credit">
+      <span class="footer-credit" style="color: rgba(242,237,230,0.4);">
         © {new Date().getFullYear()} {about.data.name}
       </span>
     </footer>

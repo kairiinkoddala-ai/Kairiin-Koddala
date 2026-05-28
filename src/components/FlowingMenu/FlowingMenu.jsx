@@ -85,12 +85,30 @@ function MenuItem({ link, text, image, speed, textColor, marqueeBgColor, marquee
         ease: 'none',
         repeat: -1
       });
+
+      // Pause when offscreen — saves CPU when user isn't looking
+      if (itemRef.current) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!animationRef.current) return;
+              if (entry.isIntersecting) animationRef.current.play();
+              else animationRef.current.pause();
+            });
+          },
+          { threshold: 0 }
+        );
+        io.observe(itemRef.current);
+        // Stash for cleanup
+        animationRef.current._io = io;
+      }
     };
 
     const timer = setTimeout(setupMarquee, 50);
     return () => {
       clearTimeout(timer);
       if (animationRef.current) {
+        animationRef.current._io?.disconnect();
         animationRef.current.kill();
       }
     };

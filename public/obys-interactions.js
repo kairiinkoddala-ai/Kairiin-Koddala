@@ -140,25 +140,58 @@ class BlobCursor {
   }
 
   _bindEvents() {
-    const onMove = (e) => {
+    let lastX = 0;
+    let lastY = 0;
+    let pending = false;
+
+    // Throttle to one update per frame — coalesces high-frequency mousemove
+    const flush = () => {
+      pending = false;
       const { left, top } = this._getOffset();
+      const blobs = this.blobs;
+      for (let i = 0; i < blobs.length; i++) {
+        const isLead = i === 0;
+        gsap.to(blobs[i], {
+          x:        lastX - left,
+          y:        lastY - top,
+          duration: isLead ? this.cfg.fastDuration : this.cfg.slowDuration,
+          ease:     isLead ? this.cfg.fastEase     : this.cfg.slowEase,
+          overwrite: 'auto',
+        });
+      }
+    };
+
+    const onMove = (e) => {
       const x = e.clientX ?? e.touches?.[0]?.clientX;
       const y = e.clientY ?? e.touches?.[0]?.clientY;
       if (x == null) return;
-
-      this.blobs.forEach((el, i) => {
-        const isLead = i === 0;
-        gsap.to(el, {
-          x:        x - left,
-          y:        y - top,
-          duration: isLead ? this.cfg.fastDuration : this.cfg.slowDuration,
-          ease:     isLead ? this.cfg.fastEase     : this.cfg.slowEase,
-        });
-      });
+      lastX = x;
+      lastY = y;
+      if (!pending) {
+        pending = true;
+        requestAnimationFrame(flush);
+      }
     };
 
-    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mousemove', onMove, { passive: true });
     window.addEventListener('touchmove', onMove, { passive: true });
+
+    // Hide blob when tab is hidden — saves CPU on background tabs
+    document.addEventListener('visibilitychange', () => {
+      this.container.style.display = document.hidden ? 'none' : '';
+    });
+
+    // Hide blob over the hero — the metaball mask there is its own cursor
+    const hero = document.getElementById('hero-section');
+    if (hero) {
+      hero.addEventListener('mouseenter', () => {
+        this.container.style.opacity = '0';
+      }, { passive: true });
+      hero.addEventListener('mouseleave', () => {
+        this.container.style.opacity = '1';
+      }, { passive: true });
+      this.container.style.transition = 'opacity 0.2s';
+    }
   }
 }
 
@@ -262,13 +295,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   new BlobCursor({
     blobType:                'circle',
-    fillColor:               '#E8402A',
+    fillColor:               '#C97FA8',
     trailCount:              3,
     sizes:                   [60, 125, 75],
     innerSizes:              [20, 35, 25],
-    innerColor:              'rgba(255,255,255,0.8)',
+    innerColor:              'rgba(242,237,230,0.6)',
     opacities:               [0.6, 0.6, 0.6],
-    shadowColor:             'rgba(0,0,0,0.75)',
+    shadowColor:             'rgba(0,0,0,0.3)',
     shadowBlur:              5,
     shadowOffsetX:           10,
     shadowOffsetY:           10,
