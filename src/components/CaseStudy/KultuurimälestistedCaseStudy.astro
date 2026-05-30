@@ -1,0 +1,155 @@
+---
+/**
+ * KultuurimälestistedCaseStudy — National Registry of Cultural Monuments Redesign
+ * Architecture mirrors OleValmisCaseStudy.astro 1:1.
+ * Design tokens: #111111 / #0052cc / #f9f9f9 / #eeeeee
+ * Prefix: km- (Kultuurimälestised)
+ */
+import './KultuurimälestistedCaseStudy.css';
+---
+
+<div class="km">
+
+  <!-- ═══════════════════════════════════════════════════════
+       QUICK OVERVIEW — two-column grid
+  ═══════════════════════════════════════════════════════ -->
+  <section class="km-overview" aria-label="Project quick overview">
+    <div class="km-overview__col">
+      <div class="km-overview__item">
+        <span class="km-overview__key">Context</span>
+        <p class="km-overview__val">Service design and digital transformation sprint executed for the National Heritage Board of Estonia (Muinsuskaitseamet) under the EKA LAETUS framework.</p>
+      </div>
+      <div class="km-overview__item">
+        <span class="km-overview__key">Team</span>
+        <p class="km-overview__val">EKA LAETUS Collaborative Design Cohort</p>
+      </div>
+    </div>
+    <div class="km-overview__col">
+      <div class="km-overview__item">
+        <span class="km-overview__key">Timeframe</span>
+        <p class="km-overview__val">Multi-stage sprint completed in Tallinn 2025</p>
+      </div>
+      <div class="km-overview__item">
+        <span class="km-overview__key">My Role</span>
+        <p class="km-overview__val">UX Researcher, Systems Auditor, Interaction Designer &amp; Copy Strategy Lead</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ACCORDION STAGES
+  ═══════════════════════════════════════════════════════ -->
+  <div class="km-accordion" role="list">
+
+    <!-- ── STAGE 1 ─────────────────────────────────────── -->
+    <details class="km-stage" role="listitem">
+      <summary class="km-stage__summary">
+        <span class="km-stage__num">01</span>
+        <span class="km-stage__title">Introduction, Problem Frame &amp; Target Audience</span>
+        <span class="km-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="km-stage__body">
+
+        <div class="km-prose">
+          <h3 class="km-subheading">The Legacy Registry Framework</h3>
+          <p>The Kultuurimälestiste register — Estonia's National Registry of Cultural Monuments — is the authoritative state database governing all legally protected heritage assets across the country. Administered by the National Heritage Board of Estonia (Muinsuskaitseamet), the registry serves as the primary legal and operational reference point for heritage protection decisions, construction permitting, and asset ownership documentation.</p>
+          <p>Despite its critical civic function, the existing registry interface was architected for internal administrative utility rather than public accessibility. The system's information architecture, language register, and interaction model were designed around the workflows of heritage inspectors and legal officers — not the diverse range of citizens, property owners, architects, and developers who depend on it daily.</p>
+          <p>The result: a technically functional but experientially hostile system that generates significant friction, confusion, and unnecessary administrative burden for the majority of its actual user base.</p>
+
+          <h3 class="km-subheading">Target Stakeholder Ecosystem</h3>
+          <p>Our research identified three structurally distinct user segments, each with fundamentally different information needs, technical literacy levels, and interaction goals:</p>
+        </div>
+
+        <div class="km-stakeholder-grid">
+          <div class="km-stakeholder-card">
+            <div class="km-stakeholder-card__badge">Segment A</div>
+            <h4 class="km-stakeholder-card__title">Internal Experts &amp; Regulators</h4>
+            <p class="km-stakeholder-card__desc">Heritage inspectors, legal officers, and Muinsuskaitseamet administrative staff. High system literacy, complex data entry workflows, and regulatory enforcement responsibilities. Primary need: efficient data management and audit trail integrity.</p>
+            <div class="km-stakeholder-card__note">Current system optimised for this segment only</div>
+          </div>
+          <div class="km-stakeholder-card km-stakeholder-card--accent">
+            <div class="km-stakeholder-card__badge km-stakeholder-card__badge--accent">Segment B</div>
+            <h4 class="km-stakeholder-card__title">Professional B2B Operators</h4>
+            <p class="km-stakeholder-card__desc">Architects, urban planners, construction project managers, real estate developers, and legal consultants. Medium-to-high system literacy, frequent registry interactions, and professional liability exposure. Primary need: fast, reliable restriction lookups and permit status tracking.</p>
+            <div class="km-stakeholder-card__note">Underserved — forced into phone-support loops</div>
+          </div>
+          <div class="km-stakeholder-card">
+            <div class="km-stakeholder-card__badge">Segment C</div>
+            <h4 class="km-stakeholder-card__title">General Public &amp; B2C Asset Owners</h4>
+            <p class="km-stakeholder-card__desc">Private property owners, homebuyers, tenants, and culturally curious citizens. Low system literacy, infrequent interactions, and high anxiety around legal compliance. Primary need: plain-language guidance on what heritage status means for their specific property and situation.</p>
+            <div class="km-stakeholder-card__note">Most impacted — highest abandonment rate</div>
+          </div>
+        </div>
+
+        <!-- TODO: REPLACE WITH historical monument asset collage or introductory project brief cover art -->
+        <figure class="km-media">
+          <div class="km-media__placeholder">
+            <span class="km-media__icon">⬜</span>
+            <span class="km-media__text">Historical monument asset collage or introductory project brief cover art</span>
+            <span class="km-media__file">Kultuurimälestiste registri redesign_II rühm.pdf — intro spread</span>
+          </div>
+          <figcaption>Project brief cover art — Kultuurimälestiste registri redesign, EKA LAETUS 2025</figcaption>
+        </figure>
+
+      </div>
+    </details>
+
+    <!-- ── STAGE 2 ─────────────────────────────────────── -->
+    <details class="km-stage" role="listitem">
+      <summary class="km-stage__summary">
+        <span class="km-stage__num">02</span>
+        <span class="km-stage__title">Team Alignment &amp; Agile Operational Methodology</span>
+        <span class="km-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="km-stage__body">
+
+        <div class="km-prose">
+          <h3 class="km-subheading">Process Mapping via Chronological Milestones</h3>
+          <p>The project was structured across four sequential operational tracks, each building directly on the validated outputs of the previous phase. This chronological milestone architecture ensured that no design decision was made without a corresponding evidence base — preventing the common failure mode of solution-first thinking in public sector digital transformation projects.</p>
+        </div>
+
+        <div class="km-track-grid">
+          <div class="km-track-card">
+            <div class="km-track-card__num">Track 01</div>
+            <h4 class="km-track-card__title">Foundational Alignment</h4>
+            <p class="km-track-card__desc">Team canvas completion, stakeholder mapping, scope definition, and initial briefing sessions with Muinsuskaitseamet representatives. Established shared vocabulary, project constraints, and success criteria across the full cohort.</p>
+          </div>
+          <div class="km-track-card km-track-card--active">
+            <div class="km-track-card__num">Track 02</div>
+            <h4 class="km-track-card__title">Current-State Diagnostics</h4>
+            <p class="km-track-card__desc">Systematic audit of the existing registry interface, expert interview programme, and regulatory compliance desk research. Produced a comprehensive failure-mode inventory and user friction map across all three stakeholder segments.</p>
+          </div>
+          <div class="km-track-card">
+            <div class="km-track-card__num">Track 03</div>
+            <h4 class="km-track-card__title">Problem Framing</h4>
+            <p class="km-track-card__desc">Synthesis of diagnostic findings into validated insight clusters. Reframing of the initial brief from a cosmetic UI refresh to a structural service redesign. Development of the core How Might We question and design principles.</p>
+          </div>
+          <div class="km-track-card">
+            <div class="km-track-card__num">Track 04</div>
+            <h4 class="km-track-card__title">Systemic Ideation</h4>
+            <p class="km-track-card__desc">Co-design workshops, concept generation, architecture mapping, and prototype development. Iterative testing with representative users from each stakeholder segment, culminating in the final service concept and interaction model.</p>
+          </div>
+        </div>
+
+        <div class="km-prose">
+          <h3 class="km-subheading">Agile Operational Infrastructure</h3>
+          <p>The EKA LAETUS cohort operated under a distributed agile framework adapted for academic-professional hybrid contexts. Sprint cycles were calibrated to the four-track milestone structure, with weekly synchronous alignment sessions and asynchronous documentation maintained in a shared Miro workspace.</p>
+          <ul class="km-list">
+            <li><strong>Parallel Research Streams:</strong> Expert interviews, UX auditing, and desk research ran concurrently rather than sequentially — compressing the diagnostic phase without sacrificing data quality.</li>
+            <li><strong>Stakeholder Integration Points:</strong> Muinsuskaitseamet representatives were embedded as active participants at key synthesis and validation checkpoints, not passive recipients of final deliverables.</li>
+            <li><strong>Living Documentation:</strong> All research artefacts, synthesis outputs, and design decisions were maintained in a continuously updated shared canvas — enabling full team alignment despite varying individual schedules.</li>
+          </ul>
+        </div>
+
+        <!-- TODO: REPLACE WITH complete project process flow and operational roadmap canvas -->
+        <figure class="km-media">
+          <div class="km-media__placeholder">
+            <span class="km-media__icon">⬜</span>
+            <span class="km-media__text">Complete Project Process Flow and Operational Roadmap Canvas</span>
+            <span class="km-media__file">Kultuurimälestiste registri redesign_II rühm.pdf — process roadmap spread</span>
+          </div>
+          <figcaption>Project process flow — four-track operational roadmap and chronological milestone architecture</figcaption>
+        </figure>
+
+      </div>
+    </details>

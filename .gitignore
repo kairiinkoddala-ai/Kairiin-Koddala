@@ -20,5 +20,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# Large binary/media files — host these on a CDN or Git LFS instead
+*.mp4
+images/
+
 # jetbrains setting folder
 .idea/

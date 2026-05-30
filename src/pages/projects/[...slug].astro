@@ -1,6 +1,11 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import PillNav from "../../components/PillNav/PillNav.astro";
+import FlowingMenu from "../../components/FlowingMenu/FlowingMenu.jsx";
+import TransparentCaseStudy from "../../components/CaseStudy/TransparentCaseStudy.astro";
+import OleValmisCaseStudy from "../../components/CaseStudy/OleValmisCaseStudy.astro";
+import FooterSecondary from "../../components/Footer/FooterSecondary.astro";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -20,54 +25,96 @@ const otherProjects = allProjects
   .sort((a, b) => (a.data.sortOrder ?? 99) - (b.data.sortOrder ?? 99))
   .slice(0, 3);
 
+// Menu items for the FlowingMenu — same shape as the homepage
+const otherMenuItems = otherProjects.map((p) => ({
+  link: `/Kairiin-Koddala/projects/${p.id}`,
+  text: p.data.title,
+  textEt: p.data.titleEt ?? p.data.title,
+  image: p.data.coverImage.src,
+}));
+
 const aboutEntries = await getCollection("about");
 const about = aboutEntries[0];
 
-const formatDate = (date: Date) =>
-  date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+const formatDate = (date: Date, locale: string = "en-US") =>
+  date.toLocaleDateString(locale, { month: "short", year: "numeric" });
+
+const formatDateEt = (date: Date) =>
+  date.toLocaleDateString("et-EE", { month: "short", year: "numeric" });
 ---
 
 <Layout title={`${data.title} — ${about.data.name}`}>
   <!-- Skip to main content -->
   <a href="#main-content" class="skip-to-main">Skip to main content</a>
 
-  <!-- Back Link Header -->
-  <a href="/Kairiin-Koddala/" class="back-link">← Back</a>
+  <!-- Floating Pill Nav — project variant: back link + language toggle -->
+  <PillNav variant="project" backHref="/Kairiin-Koddala/" />
 
   <main id="main-content" class="project-detail">
-    <!-- Project Hero -->
-    <section class="project-detail-hero">
-      <div class="project-detail-tags">
-        {data.tags.map((tag) => (
-          <span>{tag}</span>
-        ))}
-      </div>
 
-      <h1 class="project-detail-title">{data.title}</h1>
+    <!-- Project Hero — cover image with title overlaid -->
+    <!-- TODO: Replace coverImage in the project's .md frontmatter with your own photo -->
+    <section class="project-hero-cover">
+      <img
+        src={data.coverImage.src}
+        alt={`${data.title} — project cover`}
+        class="project-hero-cover__img"
+        loading="eager"
+        decoding="async"
+      />
+      <!-- Dark gradient so text is always legible -->
+      <div class="project-hero-cover__overlay" aria-hidden="true"></div>
+
+      <!-- Text content on top of the image -->
+      <div class="project-hero-cover__content">
+        <div class="project-detail-tags project-detail-tags--light">
+          {data.tags.map((tag) => (
+            <span>{tag}</span>
+          ))}
+        </div>
+        <h1
+          class="project-detail-title project-detail-title--light"
+          data-title-en={data.title}
+          data-title-et={data.titleEt ?? data.title}
+        >
+          {data.title}
+        </h1>
+      </div>
     </section>
 
-    <!-- Project Meta -->
+    <!-- Project Meta — hidden for Transparent and Ole Valmis (case study components cover it) -->
+    {project.id !== 'transparent-gender-pay-gap' && project.id !== 'ole-valmis' && (
     <div class="project-detail-meta">
       <div class="project-meta-item">
-        <span class="project-meta-label">/ Role</span>
-        <span class="project-meta-value">{data.role}</span>
+        <span class="project-meta-label" data-i18n="meta_role">/ Role</span>
+        <span
+          class="project-meta-value"
+          data-meta-en={data.role}
+          data-meta-et={data.roleEt ?? data.role}
+        >
+          {data.role}
+        </span>
       </div>
 
       <div class="project-meta-item">
-        <span class="project-meta-label">/ Timeline</span>
-        <span class="project-meta-value">
+        <span class="project-meta-label" data-i18n="meta_timeline">/ Timeline</span>
+        <span
+          class="project-meta-value"
+          data-timeline-en={`${formatDate(data.timeline.startDate)}${data.timeline.endDate ? ` – ${formatDate(data.timeline.endDate)}` : " – Present"}`}
+          data-timeline-et={`${formatDateEt(data.timeline.startDate)}${data.timeline.endDate ? ` – ${formatDateEt(data.timeline.endDate)}` : " – Praeguseni"}`}
+        >
           {formatDate(data.timeline.startDate)}{data.timeline.endDate ? ` – ${formatDate(data.timeline.endDate)}` : " – Present"}
         </span>
       </div>
 
       <div class="project-meta-item">
-        <span class="project-meta-label">/ Tools</span>
+        <span class="project-meta-label" data-i18n="meta_tools">/ Tools</span>
         <span class="project-meta-value">{data.tools.join(", ")}</span>
       </div>
 
       {data.links && data.links.length > 0 && (
         <div class="project-meta-item">
-          <span class="project-meta-label">/ Links</span>
+          <span class="project-meta-label" data-i18n="meta_links">/ Links</span>
           <div>
             {data.links.map((link) => (
               <a
@@ -84,95 +131,226 @@ const formatDate = (date: Date) =>
         </div>
       )}
     </div>
+    )}
 
-    <!-- About the Project -->
-    <section class="project-detail-content">
-      <h2>/ About the Project</h2>
-      <p>{data.description}</p>
+    <!-- About the Project — hidden for Transparent and Ole Valmis (case study components cover it) -->
+    {project.id !== 'transparent-gender-pay-gap' && project.id !== 'ole-valmis' && (
+      <section class="project-detail-content">
+        <h2 data-i18n="section_about">/ About the Project</h2>
+        <p
+          data-field-en={data.description}
+          data-field-et={data.descriptionEt ?? data.description}
+        >
+          {data.description}
+        </p>
 
-      <h2>/ Problem</h2>
-      <p>{data.problem}</p>
+        <h2 data-i18n="section_problem">/ Problem</h2>
+        <p
+          data-field-en={data.problem}
+          data-field-et={data.problemEt ?? data.problem}
+        >
+          {data.problem}
+        </p>
 
-      <h2>/ Solution</h2>
-      <p>{data.solution}</p>
+        <h2 data-i18n="section_solution">/ Solution</h2>
+        <p
+          data-field-en={data.solution}
+          data-field-et={data.solutionEt ?? data.solution}
+        >
+          {data.solution}
+        </p>
 
-      <h2>/ Outcome</h2>
-      <p>{data.outcome}</p>
-    </section>
-
-    <!-- Project Content (Markdown) -->
-    <section class="project-detail-content" style="border-top: 1px solid var(--color-border); padding-top: var(--space-3xl);">
-      <Content />
-    </section>
-
-    <!-- Other Projects -->
-    {otherProjects.length > 0 && (
-      <section style="padding: var(--space-3xl) 0;">
-        <div class="section-header">
-          <h2>Other</h2>
-          <h2>Projects</h2>
-        </div>
-
-        {otherProjects.map((p, index) => (
-          <a href={`/Kairiin-Koddala/projects/${p.id}`} class="project-row">
-            <div class="project-row-inner">
-              <div class="project-row-left">
-                <span class="project-number">{index + 1} /</span>
-                <span class="project-title">{p.data.title}</span>
-              </div>
-              <div class="project-row-right">
-                <span class="project-view">View Project</span>
-              </div>
-            </div>
-          </a>
-        ))}
+        <h2 data-i18n="section_outcome">/ Outcome</h2>
+        <p
+          data-field-en={data.outcome}
+          data-field-et={data.outcomeEt ?? data.outcome}
+        >
+          {data.outcome}
+        </p>
       </section>
     )}
 
-    <!-- Contact Section -->
-    <section class="contact-section" style="background: var(--color-bg-secondary); border-top: none;">
-      <h2 class="contact-title" style="color: #F2EDE6;">Get in Touch</h2>
+    <!-- Markdown body — hidden for Transparent and Ole Valmis (case study components cover it) -->
+    {project.id !== 'transparent-gender-pay-gap' && project.id !== 'ole-valmis' && (
+      <section class="project-detail-content" style="border-top: 1px solid var(--color-border); padding-top: var(--space-3xl);">
+        <Content />
+      </section>
+    )}
 
-      <div class="contact-grid">
-        {about.data.contact.phone && (
-          <a href={`tel:${about.data.contact.phone}`} class="contact-item" style="border-top-color: rgba(242,237,230,0.15);">
-            <span class="contact-item-value" style="color: #F2EDE6;">
-              {about.data.contact.phone.split('').join(' ')}
-            </span>
-            <span class="contact-item-label" style="color: rgba(242,237,230,0.5);">Call</span>
-          </a>
-        )}
+    <!-- Rich case study — only rendered for the Transparent project -->
+    {project.id === 'transparent-gender-pay-gap' && (
+      <TransparentCaseStudy />
+    )}
 
-        <a href={`mailto:${about.data.contact.email}`} class="contact-item" style="border-top-color: rgba(242,237,230,0.15);">
-          <span class="contact-item-value" style="color: #F2EDE6;">
-            {about.data.contact.email.split('').join(' ')}
-          </span>
-          <span class="contact-item-label" style="color: rgba(242,237,230,0.5);">Mail</span>
+    <!-- Rich case study — only rendered for Ole Valmis -->
+    {project.id === 'ole-valmis' && (
+      <OleValmisCaseStudy />
+    )}
+
+    <!-- Other Projects — FlowingMenu, identical to homepage but visually secondary -->
+    {otherProjects.length > 0 && (
+      <section class="other-projects-section">
+        <div class="section-header section-header--secondary">
+          <h2 data-i18n="other_1">Other</h2>
+          <h2 data-i18n="other_2">Projects</h2>
+        </div>
+
+        <div class="flowing-menu-wrap flowing-menu-wrap--compact flowing-menu-wrap--secondary">
+          <FlowingMenu
+            client:load
+            items={otherMenuItems}
+            speed={18}
+            bgColor="#F2EDE6"
+            textColor="#1e1c14"
+            marqueeBgColor="#C97FA8"
+            marqueeTextColor="#F2EDE6"
+            borderColor="#d6cfc4"
+          />
+        </div>
+
+        {/* "See all projects" link — navigates to homepage #section-work */}
+        <a
+          href="/Kairiin-Koddala/#section-work"
+          class="view-all-link"
+          data-i18n="see_all"
+        >
+          See All Projects →
         </a>
 
-        {about.data.socials.map((social) => (
-          <a href={social.url} target="_blank" rel="noopener noreferrer" class="contact-item" style="border-top-color: rgba(242,237,230,0.15);">
-            <span class="contact-item-value" style="color: #F2EDE6;">
-              {social.platform.toUpperCase().split('').join(' ')}
-            </span>
-            <span class="contact-item-label" style="color: rgba(242,237,230,0.5);">Follow</span>
-          </a>
-        ))}
-      </div>
-    </section>
+        {/* Hidden data store for i18n title swapping — same pattern as homepage */}
+        <div id="project-titles-data" aria-hidden="true" style="display:none">
+          {otherProjects.map((p) => (
+            <span
+              data-project-id={p.id}
+              data-title-en={p.data.title}
+              data-title-et={p.data.titleEt ?? p.data.title}
+            />
+          ))}
+        </div>
+      </section>
+    )}
 
-    <!-- Footer -->
-    <footer class="site-footer" style="background: var(--color-bg-secondary); border-top-color: rgba(242,237,230,0.15);">
-      <div class="footer-socials">
-        {about.data.socials.map((social) => (
-          <a href={social.url} target="_blank" rel="noopener noreferrer" style="color: rgba(242,237,230,0.5);">
-            {social.platform.substring(0, 2).toUpperCase()}
-          </a>
-        ))}
-      </div>
-      <span class="footer-credit" style="color: rgba(242,237,230,0.4);">
-        © {new Date().getFullYear()} {about.data.name}
-      </span>
-    </footer>
+    <!-- Footer — secondary version matching homepage palette -->
+    <FooterSecondary />
+
   </main>
 </Layout>
+
+  <script>
+  // ── Project page i18n ──────────────────────────────────────────────────────
+  // Reads the same localStorage key as the homepage so language is persistent.
+  // Swaps: title, role, timeline, description, problem, solution, outcome,
+  //        section headings, meta labels, other-project titles, nav labels.
+
+  const UI = {
+    en: {
+      nav_back:         '← Home',
+      meta_role:        '/ Role',
+      meta_timeline:    '/ Timeline',
+      meta_tools:       '/ Tools',
+      meta_links:       '/ Links',
+      section_about:    '/ About the Project',
+      section_problem:  '/ Problem',
+      section_solution: '/ Solution',
+      section_outcome:  '/ Outcome',
+      other_1:          'Other',
+      other_2:          'Projects',
+      view_project:     'View Project',
+      see_all:          'See All Projects →',
+    },
+    et: {
+      nav_back:         '← Avaleht',
+      meta_role:        '/ Roll',
+      meta_timeline:    '/ Ajavahemik',
+      meta_tools:       '/ Tööriistad',
+      meta_links:       '/ Lingid',
+      section_about:    '/ Projekti Kohta',
+      section_problem:  '/ Probleem',
+      section_solution: '/ Lahendus',
+      section_outcome:  '/ Tulemus',
+      other_1:          'Teised',
+      other_2:          'Projektid',
+      view_project:     'Vaata Projekti',
+      see_all:          'Vaata Kõiki Projekte →',
+    },
+  };
+
+  (function () {
+    const lang = (localStorage.getItem('lang') || 'en') as 'en' | 'et';
+    const langLabel = document.getElementById('lang-label');
+    const toggle    = document.getElementById('lang-toggle');
+
+    function applyLang(l: 'en' | 'et') {
+      const t = UI[l];
+      document.documentElement.lang = l;
+
+      // ── Static UI strings ──────────────────────────────────────────────
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n') as keyof typeof t;
+        if (t[key] !== undefined) el.textContent = t[key];
+      });
+
+      // ── Project title (h1) ─────────────────────────────────────────────
+      const titleEl = document.querySelector('[data-title-en][data-title-et]:not(.project-row)') as HTMLElement | null;
+      if (titleEl) {
+        titleEl.textContent = l === 'et'
+          ? (titleEl.dataset.titleEt || titleEl.dataset.titleEn || '')
+          : (titleEl.dataset.titleEn || '');
+      }
+
+      // ── Role meta value ────────────────────────────────────────────────
+      const roleEl = document.querySelector('[data-meta-en]') as HTMLElement | null;
+      if (roleEl) {
+        roleEl.textContent = l === 'et'
+          ? (roleEl.dataset.metaEt || roleEl.dataset.metaEn || '')
+          : (roleEl.dataset.metaEn || '');
+      }
+
+      // ── Timeline meta value ────────────────────────────────────────────
+      const timelineEl = document.querySelector('[data-timeline-en]') as HTMLElement | null;
+      if (timelineEl) {
+        timelineEl.textContent = l === 'et'
+          ? (timelineEl.dataset.timelineEt || timelineEl.dataset.timelineEn || '')
+          : (timelineEl.dataset.timelineEn || '');
+      }
+
+      // ── Translatable paragraph fields (description, problem, solution, outcome) ──
+      document.querySelectorAll('[data-field-en]').forEach((el) => {
+        const htmlEl = el as HTMLElement;
+        htmlEl.textContent = l === 'et'
+          ? (htmlEl.dataset.fieldEt || htmlEl.dataset.fieldEn || '')
+          : (htmlEl.dataset.fieldEn || '');
+      });
+
+      // ── Other project titles in the FlowingMenu ────────────────────────
+      const titleData = document.querySelectorAll('#project-titles-data [data-title-en]');
+      const menuLinks = document.querySelectorAll('.menu__item-link');
+      titleData.forEach((dataEl, i) => {
+        const link = menuLinks[i];
+        if (!link) return;
+        const htmlData = dataEl as HTMLElement;
+        const newTitle = l === 'et'
+          ? (htmlData.dataset.titleEt || htmlData.dataset.titleEn || '')
+          : (htmlData.dataset.titleEn || '');
+        const textNode = Array.from(link.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
+        if (textNode) textNode.textContent = newTitle;
+      });
+
+      // ── Toggle button label ────────────────────────────────────────────
+      if (langLabel) langLabel.textContent = l === 'en' ? 'ET' : 'EN';
+
+      localStorage.setItem('lang', l);
+    }
+
+    // Apply saved language on load
+    applyLang(lang);
+
+    // Toggle on click
+    if (toggle) {
+      toggle.addEventListener('click', () => {
+        const current = (localStorage.getItem('lang') || 'en') as 'en' | 'et';
+        applyLang(current === 'en' ? 'et' : 'en');
+      });
+    }
+  })();
+</script>

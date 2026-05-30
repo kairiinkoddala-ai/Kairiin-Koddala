@@ -1,7 +1,16 @@
 ---
 title: "Transparent — Gender Pay Gap Research"
-description: "A comprehensive service design research project investigating the gender pay gap in Estonia, resulting in a digital service for parents and small businesses. Developed in collaboration with IBM as part of the international Student Service Design Challenge."
+titleEt: "Transparent — Soolise Palgalõhe Uuring"
+description: "A 6-month cross-functional service design project investigating Estonia's gender pay gap, developed in collaboration with IBM for the international Student Service Design Challenge. 369 survey respondents, 4 expert interviews, co-design workshops, and a full service blueprint — resulting in a digital toolkit for parents and small businesses."
+descriptionEt: "6-kuuline ristfunktsionaalne teenusedisaini projekt, mis uurib Eesti soolist palgalõhet, arendatud koostöös IBM-iga rahvusvahelise üliõpilaste teenusedisaini väljakutse raames. 369 küsitlusele vastajat, 4 eksperdiintervjuud, kaaskujundamise töötoad ja täielik teenuse plaan — tulemuseks digitaalne tööriistakomplekt vanematele ja väikeettevõtetele."
 coverImage: ./images/cover-transparent.jpg
+gallery:
+  - image: ./images/gallery-1.jpg
+    alt: "High-fidelity stakeholder power analysis maps and detailed user journey map tracking proto-customer Tiina Tahab Tööle as she returns to work after parental leave"
+    caption: "Ecosystem & Experience Maps — stakeholder power analysis and Tiina's return-to-work journey"
+  - image: ./images/gallery-2.jpg
+    alt: "Complete system architecture, Service Blueprint (100m IVA), and high-fidelity responsive UI screens for the toolkit dashboard and community newsletters"
+    caption: "Product Ecosystem Blueprint — service blueprint and high-fidelity UI"
 tags:
   - Service Design
   - UX Research
@@ -11,66 +20,52 @@ tools:
   - Miro
   - Survey Tools
   - Service Blueprint
-role: Service Designer & Researcher
+role: UX Researcher, Data Synthesizer, Workshop Facilitator & Product Ideator
+roleEt: UX-uurija, andmete sünteesija, workshopi läbiviija ja tooteideaator
 timeline:
   startDate: 2024-09-01
   endDate: 2025-03-01
-problem: "Estonia has one of the highest gender pay gaps in the EU at 13.1%, down from 21.3% in 2022 but still significantly above the European average. Unequal income limits women's career prospects, forces choices between family and career, and creates broader economic consequences for society."
-solution: "Developed Transparent — a digital service for parents and small businesses — based on extensive mixed-methods research including 369 survey respondents, 4 expert interviews, field studies, stakeholder mapping, and co-design workshops. The service increases transparency in hiring and compensation while providing parents with tools and community support."
-outcome: "Research uncovered systemic biases at multiple touchpoints in the hiring process. The project delivered a complete service blueprint, business model canvas, and interactive UI prototype. The co-design process with stakeholders validated four key intervention areas: parental leave sharing awareness, incentive systems, workplace support during leave, and transparent compensation tools."
+problem: "Estonia has historically faced a massive gender pay gap, carrying over the highest wage gap from the Soviet Union era in the 1980s (41%) and leading the European Union in 2022 with a gap of 21.3%. A sharp divergence in earnings emerges precisely between the under-25 and 25–34 age brackets — proving that Estonian workplace culture subconsciously views women of childbearing age as an organizational and financial risk. Despite explicit legal protections under the Gender Equality Act of 2004, women are routinely subjected to invasive, illegal interview questions regarding their relationship status, marital status, and family plans."
+problemEt: "Eestil on ajalooliselt olnud tohutu sooline palgalõhe, mis pärineb Nõukogude Liidu ajastust 1980ndatel (41%) ja juhtis Euroopa Liitu 2022. aastal 21,3% lõhega. Terav lahknevus sissetulekutes ilmneb täpselt alla 25-aastaste ja 25–34-aastaste vahel — tõestades, et Eesti töökultuuri alateadvus näeb viljakaseas naisi organisatsioonilise ja rahalise riskina. Vaatamata selgesõnalistele õiguslikele kaitsemeetmetele soolise võrdõiguslikkuse seaduse alusel 2004. aastast, puutuvad naised rutiinselt kokku invasiivsete, ebaseaduslike intervjuuküsimustega oma suhtestaatuse, perekonnaseisu ja pereplaanide kohta."
+solution: "We designed Transparent — a digital toolkit and service ecosystem specifically built to support small business owners (under 50 employees) who operate without dedicated HR or D&I teams, while simultaneously providing a structured lifecycle system for parents returning to the workforce. The platform provides structured frameworks to navigate parental career life transitions, replaces informal biased processes with empathetic standardized templates, and aggregates anonymous worker inputs through localized corporate newsletters and expert-led discussion forums to bring transparency to internal salary parameters."
+solutionEt: "Kujundasime Transparent — digitaalse tööriistakomplekti ja teenuste ökosüsteemi, mis on spetsiaalselt loodud väikeettevõtete omanike (alla 50 töötaja) toetamiseks, kes tegutsevad ilma pühendatud HR- või mitmekesisuse ja kaasamise meeskondadeta, pakkudes samal ajal struktureeritud elutsükli süsteemi tööjõusse naasvate vanematele. Platvorm pakub struktureeritud raamistikke vanemliku karjääri eluüleminekute navigeerimiseks, asendab mitteametlikud kallutatud protsessid empaatiliste standardiseeritud mallidega ning koondab anonüümseid töötajate sisendeid kohalike ettevõtete uudiskirjade ja ekspertide juhitud arutelufoorumite kaudu, et tuua läbipaistvust sisemistesse palgaparameetritesse."
+outcome: "Research uncovered systemic biases at multiple touchpoints in the hiring process. The project delivered a complete service blueprint, business model canvas, and interactive UI prototype. Co-design sessions with stakeholders validated four key intervention areas: parental leave sharing awareness, incentive systems, workplace support during leave, and transparent compensation tools."
+outcomeEt: "Uuring paljastas süsteemsed eelarvamused mitmes värbamisprotsessi puutepunktis. Projekt andis täieliku teenuse plaani, ärimudeli lõuendi ja interaktiivse UI prototüübi. Sidusrühmadega kaaskujundamise sessioonid valideerisid neli peamist sekkumisala: teadlikkus vanemapuhkuse jagamisest, stiimulisüsteemid, töökoha tugi puhkuse ajal ja läbipaistvad hüvitiste tööriistad."
 featured: true
 sortOrder: 7
 publishedAt: 2025-03-01
 ---
 
-## Project Context
+## The Team
 
-Transparent was developed as part of the international Student Service Design Challenge in collaboration with IBM. The task was to raise awareness about existing biases in the local context — we chose to investigate the gender pay gap and how gender biases contribute to it.
+Helen Kärt Käbin, Gabriella Tarja, Laura Sööt, Hanna Milk, Kairiin Koddala, Paula Maria Mengel
 
-**Team:** Gabriella Tarja, Hanna Milk, Helen Kärt Käbin, Kairiin Koddala, Laura Sööt, Paula Maria Mengel
+A 6-month cross-functional squad designed for the international Student Service Design Challenge in collaboration with IBM.
 
-## Research Process
+## The Problem
 
-### 1. Desktop Research
+Estonia has historically faced a massive gender pay gap (GPG), carrying over the highest wage gap from the Soviet Union era in the 1980s (41%) and leading the European Union in 2022 with a gap of 21.3%. To evaluate the human mechanics behind these numbers, our team launched an extensive ethnographic and mixed-methods research initiative built around three target queries:
 
-Mapped Estonia's gender pay gap history and current statistics. At 41%, Estonia had the highest GPG in the Soviet Union in the 1980s, and again led the EU in 2022 at 21.3%. The current figure of 13.1% remains significantly above the European average.
+1. What are the current cultural perspectives regarding gendered work practices?
+2. How does the recruitment process diverge by gender, and how does parental status impact candidate evaluation?
+3. How does having a child directly impact life-long career earnings?
 
-Key finding: unequal income limits career prospects, forces family-versus-career choices, increases dependency in relationships, and has broad economic consequences including reduced tax revenue and higher poverty risk among older women.
+Our research was backed by data compilation from Statistics Estonia, a comprehensive survey of **369 respondents** who had navigated the job market within the last 5 years, and **4 in-depth expert interviews** — including Liisa Oviir (advisor to the Gender Equality Commissioner), private and public sector recruiters, and prominent financial investor Kristi Saare.
 
-### 2. Field Research
+The systemic trend was undeniable: a sharp divergence in earnings emerges precisely between the under-25 and 25–34 age brackets, proving that Estonian workplace culture subconsciously views women of childbearing age as an organizational and financial risk rather than reliable long-term professionals.
 
-Three research questions guided the study:
-- What are current viewpoints on men's and women's work culture?
-- How does the hiring process differ by gender?
-- How does having children affect wages?
+## The Solution
 
-Methods used:
-- Survey with 369 respondents who had applied for jobs within the past five years
-- 4 expert interviews: Liisa Oviir (advisor to the Gender Equality Commissioner), two private sector recruiters, one public sector recruiter, and investor Kristi Saare
-- Field study participation in a Women in Tech lecture at Bolt
+We designed **Transparent** — a digital toolkit and service ecosystem specifically built to support small business owners (under 50 employees) who operate without dedicated HR or Diversity & Inclusion teams, while simultaneously providing a structured lifecycle system for parents returning to the workforce.
 
-### 3. Analysis
+- **The Digital Off- and Onboarding Toolkit** — A comprehensive web application providing business owners with structured frameworks to navigate a parent's career life transitions. It replaces informal, biased processes with empathetic, standardized templates that guide management through employee parental leave and smooth re-entry paths.
+- **Crowdsourced Insight Funnels** — The platform aggregates anonymous worker inputs, utilizing localized corporate newsletters and expert-led discussion forums to bring transparency to internal salary parameters, eliminate negotiation anxiety, and build supportive workplace cultures.
+- **Systemic Impact** — By giving small business CEOs actionable, low-cost diversity blueprints, the service normalizes caregiving responsibilities, minimizes talent turnover, and systematically attacks the structural biases that drive the motherhood penalty.
 
-**Stakeholder Mapping** revealed a complex ecosystem: EU directives provide the regulatory framework but implementation varies; Estonian government sets national policy but enforcement is inconsistent; employers hold significant power with limited transparency requirements; media coverage of pay equity remains sporadic.
+## The Pivot
 
-**Experience Mapping** documented the full job application journey from initial introduction through final feedback. Bias compounds at multiple touchpoints — gendered job descriptions, upfront salary expectations that disadvantage lower earners, unconscious bias in interviews, and limited transparency around internal compensation structures.
+Our team initially kicked off the research with a broad focus on wage transparency and abstract salary spreadsheets, assuming that simply publishing objective data would solve the issue. However, our stakeholder workshops — which brought together private business owners and mothers returning from leave — completely changed our product direction.
 
-**Journey Mapping** focused on the female applicant's experience, particularly how parenthood intersects with gender. Most striking: women often discover pay inequities only after accepting a position, when changing jobs becomes more difficult.
+We learned that raw salary numbers alone do not capture the actual social friction or the psychological drop-off point. McKinsey data showed us that **43% of women leave the workforce within a year of having a child**, and our co-design sessions proved that the root discrimination happens long before a contract is signed. We discovered that having or planning a family is viewed as a positive sign of stability for male applicants, whereas mothers are actively advised to hide their parental status on their CVs to avoid being written off.
 
-### 4. Co-Design Workshop
-
-A workshop with a business owner who was also a parent, and two mothers returning from parental leave, using mind mapping, 5 Whys, "How Might We?" questions, and rapid ideation exercises.
-
-Four key ideas emerged:
-1. Raising awareness about the positive effects of sharing parental leave between partners
-2. Encouraging men to take parental leave to reduce career gaps caused by having children
-3. Creating incentive systems rewarding parental leave sharing
-4. Providing support systems for parents during leave — communication channels with the workplace, self-development courses, and networking events
-
-### 5. Service Blueprint & Business Model
-
-The final deliverables included a detailed service blueprint mapping all touchpoints and processes, a business model canvas defining value propositions and revenue streams, and an interactive UI prototype with a parent dashboard, business owner portal, resource library, and community features.
-
-## Skills
-
-Service Design · UX Research · Social Impact Design · Stakeholder Mapping · Journey Mapping · Survey Design · Data Analysis
+This revelation forced us to pivot our entire design focus away from abstract wage tracking toward the recruitment and transition funnel — standardizing early touchpoints, eliminating gendered keywords from job listings, and structuring the parental leave transition. This shift allowed us to move from an educational dashboard to an active, operational toolkit that intercepts gender bias at the exact moment it enters the corporate system.
