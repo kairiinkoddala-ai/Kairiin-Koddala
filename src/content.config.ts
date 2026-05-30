@@ -46,7 +46,9 @@ const projects = defineCollection({
   schema: ({ image }) =>
     z.object({
       title: z.string(),
+      titleEt: z.string().optional(),
       description: z.string(),
+      descriptionEt: z.string().optional(),
       coverImage: image(),
       gallery: z
         .array(
@@ -60,13 +62,17 @@ const projects = defineCollection({
       tags: z.array(z.string()),
       tools: z.array(z.string()),
       role: z.string(),
+      roleEt: z.string().optional(),
       timeline: z.object({
         startDate: z.coerce.date(),
         endDate: z.coerce.date().optional(),
       }),
       problem: z.string(),
+      problemEt: z.string().optional(),
       solution: z.string(),
+      solutionEt: z.string().optional(),
       outcome: z.string(),
+      outcomeEt: z.string().optional(),
       links: z
         .array(
           z.object({

@@ -129,9 +129,6 @@ class BlobCursor {
 
     this.container.appendChild(this.blobMain);
     document.body.appendChild(this.container);
-
-    // Hide the native cursor
-    document.body.style.cursor = 'none';
   }
 
   _getOffset() {
@@ -184,12 +181,31 @@ class BlobCursor {
     // Hide blob over the hero — the metaball mask there is its own cursor
     const hero = document.getElementById('hero-section');
     if (hero) {
+      // Use IntersectionObserver instead of mouseenter/mouseleave to avoid
+      // the "scroll away while inside" trap that leaves opacity stuck at 0.
+      let heroVisible = false;
+      const io = new IntersectionObserver(
+        ([entry]) => { heroVisible = entry.isIntersecting; },
+        { threshold: 0.01 }
+      );
+      io.observe(hero);
+
       hero.addEventListener('mouseenter', () => {
         this.container.style.opacity = '0';
       }, { passive: true });
+
       hero.addEventListener('mouseleave', () => {
         this.container.style.opacity = '1';
       }, { passive: true });
+
+      // Safety net: whenever the mouse moves, if the hero is no longer
+      // intersecting the viewport, make sure the blob is visible.
+      window.addEventListener('mousemove', () => {
+        if (!heroVisible && this.container.style.opacity === '0') {
+          this.container.style.opacity = '1';
+        }
+      }, { passive: true });
+
       this.container.style.transition = 'opacity 0.2s';
     }
   }
@@ -289,11 +305,25 @@ class ProjectHoverEffect {
 
 // ============================================================
 // Boot — gsap is guaranteed on window (loaded via CDN script tag before this file)
+//
+// astro:page-load fires on both the initial load AND after every
+// View Transitions navigation, so all interactions re-initialise
+// correctly on every page without duplicating the BlobCursor.
 // ============================================================
-document.addEventListener('DOMContentLoaded', () => {
+
+let _blobCursorInstance = null;
+
+function boot() {
   new LoadingBar();
 
-  new BlobCursor({
+  // Destroy previous BlobCursor instance before creating a new one
+  // to avoid stacking blob containers across navigations.
+  if (_blobCursorInstance && _blobCursorInstance.container) {
+    _blobCursorInstance.container.remove();
+    _blobCursorInstance = null;
+  }
+
+  _blobCursorInstance = new BlobCursor({
     blobType:                'circle',
     fillColor:               '#C97FA8',
     trailCount:              3,
@@ -319,4 +349,8 @@ document.addEventListener('DOMContentLoaded', () => {
   new RevealOnScroll();
   new HeroAnimation().init();
   new ProjectHoverEffect().init();
-});
+}
+
+// astro:page-load covers both first load and every subsequent
+// View Transitions navigation.
+document.addEventListener('astro:page-load', boot);

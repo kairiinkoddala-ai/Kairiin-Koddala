@@ -1,0 +1,735 @@
+/* ============================================================
+   Footer Component Styles
+   ─────────────────────────────────────────────────────────────
+   Color tokens:
+     Dark Olive Green  →  #2E2D1E  (--color-bg-secondary)
+     Soft/Vibrant Pink →  #C97FA8  (--color-accent)
+   ============================================================ */
+
+/* ── Root wrapper ─────────────────────────────────────────── */
+.footer-root {
+  width: 100%;
+  font-family: var(--font-sans);
+}
+
+/* ============================================================
+   SECTION 1 — Pre-footer CTA
+   Background: Pink  |  Text: Dark Olive
+   ============================================================ */
+.footer-cta {
+  background-color: #C97FA8;
+  padding: clamp(40px, 8vw, 80px) var(--container-padding);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Subtle texture overlay */
+.footer-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at 80% 20%,
+    rgba(46, 45, 30, 0.06) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.footer-cta__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+}
+
+/* Eyebrow label */
+.footer-cta__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(46, 45, 30, 0.55);
+  margin-bottom: 24px;
+}
+
+.footer-cta__eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: #2E2D1E;
+  opacity: 0.5;
+  animation: footer-pulse 2s ease-in-out infinite;
+}
+
+/* Main heading */
+.footer-cta__heading {
+  font-family: var(--font-serif);
+  font-size: clamp(3.5rem, 12vw, 10rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 0.92;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  color: #2E2D1E;
+  margin: 0 0 clamp(32px, 5vw, 56px);
+}
+
+/* CTA link */
+.footer-cta__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #2E2D1E;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(46, 45, 30, 0.35);
+  padding-bottom: 4px;
+  transition:
+    border-color 0.4s var(--ease),
+    gap 0.4s var(--ease),
+    opacity 0.4s var(--ease);
+}
+
+.footer-cta__link:hover {
+  border-color: #2E2D1E;
+  gap: 16px;
+  opacity: 0.75;
+  color: #2E2D1E;
+}
+
+.footer-cta__arrow {
+  flex-shrink: 0;
+  transition: transform 0.4s var(--ease);
+}
+
+.footer-cta__link:hover .footer-cta__arrow {
+  transform: translateX(4px);
+}
+
+/* ============================================================
+   SECTION 2 — Main footer
+   Background: Dark Olive  |  Text: Pink
+   ============================================================ */
+.footer-main {
+  background-color: #2E2D1E;
+  padding: clamp(32px, 6vw, 64px) var(--container-padding) clamp(24px, 4vw, 40px);
+}
+
+.footer-main__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Section heading */
+.footer-main__heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: rgba(201, 127, 168, 0.55);
+  margin-bottom: clamp(24px, 4vw, 36px);
+  line-height: 1.2;
+}
+
+/* ── 3-column card grid ───────────────────────────────────── */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  background-color: rgba(201, 127, 168, 0.12);
+  border: 1px solid rgba(201, 127, 168, 0.12);
+  overflow: hidden;
+  margin-bottom: clamp(28px, 4vw, 40px);
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ── Base card ────────────────────────────────────────────── */
+.footer-card {
+  background-color: #2E2D1E;
+  padding: clamp(20px, 2.5vw, 28px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: background-color 0.4s var(--ease);
+}
+
+.footer-card:hover {
+  background-color: rgba(201, 127, 168, 0.04);
+}
+
+/* Card header row */
+.footer-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Card label (eyebrow) */
+.footer-card__label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(201, 127, 168, 0.45);
+}
+
+/* Decorative dot */
+.footer-card__dot {
+  width: 6px;
+  height: 6px;
+  background-color: rgba(201, 127, 168, 0.3);
+}
+
+/* ── Card 1: Project ──────────────────────────────────────── */
+.footer-card--project .footer-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.footer-card__tag {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(201, 127, 168, 0.5);
+  border: 1px solid rgba(201, 127, 168, 0.2);
+  padding: 3px 10px;
+}
+
+.footer-card__title {
+  font-family: var(--font-sans);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #C97FA8;
+  line-height: 1.3;
+  flex: 1; /* push CTA to bottom */
+}
+
+.footer-card__desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(201, 127, 168, 0.55);
+  flex: 1;
+}
+
+/* View Project CTA */
+.footer-card__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #C97FA8;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201, 127, 168, 0.3);
+  padding-bottom: 3px;
+  width: fit-content;
+  margin-top: auto;
+  transition:
+    border-color 0.4s var(--ease),
+    gap 0.4s var(--ease),
+    color 0.4s var(--ease);
+}
+
+.footer-card__cta:hover {
+  border-color: #C97FA8;
+  gap: 12px;
+  color: #C97FA8;
+}
+
+/* ── Card 2: Spotify ──────────────────────────────────────── */
+.footer-card--spotify .footer-card__spotify-icon {
+  color: rgba(201, 127, 168, 0.6);
+  flex-shrink: 0;
+}
+
+/* Animated sound bars */
+.footer-card__sound-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 20px;
+}
+
+.footer-card__bar {
+  display: block;
+  width: 3px;
+  background-color: rgba(201, 127, 168, 0.4);
+  animation: footer-sound-bar 1.2s ease-in-out infinite;
+}
+
+.footer-card__bar--1 { height: 40%; animation-delay: 0s;    }
+.footer-card__bar--2 { height: 80%; animation-delay: 0.15s; }
+.footer-card__bar--3 { height: 60%; animation-delay: 0.3s;  }
+.footer-card__bar--4 { height: 100%; animation-delay: 0.45s; }
+.footer-card__bar--5 { height: 50%; animation-delay: 0.6s;  }
+
+/* Spotify iframe wrapper */
+.footer-card__spotify-wrap {
+  width: 100%;
+  overflow: hidden;
+  background-color: #121212;
+  margin-top: auto;
+}
+
+.footer-card__spotify-wrap iframe {
+  display: block;
+  border: none;
+  border-radius: 0 !important;
+}
+
+/* ── Card 3: Contact ──────────────────────────────────────── */
+.footer-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+
+.footer-contact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(201, 127, 168, 0.1);
+}
+
+.footer-contact-item:first-child {
+  padding-top: 0;
+}
+
+.footer-contact-item:last-child {
+  border-bottom: none;
+}
+
+/* Platform label */
+.footer-contact-item__platform {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(201, 127, 168, 0.4);
+}
+
+/* Contact link */
+.footer-contact-item__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: #C97FA8;
+  text-decoration: none;
+  position: relative;
+  width: fit-content;
+  transition: color 0.4s var(--ease), gap 0.4s var(--ease);
+}
+
+/* Underline slide-in on hover */
+.footer-contact-item__link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #C97FA8;
+  transition: width 0.4s var(--ease);
+}
+
+.footer-contact-item__link:hover {
+  color: #C97FA8;
+  gap: 10px;
+}
+
+.footer-contact-item__link:hover::after {
+  width: 100%;
+}
+
+.footer-contact-item__arrow {
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition:
+    opacity 0.3s var(--ease),
+    transform 0.3s var(--ease);
+}
+
+.footer-contact-item__link:hover .footer-contact-item__arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Availability badge */
+.footer-card__availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(201, 127, 168, 0.4);
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.footer-card__availability-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background-color: #C97FA8;
+  opacity: 0.6;
+  animation: footer-pulse 2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ── Bottom bar ───────────────────────────────────────────── */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(201, 127, 168, 0.1);
+}
+
+.footer-bottom__copy,
+.footer-bottom__made {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(201, 127, 168, 0.3);
+}
+
+/* ============================================================
+   Keyframe animations
+   ============================================================ */
+
+/* Pulsing dot */
+@keyframes footer-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.2); }
+}
+
+/* Sound bar bounce */
+@keyframes footer-sound-bar {
+  0%, 100% { transform: scaleY(0.4); }
+  50%       { transform: scaleY(1);   }
+}
+
+/* ============================================================
+   Reduced motion — respect user preference
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .footer-card__bar,
+  .footer-card__availability-dot,
+  .footer-cta__eyebrow::before {
+    animation: none;
+  }
+
+  .footer-cta__link,
+  .footer-card__cta,
+  .footer-contact-item__link,
+  .footer-contact-item__link::after,
+  .footer-contact-item__arrow,
+  .footer-cta__arrow {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   CARD 1 — Creative Work + Gallery Preview
+   ============================================================ */
+
+/* The card itself is clickable-feeling but individual tiles handle clicks */
+.footer-card--creative {
+  cursor: default;
+}
+
+/* 2×2 mosaic grid of preview thumbnails */
+.gallery-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 4px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  flex: 1;
+}
+
+/* Each tile is a button wrapping an image */
+.gallery-preview__tile {
+  position: relative;
+  overflow: hidden;
+  background: rgba(201, 127, 168, 0.08);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: block;
+}
+
+.gallery-preview__tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s var(--ease), filter 0.4s var(--ease);
+  filter: saturate(0.7) brightness(0.85);
+}
+
+.gallery-preview__tile:hover img {
+  transform: scale(1.06);
+  filter: saturate(1) brightness(1);
+}
+
+/* Label that appears on hover */
+.gallery-preview__tile-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 6px 8px;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #C97FA8;
+  background: linear-gradient(to top, rgba(46, 45, 30, 0.85) 0%, transparent 100%);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+  pointer-events: none;
+}
+
+.gallery-preview__tile:hover .gallery-preview__tile-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── footer-card__cta as a <button> (same look as the <a> version) ── */
+button.footer-card__cta {
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(201, 127, 168, 0.3);
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+button.footer-card__cta:hover {
+  border-color: #C97FA8;
+}
+
+/* ============================================================
+   LIGHTBOX GALLERY
+   ============================================================ */
+
+.gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(20, 19, 12, 0.96);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  /* Fade in */
+  animation: gallery-fade-in 0.25s ease forwards;
+}
+
+@keyframes gallery-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.gallery-lightbox__inner {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Close button — top right */
+.gallery-lightbox__close {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(201, 127, 168, 0.25);
+  background: rgba(46, 45, 30, 0.8);
+  color: rgba(201, 127, 168, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  z-index: 10;
+}
+
+.gallery-lightbox__close:hover {
+  background: rgba(201, 127, 168, 0.15);
+  color: #C97FA8;
+  border-color: rgba(201, 127, 168, 0.5);
+}
+
+/* Counter — top left */
+.gallery-lightbox__counter {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(201, 127, 168, 0.4);
+}
+
+/* Main image container */
+.gallery-lightbox__img-wrap {
+  width: 100%;
+  max-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: rgba(201, 127, 168, 0.04);
+}
+
+.gallery-lightbox__img {
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  display: block;
+  /* Slide in on image change */
+  animation: gallery-img-in 0.3s var(--ease) forwards;
+}
+
+@keyframes gallery-img-in {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Caption row */
+.gallery-lightbox__caption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.gallery-lightbox__label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #C97FA8;
+  border: 1px solid rgba(201, 127, 168, 0.3);
+  padding: 3px 10px;
+  flex-shrink: 0;
+}
+
+.gallery-lightbox__alt {
+  font-size: 12px;
+  color: rgba(201, 127, 168, 0.45);
+  letter-spacing: 0.03em;
+}
+
+/* Prev / Next navigation buttons */
+.gallery-lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(201, 127, 168, 0.2);
+  background: rgba(46, 45, 30, 0.7);
+  color: rgba(201, 127, 168, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  margin-top: -40px;
+}
+
+.gallery-lightbox__nav:hover {
+  background: rgba(201, 127, 168, 0.12);
+  color: #C97FA8;
+  border-color: rgba(201, 127, 168, 0.4);
+}
+
+.gallery-lightbox__nav--prev { left: -56px; }
+.gallery-lightbox__nav--next { right: -56px; }
+
+/* On small screens, move nav inside */
+@media (max-width: 1024px) {
+  .gallery-lightbox__nav--prev { left: 0; }
+  .gallery-lightbox__nav--next { right: 0; }
+}
+
+/* Thumbnail strip */
+.gallery-lightbox__thumbs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.gallery-lightbox__thumb {
+  width: 56px;
+  height: 40px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  padding: 0;
+  cursor: pointer;
+  background: rgba(201, 127, 168, 0.08);
+  transition: border-color 0.25s ease, opacity 0.25s ease;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.gallery-lightbox__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-lightbox__thumb:hover {
+  opacity: 0.8;
+}
+
+.gallery-lightbox__thumb.is-active {
+  border-color: #C97FA8;
+  opacity: 1;
+}
+
+/* ── Reduced motion overrides ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-lightbox,
+  .gallery-lightbox__img,
+  .gallery-preview__tile img,
+  .gallery-preview__tile-label {
+    animation: none;
+    transition: none;
+  }
+}

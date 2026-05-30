@@ -1,0 +1,391 @@
+---
+/**
+ * OleValmisCaseStudy — Rich case study for Ole Valmis!
+ * Architecture mirrors TransparentCaseStudy.astro 1:1.
+ * Design tokens: #111111 / #0052cc / #f9f9f9 / #eeeeee
+ */
+import './OleValmisCaseStudy.css';
+---
+
+<div class="ov">
+
+  <!-- ═══════════════════════════════════════════════════════
+       QUICK OVERVIEW — two-column grid
+  ═══════════════════════════════════════════════════════ -->
+  <section class="ov-overview" aria-label="Project quick overview">
+    <div class="ov-overview__col">
+      <div class="ov-overview__item">
+        <span class="ov-overview__key">Context</span>
+        <p class="ov-overview__val">"Ole valmis!" is a personalised crisis preparedness digital platform, redesigned through a service design process to reduce cognitive overload and increase real-world adoption among young urban adults.</p>
+      </div>
+      <div class="ov-overview__item">
+        <span class="ov-overview__key">Team</span>
+        <p class="ov-overview__val">Hanna Milk, Kairiin Koddala, Helen Kärt Käbin, Greg Juhanson, Gabriella Tarja</p>
+      </div>
+    </div>
+    <div class="ov-overview__col">
+      <div class="ov-overview__item">
+        <span class="ov-overview__key">Goal</span>
+        <p class="ov-overview__val">Investigate why young adults in Estonia do not engage with crisis preparedness tools, and redesign the experience to be contextual, personalised, and actionable.</p>
+      </div>
+      <div class="ov-overview__item">
+        <span class="ov-overview__key">Timeframe</span>
+        <p class="ov-overview__val">6 months</p>
+      </div>
+      <div class="ov-overview__item">
+        <span class="ov-overview__key">My Role</span>
+        <p class="ov-overview__val">UX Researcher, Data Synthesizer, Field Ethnographer &amp; Interaction Designer</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ACCORDION STAGES
+  ═══════════════════════════════════════════════════════ -->
+  <div class="ov-accordion" role="list">
+
+    <!-- ── STAGE 1 ─────────────────────────────────────── -->
+    <details class="ov-stage" role="listitem">
+      <summary class="ov-stage__summary">
+        <span class="ov-stage__num">01</span>
+        <span class="ov-stage__title">Introduction, Problem Frame &amp; Target Audience</span>
+        <span class="ov-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="ov-stage__body">
+
+        <div class="ov-prose">
+          <h3 class="ov-subheading">The Research Focus &amp; Audience Scope</h3>
+          <p>The project centred on young adults aged <strong>19–23</strong> living in urban centres — specifically residents of apartment blocks (<em>kortermajad</em>) in Estonian cities. This demographic represents the highest-risk low-preparedness segment: mobile, independent, and largely disconnected from traditional civil defence communication channels.</p>
+
+          <h3 class="ov-subheading">The Primary Friction Point</h3>
+          <p>Early scoping revealed a deceptively simple root cause. The barrier was not fear, distrust, or lack of access to information.</p>
+        </div>
+
+        <!-- Core insight callout -->
+        <blockquote class="ov-callout">
+          <p class="ov-callout__quote">"Noored täiskasvanud ei valmistu kriisiks, sest nad ei viitsi."</p>
+          <p class="ov-callout__translation">Young adults do not prepare for crises because they simply cannot be bothered.</p>
+        </blockquote>
+
+        <div class="ov-prose">
+          <p>This reframed the entire design challenge. The problem was not informational — it was motivational and contextual. The existing app delivered the right content in entirely the wrong format for this audience's cognitive bandwidth and lifestyle constraints.</p>
+        </div>
+
+        <!-- TODO: REPLACE WITH splash art from esitlus.pdf -->
+        <figure class="ov-media">
+          <div class="ov-media__placeholder">
+            <span class="ov-media__icon">⬜</span>
+            <span class="ov-media__text">Flame / Wind icon artwork or introductory splash art</span>
+            <span class="ov-media__file">esitlus.pdf — intro spread</span>
+          </div>
+          <figcaption>Visual identity and introductory splash art — Ole Valmis! redesign</figcaption>
+        </figure>
+
+      </div>
+    </details>
+
+    <!-- ── STAGE 2 ─────────────────────────────────────── -->
+    <details class="ov-stage" role="listitem">
+      <summary class="ov-stage__summary">
+        <span class="ov-stage__num">02</span>
+        <span class="ov-stage__title">Mixed-Methods Research Methodology</span>
+        <span class="ov-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="ov-stage__body">
+
+        <div class="ov-prose">
+          <p>To build a valid evidence base, we deployed a three-stream mixed-methods framework designed to triangulate behavioural, attitudinal, and contextual data simultaneously.</p>
+        </div>
+
+        <div class="ov-method-grid">
+          <div class="ov-method-card">
+            <div class="ov-method-card__badge">Stream 1</div>
+            <h3 class="ov-subheading">Desktop Research</h3>
+            <p>Systematic audit of existing crisis preparedness literature, Naiskodukaitse communications, and comparable international preparedness platforms (Finland, Sweden, Israel). Mapped the gap between official guidance and actual user behaviour patterns.</p>
+          </div>
+          <div class="ov-method-card">
+            <div class="ov-method-card__badge">Stream 2</div>
+            <h3 class="ov-subheading">In-Depth Interviews</h3>
+            <p class="ov-method-card__stat">n = 10</p>
+            <p>Semi-structured interviews with young urban adults and domain experts. Sessions probed knowledge baselines, emotional responses to crisis scenarios, and existing preparedness behaviours (or the absence of them).</p>
+          </div>
+          <div class="ov-method-card">
+            <div class="ov-method-card__badge">Stream 3</div>
+            <h3 class="ov-subheading">Field Ethnography</h3>
+            <p>Participated in a live evacuation drill (<em>evakuatsiooniõppusel osalemine</em>). Observed real-time decision-making under simulated crisis conditions, capturing behavioural data unavailable through self-reporting alone.</p>
+          </div>
+        </div>
+
+        <div class="ov-prose">
+          <h3 class="ov-subheading">Research Limitations</h3>
+          <ul class="ov-list">
+            <li><strong>"Imagine If" Dilemma:</strong> Participants struggled to accurately predict their own behaviour in hypothetical crisis scenarios, creating a gap between stated intent and likely real-world action.</li>
+            <li><strong>Sample Diversity Constraints:</strong> The interview cohort skewed toward digitally literate, higher-education students — potentially underrepresenting lower-income or rural-adjacent urban residents.</li>
+          </ul>
+        </div>
+
+        <!-- TODO: REPLACE WITH interview/usability testing photos from esitlus.pdf -->
+        <figure class="ov-media">
+          <div class="ov-media__placeholder">
+            <span class="ov-media__icon">⬜</span>
+            <span class="ov-media__text">Photographs of users holding smartphones during live interview / usability testing sessions</span>
+            <span class="ov-media__file">esitlus.pdf — research documentation spread</span>
+          </div>
+          <figcaption>Field research documentation — interview and usability testing sessions</figcaption>
+        </figure>
+
+      </div>
+    </details>
+
+    <!-- ── STAGE 3 ─────────────────────────────────────── -->
+    <details class="ov-stage" role="listitem">
+      <summary class="ov-stage__summary">
+        <span class="ov-stage__num">03</span>
+        <span class="ov-stage__title">Data Analysis &amp; Synthesis</span>
+        <span class="ov-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="ov-stage__body">
+
+        <div class="ov-prose">
+          <p>All interview transcripts and field notes were transferred into Miro for affinity mapping. Insights were clustered by user background, knowledge source, emotional state, and practical constraint — producing a high-density synthesis canvas that revealed patterns invisible at the individual interview level.</p>
+        </div>
+
+        <!-- TODO: REPLACE WITH Miro canvas screenshot from esitlus.pdf -->
+        <figure class="ov-media">
+          <div class="ov-media__placeholder">
+            <span class="ov-media__icon">⬜</span>
+            <span class="ov-media__text">High-resolution Miro canvas — coloured sticky notes sorting interview insights</span>
+            <span class="ov-media__file">esitlus.pdf — affinity mapping spread</span>
+          </div>
+          <figcaption>Affinity mapping — full Miro synthesis canvas</figcaption>
+        </figure>
+
+        <div class="ov-prose">
+          <h3 class="ov-subheading">Key Synthesis Realisations (Taipamised)</h3>
+        </div>
+
+        <div class="ov-insights-grid">
+          <div class="ov-insight-card">
+            <div class="ov-insight-card__num">01</div>
+            <h4 class="ov-insight-card__title">Internet Connectivity Blindspot</h4>
+            <p>Users consistently assumed internet access during a crisis — planning to "just Google it" when needed. No participant had considered offline preparedness as a distinct requirement.</p>
+          </div>
+          <div class="ov-insight-card ov-insight-card--accent">
+            <div class="ov-insight-card__num">02</div>
+            <h4 class="ov-insight-card__title">High School Knowledge Baseline</h4>
+            <p>School was rated the primary source of crisis knowledge by <strong>7 out of 10</strong> participants. Only <strong>4 out of 10</strong> cited the internet — inverting the assumption that digital natives default to online sources.</p>
+          </div>
+          <div class="ov-insight-card">
+            <div class="ov-insight-card__num">03</div>
+            <h4 class="ov-insight-card__title">Resource &amp; Space Paradox</h4>
+            <p>Apartment living creates a structural barrier: no storage space for bulky emergency gear. Standard preparedness lists assume house-dwellers with garages and basements — not 40m² urban flats.</p>
+          </div>
+        </div>
+
+        <!-- TODO: REPLACE WITH 7/10 vs 4/10 knowledge breakdown graphic from esitlus.pdf -->
+        <figure class="ov-media">
+          <div class="ov-media__placeholder">
+            <span class="ov-media__icon">⬜</span>
+            <span class="ov-media__text">Graphic — 7/10 school vs. 4/10 internet knowledge source breakdown</span>
+            <span class="ov-media__file">esitlus.pdf — synthesis data visualisation</span>
+          </div>
+          <figcaption>Knowledge source breakdown — school vs. internet as primary crisis information channels</figcaption>
+        </figure>
+
+      </div>
+    </details>
+
+    <!-- ── STAGE 4 ─────────────────────────────────────── -->
+    <details class="ov-stage" role="listitem">
+      <summary class="ov-stage__summary">
+        <span class="ov-stage__num">04</span>
+        <span class="ov-stage__title">Target Audience Archetypes (Personas)</span>
+        <span class="ov-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="ov-stage__body">
+
+        <div class="ov-prose">
+          <p>Synthesis produced two distinct behavioural archetypes that represent the full spectrum of the target audience's relationship with crisis preparedness. Both require fundamentally different interaction models.</p>
+        </div>
+
+        <div class="ov-persona-grid">
+          <!-- Persona 1 -->
+          <div class="ov-persona ov-persona--warm">
+            <div class="ov-persona__header">
+              <div class="ov-persona__name">Mindey Koti</div>
+              <div class="ov-persona__age">Age 21</div>
+            </div>
+            <blockquote class="ov-persona__quote">
+              "I just want to live in my pink bubble and not think about any of this."
+            </blockquote>
+            <ul class="ov-persona__traits">
+              <li><strong>Attitude:</strong> High indifference — crisis feels abstract and irrelevant to daily life</li>
+              <li><strong>Knowledge:</strong> Low baseline — avoids the topic entirely</li>
+              <li><strong>Needs:</strong> Bite-sized visuals, zero cognitive load, emotional safety framing</li>
+              <li><strong>Barrier:</strong> Anxiety avoidance — any mention of crisis triggers disengagement</li>
+            </ul>
+            <div class="ov-persona__design-note">Design response: micro-steps, visual-first, no doom framing</div>
+          </div>
+
+          <!-- Persona 2 -->
+          <div class="ov-persona ov-persona--cool">
+            <div class="ov-persona__header">
+              <div class="ov-persona__name">Teor Eetik</div>
+              <div class="ov-persona__age">Age 23</div>
+            </div>
+            <blockquote class="ov-persona__quote">
+              "Right now I feel like I should prepare for everything... but you simply can't prepare for everything!"
+            </blockquote>
+            <ul class="ov-persona__traits">
+              <li><strong>Attitude:</strong> High theoretical awareness — understands the need intellectually</li>
+              <li><strong>Knowledge:</strong> Medium — knows the concepts, paralysed by scope</li>
+              <li><strong>Needs:</strong> Family coordination tools, prioritised action lists, clear "enough" thresholds</li>
+              <li><strong>Barrier:</strong> Overwhelm paralysis — too much information, no clear starting point</li>
+            </ul>
+            <div class="ov-persona__design-note">Design response: personalised scope, household context, progress tracking</div>
+          </div>
+        </div>
+
+        <!-- TODO: REPLACE WITH persona slider rating bars from esitlus.pdf -->
+        <figure class="ov-media">
+          <div class="ov-media__placeholder">
+            <span class="ov-media__icon">⬜</span>
+            <span class="ov-media__text">High-fidelity slider rating bars — Indifference, Critical Thinking, and Anxiety levels mapped per persona</span>
+            <span class="ov-media__file">esitlus.pdf — persona attribute mapping</span>
+          </div>
+          <figcaption>Persona attribute mapping — behavioural spectrum across indifference, critical thinking, and anxiety axes</figcaption>
+        </figure>
+
+      </div>
+    </details>
+
+    <!-- ── STAGE 5 ─────────────────────────────────────── -->
+    <details class="ov-stage" role="listitem">
+      <summary class="ov-stage__summary">
+        <span class="ov-stage__num">05</span>
+        <span class="ov-stage__title">App Audit &amp; System Usability Testing</span>
+        <span class="ov-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="ov-stage__body">
+
+        <div class="ov-prose">
+          <p>Observational usability testing on the existing Ole Valmis! app produced a critical adoption gap finding: while <strong>8 out of 10</strong> participants were aware of the app's existence, only <strong>2 out of 10</strong> had downloaded it. Awareness was not the problem. The interface itself was the barrier.</p>
+        </div>
+
+        <!-- Interaction failure matrix -->
+        <div class="ov-table-wrap">
+          <table class="ov-table">
+            <thead>
+              <tr>
+                <th>Interface Component</th>
+                <th>Observed Failure Mode</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Text Readability &amp; Layout</strong></td>
+                <td>Wall-of-text guidelines; lacks visual hierarchy and typography tokens. Users abandoned reading within 8 seconds.</td>
+              </tr>
+              <tr>
+                <td><strong>Search Engine Performance</strong></td>
+                <td>Broken or unindexed search logic; searching local infrastructure returns zero results. Core utility feature non-functional.</td>
+              </tr>
+              <tr>
+                <td><strong>Navigation Menu Bar</strong></td>
+                <td>Bottom navigation architecture fails to support intuitive user paths. Users could not locate key preparedness checklists without guidance.</td>
+              </tr>
+              <tr>
+                <td><strong>Information Freshness</strong></td>
+                <td>Outdated external resource links and static text. Users encountered broken links and 2019-era guidance during testing.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- TODO: REPLACE WITH annotated app screenshots from esitlus.pdf -->
+        <figure class="ov-media">
+          <div class="ov-media__placeholder">
+            <span class="ov-media__icon">⬜</span>
+            <span class="ov-media__text">Screenshots of the original app interface with red annotations highlighting broken search and wall-of-text blocks</span>
+            <span class="ov-media__file">esitlus.pdf — usability audit annotations</span>
+          </div>
+          <figcaption>Usability audit — annotated failure points in the existing Ole Valmis! interface</figcaption>
+        </figure>
+
+      </div>
+    </details>
+
+    <!-- ── STAGE 6 ─────────────────────────────────────── -->
+    <details class="ov-stage" role="listitem">
+      <summary class="ov-stage__summary">
+        <span class="ov-stage__num">06</span>
+        <span class="ov-stage__title">Strategic Ideation, Design System &amp; Prototypes</span>
+        <span class="ov-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="ov-stage__body">
+
+        <div class="ov-prose">
+          <h3 class="ov-subheading">The Core Solution: Personaliseeritud Kriisivalmistumise Nimekiri</h3>
+          <p>The central design intervention shifts the experience from a generic, overwhelming master list to a <strong>contextually filtered, personalised checklist</strong> — generated dynamically based on the user's household profile, living situation, and local infrastructure context.</p>
+        </div>
+
+        <!-- System architecture diagram -->
+        <div class="ov-arch">
+          <div class="ov-arch__label">System Data Flow</div>
+          <div class="ov-arch__diagram">
+            <div class="ov-arch__node ov-arch__node--input">
+              <div class="ov-arch__node-title">User Home Profile</div>
+              <div class="ov-arch__node-sub">Household size · Floor · Building type</div>
+            </div>
+            <div class="ov-arch__arrow">→</div>
+            <div class="ov-arch__node ov-arch__node--process">
+              <div class="ov-arch__node-title">Contextual Filtering Console</div>
+              <div class="ov-arch__node-sub">Neighbourhood context · Local infrastructure · Risk profile</div>
+            </div>
+            <div class="ov-arch__arrow">→</div>
+            <div class="ov-arch__node ov-arch__node--output">
+              <div class="ov-arch__node-title">Tailored Step-by-Step Checklist</div>
+              <div class="ov-arch__node-sub">Prioritised · Bite-sized · Achievable</div>
+            </div>
+          </div>
+          <div class="ov-arch__input-row">
+            <div class="ov-arch__input-node">Neighborhood Context</div>
+          </div>
+        </div>
+
+        <div class="ov-prose">
+          <h3 class="ov-subheading">Systemic Eco-Solutions &amp; Strategic Conceptual Directions</h3>
+          <ul class="ov-list">
+            <li><strong>Apartment Association Crisis Packages (<em>Korteriühistu kriisipakid</em>):</strong> B2B bulk ordering model enabling apartment associations to procure "Food Force" nutritional buckets and shared emergency supplies at scale — solving the individual storage paradox through collective infrastructure.</li>
+            <li><strong>Post-Crisis Municipal Support Channels:</strong> Integrated pathways connecting users to local government recovery resources, reducing the information vacuum that follows an acute crisis event.</li>
+            <li><strong>Mental Health Preservation Mechanics:</strong> Reframing preparedness as an act of care rather than fear — embedding psychological safety language throughout the onboarding and checklist experience.</li>
+            <li><strong>Gamified Preparation Simulations (<em>Prügikastijaht</em>):</strong> Location-based scavenger hunt mechanic that teaches dual-use item logic through play — turning the act of identifying household crisis resources into an engaging, repeatable activity.</li>
+          </ul>
+        </div>
+
+        <!-- TODO: REPLACE WITH UI design system elements from esitlus.pdf -->
+        <figure class="ov-media">
+          <div class="ov-media__placeholder">
+            <span class="ov-media__icon">⬜</span>
+            <span class="ov-media__text">UI elements — updated type scales, colour swatches, and interactive chatbot interface</span>
+            <span class="ov-media__file">esitlus.pdf — design system section</span>
+          </div>
+          <figcaption>Design system — type scale, colour tokens, and chatbot interaction model</figcaption>
+        </figure>
+
+        <!-- TODO: REPLACE WITH high-fidelity mobile mockups from Section 1.pdf -->
+        <figure class="ov-media">
+          <div class="ov-media__placeholder">
+            <span class="ov-media__icon">⬜</span>
+            <span class="ov-media__text">Grid of high-fidelity mobile mockups — personalised onboarding flow and customised checklist engine (9:41 layouts)</span>
+            <span class="ov-media__file">Section 1.pdf — final prototype screens</span>
+          </div>
+          <figcaption>High-fidelity prototype — personalised onboarding and contextual checklist engine</figcaption>
+        </figure>
+
+      </div>
+    </details>
+
+  </div><!-- /ov-accordion -->
+
+</div><!-- /ov -->

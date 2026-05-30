@@ -1,0 +1,274 @@
+---
+/**
+ * FooterSecondary — compact project-page footer
+ * Same dark olive + pink palette as the main Footer.
+ * Contains: pink CTA strip (smaller) + contact row + bottom bar.
+ * No Spotify, no gallery — those live on the homepage only.
+ */
+const CONTACT = {
+  linkedin: { label: 'LinkedIn', display: 'Kairiin Koddala', href: 'https://www.linkedin.com/in/kairiin-koddala-7a9132258/' },
+  email:    { label: 'Gmail',    display: 'kairiinkoddala@gmail.com', href: 'mailto:kairiinkoddala@gmail.com' },
+};
+const year = new Date().getFullYear();
+---
+
+<footer class="sf" aria-label="Site footer">
+
+  <!-- ── Pink CTA strip ──────────────────────────────────── -->
+  <section class="sf__cta" aria-label="Call to action">
+    <div class="sf__cta-inner">
+      <div class="sf__cta-text">
+        <span class="sf__eyebrow" aria-hidden="true">Available for work</span>
+        <p class="sf__heading">Let's work together</p>
+      </div>
+      <a href={CONTACT.email.href} class="sf__cta-link" aria-label="Send an email">
+        Get in touch
+        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── Dark olive contact row ──────────────────────────── -->
+  <section class="sf__main" aria-label="Contact">
+    <div class="sf__main-inner">
+
+      <div class="sf__contact-row">
+        <!-- LinkedIn -->
+        <div class="sf__contact-item">
+          <span class="sf__contact-label">{CONTACT.linkedin.label}</span>
+          <a href={CONTACT.linkedin.href} class="sf__contact-link" target="_blank" rel="noopener noreferrer">
+            {CONTACT.linkedin.display}
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Email -->
+        <div class="sf__contact-item">
+          <span class="sf__contact-label">{CONTACT.email.label}</span>
+          <a href={CONTACT.email.href} class="sf__contact-link">
+            {CONTACT.email.display}
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Back to all work -->
+        <div class="sf__contact-item sf__contact-item--right">
+          <a href="/Kairiin-Koddala/#section-work" class="sf__back-link">
+            ← All Projects
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="sf__bottom">
+        <span class="sf__copy">© {year} Kairiin Koddala</span>
+        <span class="sf__made">Designed &amp; built with intention</span>
+      </div>
+
+    </div>
+  </section>
+
+</footer>
+
+<style>
+/* ── Secondary footer ─────────────────────────────────────── */
+.sf {
+  width: 100%;
+  font-family: var(--font-sans);
+}
+
+/* Pink CTA strip — compact horizontal layout */
+.sf__cta {
+  background-color: #C97FA8;
+  padding: clamp(32px, 5vw, 56px) var(--container-padding);
+}
+
+.sf__cta-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.sf__cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sf__eyebrow {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(46, 45, 30, 0.5);
+}
+
+.sf__heading {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color: #2E2D1E;
+  line-height: 1;
+  margin: 0;
+}
+
+.sf__cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: #2E2D1E;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(46, 45, 30, 0.35);
+  padding-bottom: 3px;
+  flex-shrink: 0;
+  transition: gap 0.4s var(--ease), border-color 0.4s var(--ease), opacity 0.4s var(--ease);
+}
+
+.sf__cta-link:hover {
+  gap: 16px;
+  border-color: #2E2D1E;
+  opacity: 0.7;
+  color: #2E2D1E;
+}
+
+/* Dark olive main section */
+.sf__main {
+  background-color: #2E2D1E;
+  padding: clamp(32px, 5vw, 56px) var(--container-padding) clamp(24px, 4vw, 40px);
+}
+
+.sf__main-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Contact row */
+.sf__contact-row {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 0;
+  border-bottom: 1px solid rgba(201, 127, 168, 0.1);
+  padding-bottom: clamp(24px, 3vw, 36px);
+  margin-bottom: clamp(20px, 3vw, 28px);
+}
+
+.sf__contact-item {
+  flex: 1;
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0 0 0 0;
+  border-right: 1px solid rgba(201, 127, 168, 0.1);
+  padding-right: clamp(20px, 3vw, 40px);
+  padding-left: clamp(20px, 3vw, 40px);
+}
+
+.sf__contact-item:first-child {
+  padding-left: 0;
+}
+
+.sf__contact-item--right {
+  border-right: none;
+  align-items: flex-end;
+}
+
+.sf__contact-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(201, 127, 168, 0.35);
+}
+
+.sf__contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  color: #C97FA8;
+  text-decoration: none;
+  position: relative;
+  width: fit-content;
+  transition: gap 0.4s var(--ease);
+}
+
+.sf__contact-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #C97FA8;
+  transition: width 0.4s var(--ease);
+}
+
+.sf__contact-link:hover {
+  gap: 10px;
+  color: #C97FA8;
+}
+
+.sf__contact-link:hover::after {
+  width: 100%;
+}
+
+.sf__back-link {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(201, 127, 168, 0.4);
+  text-decoration: none;
+  transition: color 0.3s var(--ease);
+}
+
+.sf__back-link:hover {
+  color: #C97FA8;
+}
+
+/* Bottom bar */
+.sf__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.sf__copy,
+.sf__made {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(201, 127, 168, 0.25);
+}
+
+@media (max-width: 640px) {
+  .sf__contact-item {
+    border-right: none;
+    padding-left: 0;
+    border-bottom: 1px solid rgba(201, 127, 168, 0.08);
+    padding-bottom: 16px;
+  }
+
+  .sf__contact-item--right {
+    border-bottom: none;
+    align-items: flex-start;
+  }
+}
+</style>

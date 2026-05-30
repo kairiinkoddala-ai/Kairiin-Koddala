@@ -1,0 +1,77 @@
+---
+/**
+ * PillNav — shared floating bottom navigation pill
+ *
+ * variant="home"    → section links (HEY / ABOUT / WORK / CONTACT) + language toggle
+ * variant="project" → back/home link + language toggle only
+ */
+
+interface Props {
+  variant?: 'home' | 'project';
+  backHref?: string; // only used when variant="project"
+}
+
+const { variant = 'home', backHref = '/Kairiin-Koddala/' } = Astro.props;
+---
+
+{variant === 'home' ? (
+  <nav class="pill-nav" aria-label="Page sections">
+    <a href="#section-hey" class="pill-nav-item" data-section="section-hey">
+      <span class="pill-nav-num">01/</span>
+      <span class="pill-nav-label" data-i18n="nav_hey">HEY</span>
+    </a>
+    <a href="#section-about" class="pill-nav-item" data-section="section-about">
+      <span class="pill-nav-num">02/</span>
+      <span class="pill-nav-label" data-i18n="nav_about">ABOUT</span>
+    </a>
+    <a href="#section-work" class="pill-nav-item" data-section="section-work">
+      <span class="pill-nav-num">03/</span>
+      <span class="pill-nav-label" data-i18n="nav_work">WORK</span>
+    </a>
+    <a href="#section-contact" class="pill-nav-item" data-section="section-contact">
+      <span class="pill-nav-num">04/</span>
+      <span class="pill-nav-label" data-i18n="nav_contact">CONTACT</span>
+    </a>
+    <button class="pill-nav-lang" id="lang-toggle" aria-label="Switch language">
+      <span id="lang-label">ET</span>
+    </button>
+  </nav>
+) : (
+  <nav class="pill-nav pill-nav--project" aria-label="Page navigation">
+    <a href={backHref} class="pill-nav-item pill-nav-item--back" data-i18n="nav_back">
+      ← Home
+    </a>
+    <button class="pill-nav-lang" id="lang-toggle" aria-label="Switch language">
+      <span id="lang-label">ET</span>
+    </button>
+  </nav>
+)}
+
+<style>
+  /* Project variant — narrower pill, right-aligned, same bottom position */
+  .pill-nav--project {
+    /* Override the centering from global.css */
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: auto;
+    width: auto;
+    padding: 0 var(--space-xl);
+    gap: var(--space-lg);
+  }
+
+  /* Back link inside the project pill */
+  .pill-nav-item--back {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    padding: 4px 8px;
+    transition: color var(--duration) var(--ease);
+    white-space: nowrap;
+  }
+
+  .pill-nav-item--back:hover {
+    color: var(--color-text);
+  }
+</style>

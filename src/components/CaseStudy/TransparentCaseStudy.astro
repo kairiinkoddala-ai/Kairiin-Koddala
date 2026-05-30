@@ -1,0 +1,343 @@
+---
+/**
+ * TransparentCaseStudy — Restructured with:
+ *   1. Two-column Quick Overview grid
+ *   2. Accordion (details/summary) for all 6 stages
+ *   Note: Hero image is handled by the parent page template.
+ */
+import './TransparentCaseStudy.css';
+---
+
+<div class="cs">
+
+  <!-- ═══════════════════════════════════════════════════════
+       QUICK OVERVIEW — two-column grid
+  ═══════════════════════════════════════════════════════ -->
+  <section class="cs-overview" aria-label="Project quick overview">
+    <div class="cs-overview__col">
+      <div class="cs-overview__item">
+        <span class="cs-overview__key">Context</span>
+        <p class="cs-overview__val">Transparent is a digital service for parents and small businesses designed as a result of the international Student Service Design Challenge in collaboration with IBM.</p>
+      </div>
+      <div class="cs-overview__item">
+        <span class="cs-overview__key">Team</span>
+        <p class="cs-overview__val">Helen Kärt Käbin, Gabriella Tarja, Laura Sööt, Hanna Milk, Kairiin Koddala, Paula Maria Mengel</p>
+      </div>
+    </div>
+    <div class="cs-overview__col">
+      <div class="cs-overview__item">
+        <span class="cs-overview__key">Goal</span>
+        <p class="cs-overview__val">The aim was to investigate the gender pay gap in Estonia and come up with viable service solutions based on diverse research.</p>
+      </div>
+      <div class="cs-overview__item">
+        <span class="cs-overview__key">Timeframe</span>
+        <p class="cs-overview__val">6 months</p>
+      </div>
+      <div class="cs-overview__item">
+        <span class="cs-overview__key">My Role</span>
+        <p class="cs-overview__val">Research, interviews, workshops, analysis, ideation, prototype</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       ACCORDION STAGES
+  ═══════════════════════════════════════════════════════ -->
+  <div class="cs-accordion" role="list">
+
+    <!-- ── STAGE 1 ─────────────────────────────────────── -->
+    <details class="cs-stage" role="listitem">
+      <summary class="cs-stage__summary">
+        <span class="cs-stage__num">01</span>
+        <span class="cs-stage__title">Executive Summary &amp; Strategic Intent</span>
+        <span class="cs-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="cs-stage__body">
+        <div class="cs-prose">
+          <p>The objective of this 6-month enterprise initiative was to identify the root systemic variables driving Estonia's long-standing gender pay gap (GPG) and engineer an actionable digital service intervention. Estonia historically inherited the highest GPG from the Soviet era in the 1980s <strong>(41%)</strong> and maintained an explicit disparity within the European Union in 2022 at <strong>21.3%</strong>.</p>
+          <p>Through empirical research, our team successfully validated that the wage gap is deeply coupled with motherhood. Consequently, we reframed our problem statement away from general wage metrics to focus directly on the gender-based unequal treatment of parents during corporate recruitment and organisational transition funnels.</p>
+        </div>
+        <div class="cs-stats">
+          <div class="cs-stat">
+            <span class="cs-stat__num">41%</span>
+            <span class="cs-stat__label">GPG inherited from Soviet era (1980s)</span>
+          </div>
+          <div class="cs-stat">
+            <span class="cs-stat__num">21.3%</span>
+            <span class="cs-stat__label">EU-leading gap in 2022</span>
+          </div>
+          <div class="cs-stat">
+            <span class="cs-stat__num">369</span>
+            <span class="cs-stat__label">Survey respondents</span>
+          </div>
+          <div class="cs-stat">
+            <span class="cs-stat__num">6 mo</span>
+            <span class="cs-stat__label">Project duration</span>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- ── STAGE 2 ─────────────────────────────────────── -->
+    <details class="cs-stage" role="listitem">
+      <summary class="cs-stage__summary">
+        <span class="cs-stage__num">02</span>
+        <span class="cs-stage__title">Team Alignment &amp; Agile Operational Methodology</span>
+        <span class="cs-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="cs-stage__body">
+        <div class="cs-two-col">
+          <div class="cs-prose">
+            <h3 class="cs-subheading">Alignment via Team Canvas</h3>
+            <p>Before diving into research, we designed and completed an initial Team Canvas to align expectations, map core values, establish communication guidelines, and identify group dynamics — addressing risks of overthinking, school task workloads, and cognitive fatigue.</p>
+            <h3 class="cs-subheading">Distributed Agile Infrastructure</h3>
+            <p>Despite collaborating while I was working remotely from Portugal, our team established a flawless asynchronous workflow that kept project momentum completely uninterrupted.</p>
+            <ul class="cs-list">
+              <li><strong>Multi-Stage Kanban:</strong> Four-stage pipeline (Kanban I–IV) paired with structured sprint retrospectives to continuously evaluate project velocity.</li>
+              <li><strong>Task Decomposition:</strong> Large research milestones broken into granular components. I operated asynchronously from Portugal — focusing on documentation, data synthesis, and remote design mapping.</li>
+              <li><strong>Synchronous Stand-ups:</strong> Rigorous live alignment checkpoints to ensure uniformity across all work packages.</li>
+            </ul>
+          </div>
+          <div class="cs-team-card">
+            <div class="cs-team-card__label">Team 4EVA</div>
+            <ul class="cs-team-list">
+              <li>Helen Kärt Käbin</li>
+              <li>Gabriella Tarja</li>
+              <li>Laura Sööt</li>
+              <li>Hanna Milk</li>
+              <li><strong>Kairiin Koddala</strong> — UX Researcher, Data Synthesizer, Agile Process Lead &amp; Product Ideator</li>
+              <li>Paula Maria Mengel</li>
+            </ul>
+            <div class="cs-team-card__context">International Student Service Design Challenge × IBM</div>
+          </div>
+        </div>
+
+        <!-- TODO: REPLACE WITH image_d7f738.png -->
+        <figure class="cs-media-block">
+          <div class="cs-media-block__placeholder">
+            <span class="cs-media-block__icon">⬜</span>
+            <span class="cs-media-block__text">Team Canvas Board — Miro</span>
+            <span class="cs-media-block__file">image_d7f738.png</span>
+          </div>
+          <figcaption>Team Canvas — values, communication guidelines, and risk mapping</figcaption>
+        </figure>
+
+        <!-- TODO: REPLACE WITH image_d7faa5.png -->
+        <figure class="cs-media-block">
+          <div class="cs-media-block__placeholder">
+            <span class="cs-media-block__icon">⬜</span>
+            <span class="cs-media-block__text">Sprint Calendar &amp; Multi-Stage Kanban Matrix</span>
+            <span class="cs-media-block__file">image_d7faa5.png</span>
+          </div>
+          <figcaption>Chronological sprint calendar and four-stage Kanban pipeline overview</figcaption>
+        </figure>
+
+        <!-- TODO: REPLACE WITH image_d7f431.jpg -->
+        <figure class="cs-media-block">
+          <img
+            src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80"
+            alt="Team synchronous stand-up call and deep dive analysis session"
+            class="cs-media-block__img"
+            loading="lazy"
+          />
+          <figcaption>Synchronous team stand-up — deep dive analysis session (image_d7f431.jpg)</figcaption>
+        </figure>
+      </div>
+    </details>
+
+    <!-- ── STAGE 3 ─────────────────────────────────────── -->
+    <details class="cs-stage" role="listitem">
+      <summary class="cs-stage__summary">
+        <span class="cs-stage__num">03</span>
+        <span class="cs-stage__title">Research Methodology &amp; Data Triangulation</span>
+        <span class="cs-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="cs-stage__body">
+        <div class="cs-prose">
+          <p>To ensure high validity and avoid reliance on intuitive assumptions, we deployed a mixed-methods research framework, integrating macro-demographic data with qualitative field ethnography.</p>
+        </div>
+        <div class="cs-research-grid">
+          <div class="cs-research-card cs-research-card--quant">
+            <div class="cs-research-card__badge">Quantitative</div>
+            <h3 class="cs-subheading">Screening Survey</h3>
+            <p class="cs-research-card__stat">n = 369</p>
+            <p>Evaluated modern hiring patterns. Filtered for candidates who navigated a recruitment process within the last 5 years (n=292).</p>
+            <div class="cs-demo-breakdown">
+              <div class="cs-demo-bar">
+                <span class="cs-demo-bar__label">Male</span>
+                <div class="cs-demo-bar__track"><div class="cs-demo-bar__fill" style="width:57.7%"></div></div>
+                <span class="cs-demo-bar__pct">57.7%</span>
+              </div>
+              <div class="cs-demo-bar">
+                <span class="cs-demo-bar__label">Female</span>
+                <div class="cs-demo-bar__track"><div class="cs-demo-bar__fill cs-demo-bar__fill--accent" style="width:41.2%"></div></div>
+                <span class="cs-demo-bar__pct">41.2%</span>
+              </div>
+              <div class="cs-demo-bar">
+                <span class="cs-demo-bar__label">Non-binary / N/A</span>
+                <div class="cs-demo-bar__track"><div class="cs-demo-bar__fill cs-demo-bar__fill--dim" style="width:1%"></div></div>
+                <span class="cs-demo-bar__pct">1%</span>
+              </div>
+            </div>
+            <p class="cs-research-card__note">68.6% of respondents aged 25–44 — core active economic bracket</p>
+          </div>
+          <div class="cs-research-card cs-research-card--qual">
+            <div class="cs-research-card__badge cs-research-card__badge--qual">Qualitative</div>
+            <h3 class="cs-subheading">Expert Interviews</h3>
+            <p class="cs-research-card__stat">n = 4</p>
+            <ul class="cs-expert-list">
+              <li><strong>Liisa Oviir</strong><span>Advisor to the Gender Equality and Equal Treatment Commissioner — legal enforcement loopholes</span></li>
+              <li><strong>Kristi Saare</strong><span>Financial Investor, Author &amp; Entrepreneur — socio-economic narratives and wealth disparities</span></li>
+              <li><strong>Public Sector Recruiter</strong><span>Operational workflows and applicant tracking screenings</span></li>
+              <li><strong>Private Sector Recruiter</strong><span>Interview scorecards and evaluation frameworks</span></li>
+            </ul>
+            <div class="cs-field-note">
+              <span class="cs-field-note__icon">📍</span>
+              <span>Field ethnography at <strong>Bolt HQ</strong> — "Women in Tech: Breaking Barriers, Building the Future" lecture series</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- ── STAGE 4 ─────────────────────────────────────── -->
+    <details class="cs-stage" role="listitem">
+      <summary class="cs-stage__summary">
+        <span class="cs-stage__num">04</span>
+        <span class="cs-stage__title">Data Synthesis &amp; Deconstructed Insights</span>
+        <span class="cs-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="cs-stage__body">
+        <div class="cs-prose">
+          <p>Our team initiated the discovery phase with a clear hypothesis: the wage gap is driven by recruiters asking fundamentally different, highly discriminatory questions to women during live interviews compared to men.</p>
+          <p>However, the survey data <strong>invalidated this assumption</strong>. The quantitative breakdown proved that men and women are asked about personal relationships and family structures at a highly comparable frequency. This critical finding forced us to dig deeper — we discovered that while the <em>input</em> (the question) is uniform, the <em>output</em> (the hiring decision) is asymmetric.</p>
+        </div>
+        <div class="cs-comparison">
+          <div class="cs-comparison__header">
+            <span class="cs-comparison__question">"Do you plan to have children soon?"</span>
+            <span class="cs-comparison__sub">Same question. Opposite interpretation.</span>
+          </div>
+          <div class="cs-comparison__grid">
+            <div class="cs-comparison__card cs-comparison__card--male">
+              <div class="cs-comparison__card-label">Male Candidate</div>
+              <ul class="cs-comparison__list">
+                <li>✓ Stable "Head of Household"</li>
+                <li>✓ High motivation signal</li>
+                <li>✓ Low predicted turnover</li>
+                <li>✓ Deserves premium compensation</li>
+              </ul>
+              <div class="cs-comparison__verdict cs-comparison__verdict--positive">Perceived as an asset</div>
+            </div>
+            <div class="cs-comparison__divider">vs</div>
+            <div class="cs-comparison__card cs-comparison__card--female">
+              <div class="cs-comparison__card-label">Female Candidate</div>
+              <ul class="cs-comparison__list">
+                <li>✗ Imminent organisational risk</li>
+                <li>✗ Expensive parental leave gap</li>
+                <li>✗ Expected high absenteeism</li>
+                <li>✗ Deprioritised for advancement</li>
+              </ul>
+              <div class="cs-comparison__verdict cs-comparison__verdict--negative">Perceived as a liability</div>
+            </div>
+          </div>
+          <div class="cs-comparison__insight">
+            <strong>McKinsey finding:</strong> 43% of women leave the workforce within a year of having a child. The root discrimination happens long before a contract is signed.
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- ── STAGE 5 ─────────────────────────────────────── -->
+    <details class="cs-stage" role="listitem">
+      <summary class="cs-stage__summary">
+        <span class="cs-stage__num">05</span>
+        <span class="cs-stage__title">Service Blueprints &amp; Business Infrastructure</span>
+        <span class="cs-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="cs-stage__body">
+        <div class="cs-prose">
+          <p>To transition our strategic findings into a high-utility B2B platform architecture, we engineered a scalable operational matrix connecting end-user touchpoints directly with administrative and backend delivery structures — linking frontstage touchpoints to automated data collection stacks and municipal support frameworks like the official Sotsiaalkindlustusamet calculator profiles.</p>
+        </div>
+
+        <!-- TODO: REPLACE WITH blueprint.jpg -->
+        <figure class="cs-media-block">
+          <div class="cs-media-block__placeholder">
+            <span class="cs-media-block__icon">⬜</span>
+            <span class="cs-media-block__text">End-to-End Service Blueprint Architecture Map</span>
+            <span class="cs-media-block__file">blueprint.jpg</span>
+          </div>
+          <figcaption>Transparent — complete service blueprint mapping user and business actions along an optimised timeline</figcaption>
+        </figure>
+
+        <!-- TODO: REPLACE WITH Frame 127.pdf (export as PNG first) -->
+        <figure class="cs-media-block">
+          <div class="cs-media-block__placeholder">
+            <span class="cs-media-block__icon">⬜</span>
+            <span class="cs-media-block__text">Business Model Canvas — Platform Ecosystem</span>
+            <span class="cs-media-block__file">Frame 127.pdf → export as PNG</span>
+          </div>
+          <figcaption>Transparent platform business model — ethical monetisation loop from NULA seed grant to self-sustaining corporate premiums</figcaption>
+        </figure>
+
+        <div class="cs-funding-strip">
+          <span class="cs-funding-strip__label">Seed Funding Pathways</span>
+          <div class="cs-funding-strip__items">
+            <span class="cs-funding-tag">NULA Startup Grant</span>
+            <span class="cs-funding-tag">Open Estonia Foundation</span>
+            <span class="cs-funding-tag">EU Funding</span>
+            <span class="cs-funding-tag">Corporate Premium Tier</span>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- ── STAGE 6 ─────────────────────────────────────── -->
+    <details class="cs-stage" role="listitem">
+      <summary class="cs-stage__summary">
+        <span class="cs-stage__num">06</span>
+        <span class="cs-stage__title">Interface Architecture, Visual Layouts &amp; Video Delivery</span>
+        <span class="cs-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="cs-stage__body">
+        <div class="cs-prose">
+          <p>The platform front-end layout balances data density with clear scannability, streamlining interaction loops for both small business owners and returning parents.</p>
+        </div>
+
+        <div class="cs-placeholder-card">
+          <div class="cs-placeholder-card__inner">
+            <span class="cs-placeholder-card__icon">⬜</span>
+            <p class="cs-placeholder-card__title">Low-Fidelity Wireframes &amp; User-Flow Map</p>
+            <p class="cs-placeholder-card__sub">Employer Dashboard and Employee Portal Interfaces</p>
+            <span class="cs-placeholder-card__badge">Add your Figma wireframe exports here</span>
+          </div>
+        </div>
+
+        <div class="cs-placeholder-card cs-placeholder-card--hifi">
+          <div class="cs-placeholder-card__inner">
+            <span class="cs-placeholder-card__icon">⬜</span>
+            <p class="cs-placeholder-card__title">High-Fidelity UI Mockups</p>
+            <p class="cs-placeholder-card__sub">Transparent Service Platform — Final Screens</p>
+            <span class="cs-placeholder-card__badge">Add your Figma high-fi exports here</span>
+          </div>
+        </div>
+
+        <figure class="cs-video-block">
+          <div class="cs-video-block__placeholder">
+            <div class="cs-video-block__play">▶</div>
+            <p class="cs-video-block__title">Transparent — Service Design Pitch Video</p>
+            <p class="cs-video-block__sub">4EVA Final Submission</p>
+            <span class="cs-video-block__badge">Replace src with your video file or embed URL</span>
+          </div>
+          <!-- TODO: REPLACE src WITH YOUR OWN VIDEO FILE (e.g. /videos/transparent-pitch.mp4) -->
+          <!-- <video controls preload="metadata" class="cs-video-block__video">
+            <source src="/videos/transparent-pitch.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video> -->
+          <figcaption>Transparent service design pitch — 4EVA team final submission</figcaption>
+        </figure>
+      </div>
+    </details>
+
+  </div><!-- /cs-accordion -->
+
+</div><!-- /cs -->
