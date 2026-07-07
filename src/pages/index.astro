@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
+import { getImage } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import FlowingMenu from "../components/FlowingMenu/FlowingMenu.jsx";
 import HeroMetaballs from "../components/HeroMetaballs/HeroMetaballs.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 import PillNav from "../components/PillNav/PillNav.astro";
@@ -12,15 +12,15 @@ const { Content: AboutContent } = await render(about);
 
 const projects = await getCollection("projects");
 const sortedProjects = projects.sort(
-  (a, b) => (a.data.sortOrder ?? 99) - (b.data.sortOrder ?? 99)
+  (a, b) => (a.data.sortOrder ?? Infinity) - (b.data.sortOrder ?? Infinity)
 );
 
-const menuItems = sortedProjects.map((project) => ({
-  link: `/Kairiin-Koddala/projects/${project.id}`,
-  text: project.data.title,
-  textEt: project.data.titleEt ?? project.data.title,
-  image: project.data.coverImage.src,
-}));
+// Pre-optimise cover images for all projects in the work index
+const projectImages = await Promise.all(
+  sortedProjects.map((p) =>
+    getImage({ src: p.data.coverImage, width: 600, format: "webp" })
+  )
+);
 ---
 
 <Layout title={`${about.data.name} — ${about.data.title}`}>
@@ -55,34 +55,103 @@ const menuItems = sortedProjects.map((project) => ({
       <p class="hero-subtitle">{about.data.name}</p>
     </HeroMetaballs>
 
-    <!-- Selected Work -->
+    <!-- Selected Work — Visual Project Showcase Grid -->
     <section class="projects-section" id="section-work">
       <div class="section-header">
         <h2 data-i18n="selected_1">Selected</h2>
         <h2 data-i18n="selected_2">Work</h2>
       </div>
 
-      <div class="flowing-menu-wrap">
-        <FlowingMenu
-          client:load
-          items={menuItems}
-          speed={18}
-          bgColor="#F2EDE6"
-          textColor="#1e1c14"
-          marqueeBgColor="#C97FA8"
-          marqueeTextColor="#F2EDE6"
-          borderColor="#d6cfc4"
-        />
-      </div>
-      {/* Hidden data store for project title translations — read by i18n script */}
-      <div id="project-titles-data" aria-hidden="true" style="display:none">
-        {sortedProjects.map((p) => (
-          <span
-            data-project-id={p.id}
-            data-title-en={p.data.title}
-            data-title-et={p.data.titleEt ?? p.data.title}
-          />
+      <!-- ── Filter Bar ── -->
+      <div class="filter-bar" role="group" aria-label="Filter projects by discipline">
+        {[
+          { key: 'all',                  label: 'All' },
+          { key: 'UX/UI',                label: 'UX/UI' },
+          { key: 'Business Strategy',    label: 'Business Strategy' },
+          { key: 'Interaction Design',   label: 'Interaction Design' },
+          { key: 'Creative Technology',  label: 'Creative Technology' },
+        ].map(({ key, label }) => (
+          <button
+            class={`filter-pill${key === 'all' ? ' filter-pill--active' : ''}`}
+            data-filter={key}
+            aria-pressed={key === 'all' ? 'true' : 'false'}
+            type="button"
+          >
+            {label}
+          </button>
         ))}
+      </div>
+
+      <!-- Work Index — three-track project rows -->
+      <div class="work-index" id="work-index">
+        {sortedProjects.map((project, i) => (
+          <div
+            class="project-index-row"
+            data-filter-tags={(project.data.filterTags ?? project.data.tags).join(',')}
+            data-index={i}
+            aria-hidden={i >= 3 ? 'true' : 'false'}
+            style={i >= 3 ? 'display:none' : ''}
+          >
+            <!-- Left Track: small muted category label -->
+            <div class="project-index-row__left">
+              <span class="project-index-row__meta">
+                {(project.data.tags ?? []).join(' · ')}
+              </span>
+            </div>
+
+            <!-- Middle Track: title + description + learn more link -->
+            <div class="project-index-row__middle">
+              <a
+                href={`/Kairiin-Koddala/projects/${project.id}`}
+                aria-label={`View case study: ${project.data.title}`}
+                class="project-index-row__title-link"
+              >
+                <h3
+                  class="project-index-row__title"
+                  data-project-title-en={project.data.title}
+                  data-project-title-et={project.data.titleEt ?? project.data.title}
+                >
+                  {project.data.title}
+                </h3>
+              </a>
+              <p class="project-index-row__desc">{project.data.description}</p>
+              <a
+                href={`/Kairiin-Koddala/projects/${project.id}`}
+                class="project-index-row__learn-more"
+                tabindex="-1"
+                aria-hidden="true"
+              >
+                Learn More
+              </a>
+            </div>
+
+            <!-- Right Track: clean landscape thumbnail -->
+            <div class="project-index-row__right">
+              <img
+                src={projectImages[i].src}
+                alt={`${project.data.title} project cover`}
+                class="project-index-row__image"
+                loading={i === 0 ? 'eager' : 'lazy'}
+                width="600"
+                height="400"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Load More / Show Less toggle -->
+      <div class="work-index-toggle" id="work-index-toggle">
+        <button
+          class="work-index-toggle__btn"
+          id="work-toggle-btn"
+          type="button"
+          aria-expanded="false"
+          aria-controls="work-index"
+        >
+          <span class="work-index-toggle__label" id="work-toggle-label">Load More</span>
+          <span class="work-index-toggle__icon" id="work-toggle-icon" aria-hidden="true">↓</span>
+        </button>
       </div>
     </section>
 
@@ -97,50 +166,108 @@ const menuItems = sortedProjects.map((project) => ({
         <p data-i18n-bio class="about-bio-text"></p>
       </div>
 
-      <div style="margin-top: var(--space-xl);">
-        <h3 style="font-size: 11px; letter-spacing: 0.15em; color: var(--color-text-dim); margin-bottom: var(--space-lg);" data-i18n="skills_label">Skills</h3>
-        <p style="color: var(--color-text-muted); letter-spacing: 0.05em;">
-          {about.data.skills.join(' · ')}
-        </p>
+      <!-- Skills as interactive pill tags -->
+      <div class="skills-block" style="margin-top: var(--space-xl);">
+        <h3 class="skills-block__label" data-i18n="skills_label">Skills</h3>
+        <div class="skills-pills" role="list" aria-label="Skills">
+          {about.data.skills.map((skill: string) => (
+            <span class="skill-pill" role="listitem">{skill}</span>
+          ))}
+        </div>
       </div>
     </section>
 
     <!-- CV Section -->
-    <section class="cv-section">
+    <section class="cv-section" id="section-cv" aria-label="Curriculum Vitae">
       <div class="section-header">
         <h2 data-i18n="cv_1">Curriculum</h2>
         <h2 data-i18n="cv_2">Vitae</h2>
       </div>
 
-      <div class="cv-grid">
-        <div class="cv-column">
-          <h3 class="cv-column-label" data-i18n="cv_exp">Experience</h3>
-          {about.data.experience?.map((entry) => (
-            <div class="cv-entry">
-              <div class="cv-entry-main">
-                <span class="cv-entry-role">{entry.role}</span>
-                <span class="cv-entry-company">{entry.company}</span>
-              </div>
-              <span class="cv-entry-years">
-                {entry.startYear}–{entry.endYear ? entry.endYear : <span data-i18n="cv_present">Present</span>}
-              </span>
-            </div>
-          ))}
+      <div class="cv-editorial">
+        <!-- Left column: section label -->
+        <div class="cv-editorial__header">
+          <span class="cv-col__label" data-i18n="cv_edu">Education</span>
         </div>
 
-        <div class="cv-column">
-          <h3 class="cv-column-label" data-i18n="cv_edu">Education</h3>
-          {about.data.education.map((entry) => (
-            <div class="cv-entry">
-              <div class="cv-entry-main">
-                <span class="cv-entry-role">{entry.degree}</span>
-                <span class="cv-entry-company">{entry.institution}</span>
-              </div>
-              <span class="cv-entry-years">
-                {entry.startYear}–{entry.endYear ? entry.endYear : <span data-i18n="cv_present">Present</span>}
-              </span>
+        <!-- Right column: all entries stacked vertically -->
+        <div class="cv-editorial__entries">
+          <!-- Education entries -->
+          <div class="cv-entry">
+            <div class="cv-entry-main">
+              <span class="cv-entry-role">BA Digital Product Design</span>
+              <span class="cv-entry-company">Estonian Academy of Arts (EKA)</span>
             </div>
-          ))}
+            <span class="cv-entry-years">2023–<span data-i18n="cv_present">Present</span></span>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-entry-main">
+              <span class="cv-entry-role">Erasmus+ Exchange Programme</span>
+              <span class="cv-entry-company">Faculty of Fine Arts, University of Porto (FBAUP)</span>
+            </div>
+            <span class="cv-entry-years">Exchange</span>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-entry-main">
+              <span class="cv-entry-role">Advanced Interaction & Prototyping Workshop</span>
+              <span class="cv-entry-company">Tokyo University of the Arts Design Lab</span>
+            </div>
+            <span class="cv-entry-years">Workshop</span>
+          </div>
+
+          <!-- Milestone divider between Education and Experience -->
+          <hr class="milestone-divider" aria-hidden="true" />
+
+          <span class="cv-col__label" data-i18n="cv_exp">Experience</span>
+
+          <!-- Experience entries -->
+          <div class="cv-entry">
+            <div class="cv-entry-main">
+              <span class="cv-entry-role">Service Design Intern</span>
+              <span class="cv-entry-company">Estonian Tax and Customs Board (MTA)</span>
+            </div>
+            <span class="cv-entry-years">2024–2024</span>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-entry-main">
+              <span class="cv-entry-role">Social Media Manager & Operations Strategist</span>
+              <span class="cv-entry-company">Botik Garden Bar</span>
+            </div>
+            <span class="cv-entry-years">2025–<span data-i18n="cv_present">Present</span></span>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-entry-main">
+              <span class="cv-entry-role">Freelance Designer</span>
+              <span class="cv-entry-company">Service & Graphic Design</span>
+            </div>
+            <span class="cv-entry-years">Ongoing</span>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-entry-main">
+              <span class="cv-entry-role">Senior Customer Experience Specialist</span>
+              <span class="cv-entry-company">Hospitality Sector</span>
+            </div>
+            <span class="cv-entry-years">2015–<span data-i18n="cv_present">Present</span></span>
+          </div>
+
+          <!-- Milestone divider between Experience and Honors -->
+          <hr class="milestone-divider" aria-hidden="true" />
+
+          <span class="cv-col__label" data-i18n="cv_honors">Honors</span>
+
+          <!-- Honors entries -->
+          <div class="cv-entry">
+            <div class="cv-entry-main">
+              <span class="cv-entry-role">2025 Student Service Design Challenge</span>
+              <span class="cv-entry-company" data-i18n="cv_honor_finalist">Global Finalist — June 2025</span>
+            </div>
+          </div>
+          <div class="cv-entry">
+            <div class="cv-entry-main">
+              <span class="cv-entry-role">Student Business & Entrepreneurship Competition</span>
+              <span class="cv-entry-company" data-i18n="cv_honor_jury">Volunteer Jury Member — Product Design Representative</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -158,8 +285,14 @@ const menuItems = sortedProjects.map((project) => ({
       nav_back: '← Home',
       hero_line1: 'Digital Product', hero_line2: 'Designer', hero_line3: 'from Tallinn.',
       selected_1: 'Selected', selected_2: 'Work',
+      archive_label: 'Other Explorations',
       about_1: 'About', cv_1: 'Curriculum', cv_2: 'Vitae',
-      skills_label: 'Skills', cv_exp: 'Experience', cv_edu: 'Education', cv_present: 'Present',
+      skills_label: 'Skills', cv_exp: 'Experience', cv_edu: 'Education', cv_present: 'Present', cv_view_full: 'View full CV',
+      cv_responsibilities: 'Responsibilities', cv_focus: 'Focus Areas', cv_honors: 'Honors & Volunteering',
+      cv_badge_award: 'Award', cv_badge_volunteer: 'Volunteer',
+      cv_honor_finalist: 'Global Finalist — Issued June 2025',
+      cv_honor_jury: 'Volunteer Jury Member — Product Design Representative evaluating student startup pitches and prototypes',
+      cv_design_skills: 'Design & Strategy', cv_languages: 'Languages', cv_native: 'Native',
       contact_title: 'Get in Touch', contact_mail_lbl: 'Mail', contact_follow: 'Follow',
       other_1: 'Other', other_2: 'Work',
       other_label_fashion: 'Fashion Photography', other_desc_fashion: 'Art direction & styling',
@@ -169,15 +302,21 @@ const menuItems = sortedProjects.map((project) => ({
       other_label_anim2: 'Character Animation', other_desc_anim2: 'Frame-by-frame illustration',
       other_label_odin: 'KAI Designs — The Odin Project', other_desc_odin: 'HTML · CSS · React',
       other_label_painting: 'Still Life in Blue', other_desc_painting: 'Oil on canvas',
-      bio: `I design experiences for people — and I believe the best way to do that is to first understand them from the front line.\n\nOver the past 10 years I've worked directly with customers in high-pressure, high-volume environments: managing 20 tables solo on a surprise rush day, de-escalating difficult situations in real time, and learning that most service failures aren't people problems — they're system problems. That lens has made me a sharper designer.\n\nAt the Estonian Tax and Customs Board, I redesigned the internal Confluence environment used across all digital product teams, and prototyped the Customs Duty Calculator mobile view — which shipped to production. I cut redundant development work by introducing component-level animations and interactive states directly in Figma, eliminating the outdated practice of building new frames for every micro-interaction.\n\nOn the Ole Valmis crisis preparedness app, a user during testing told me: "Why do I need a trash bag? I'm not sorting trash if there's a war." That moment rewired the entire product direction. The list wasn't the problem — the missing context was. I redesigned the feature to educate users on dual-use logic (a trash bag doubles as an emergency raincoat or sleeping bag barrier), and the client's development specialist reached out directly for continued collaboration.\n\nAt Botik, I own the full content strategy: I designed and execute a data-driven social media system that grew inquiry volume 27.3%, retained +98.7% of incoming traffic, and moved our Google position from 9.5 to 6.2 — a 29.8% organic traffic increase. I initiated quarterly statistical overviews for ownership, built an inventory feedback loop with the bar team, and redesigned front-of-house workflow before peak season.\n\nI'm now targeting Customer Support and Customer Success roles at product companies — deliberately. The fastest way to become a highly effective in-house UX or Service Designer is to spend time where unfiltered user pain hits first. I'm not waiting for a junior design title. I'm going to earn product intuition from the inside.\n\nIf you're building a product team that values designers who have actually talked to users for a decade — let's connect.`,
+      bio: `I grew up in the countryside, where life naturally revolves around small-knit communities, shared rituals, and looking out for one another. That upbringing completely shapes how I approach design. To me, systems aren't just blocks of logic — they are digital neighborhoods where people should feel seen, supported, and safe, especially when things get overwhelming.\n\nDesign-wise, I am deeply curious. I don't like staying on the surface; I want to sink my teeth into a topic, sit with the data, and truly understand the analytical why behind human behavior. But I also believe you can't design a meaningful system from a distance.\n\nFor the past decade, I've spent my time on the front lines of customer service — handling high-pressure rushes solo, de-escalating stressful moments in real time, and learning that when a system fails, it's rarely a people problem; it's an empathy problem. Whether I'm mapping out dual-use crisis logic for national emergency apps, restructuring workflows for a beloved local garden bar like Botik, or smoothing out internal data systems, my goal is always to design with clarity and care.\n\nI don't just want to build efficient products; I want to build thoughtful experiences that honor the people using them. If you value a deeply analytical, endlessly curious designer who brings a decade of unfiltered human insight to the table — let's create something meaningful together.`,
     },
     et: {
       nav_hey: 'HEI', nav_about: 'MINUST', nav_work: 'TÖÖD', nav_contact: 'KONTAKT',
       nav_back: '← Avaleht',
       hero_line1: 'Digitaalne toote-', hero_line2: 'disainer', hero_line3: 'Tallinnast.',
       selected_1: 'Valitud', selected_2: 'Tööd',
+      archive_label: 'Muud Projektid',
       about_1: 'Minust', cv_1: 'Curriculum', cv_2: 'Vitae',
-      skills_label: 'Oskused', cv_exp: 'Töökogemus', cv_edu: 'Haridus', cv_present: 'Praeguseni',
+      skills_label: 'Oskused', cv_exp: 'Töökogemus', cv_edu: 'Haridus', cv_present: 'Praeguseni', cv_view_full: 'Vaata täielikku CV-d',
+      cv_responsibilities: 'Ülesanded', cv_focus: 'Fookusalad', cv_honors: 'Tunnustused & Vabatahtlik töö',
+      cv_badge_award: 'Auhind', cv_badge_volunteer: 'Vabatahtlik',
+      cv_honor_finalist: 'Globaalne finalist — Väljastatud juuni 2025',
+      cv_honor_jury: 'Vabatahtlik žüriiliige — Tootedisaini esindaja, hindamas üliõpilaste idufirmade esitlusi ja prototüüpe',
+      cv_design_skills: 'Disain & Strateegia', cv_languages: 'Keeled', cv_native: 'Emakeel',
       contact_title: 'Võta Ühendust', contact_mail_lbl: 'Kiri', contact_follow: 'Jälgi',
       other_1: 'Muud', other_2: 'Tööd',
       other_label_fashion: 'Moefotograafia', other_desc_fashion: 'Kunstiline juhtimine ja stilistika',
@@ -191,68 +330,131 @@ const menuItems = sortedProjects.map((project) => ({
     },
   };
 
+  // ── All DOM-dependent logic runs on astro:page-load (fires on initial load
+  //    AND after every View Transition swap, ensuring ClientRouter compatibility)
+  document.addEventListener('astro:page-load', () => {
+
   // ── Language toggle logic ──────────────────────────────────────────────────
   (function () {
-    // Read saved preference or default to English
     let lang = localStorage.getItem('lang') || 'en';
     const toggle = document.getElementById('lang-toggle');
     const langLabel = document.getElementById('lang-label');
 
-    function applyLang(l) {
-      const t = translations[l];
+    function applyLang(l: string) {
+      const t = (translations as Record<string, Record<string, string>>)[l];
       if (!t) return;
 
-      // Update html lang attribute
       document.documentElement.lang = l;
 
-      // Update all [data-i18n] elements
       document.querySelectorAll('[data-i18n]').forEach((el) => {
-        const key = el.getAttribute('data-i18n');
-        if (t[key] !== undefined) el.textContent = t[key];
+        const key = (el as HTMLElement).getAttribute('data-i18n');
+        if (key && t[key] !== undefined) el.textContent = t[key];
       });
 
-      // Update bio (multi-paragraph, rendered as separate <p> tags)
       const bioEl = document.querySelector('[data-i18n-bio]');
       if (bioEl && t.bio) {
         bioEl.innerHTML = t.bio
           .split('\n\n')
-          .map((p) => `<p>${p.replace(/\n/g, '<br>')}</p>`)
+          .map((p: string) => `<p>${p.replace(/\n/g, '<br>')}</p>`)
           .join('');
       }
 
-      // Update toggle button label (shows the OTHER language you can switch to)
       if (langLabel) langLabel.textContent = l === 'en' ? 'ET' : 'EN';
 
-      // Update project titles in the FlowingMenu
-      // The FlowingMenu renders .menu__item-link elements with the project title as text.
-      // We match them by index against the hidden data store.
-      const titleData = document.querySelectorAll('#project-titles-data [data-title-en]');
-      const menuLinks = document.querySelectorAll('.menu__item-link');
-      titleData.forEach((dataEl, i) => {
-        const link = menuLinks[i];
-        if (!link) return;
-        const htmlData = dataEl as HTMLElement;
+      // Update project titles in the showcase grid and archive list
+      document.querySelectorAll('[data-project-title-en]').forEach((el) => {
+        const htmlEl = el as HTMLElement;
         const newTitle = l === 'et'
-          ? (htmlData.dataset.titleEt || htmlData.dataset.titleEn || '')
-          : (htmlData.dataset.titleEn || '');
-        // The link contains a text node followed by the marquee — update only the text node
-        const textNode = Array.from(link.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
-        if (textNode) textNode.textContent = newTitle;
+          ? (htmlEl.dataset.projectTitleEt || htmlEl.dataset.projectTitleEn || '')
+          : (htmlEl.dataset.projectTitleEn || '');
+        htmlEl.textContent = newTitle;
       });
 
       localStorage.setItem('lang', l);
       lang = l;
     }
 
-    // Apply on load
     applyLang(lang);
 
-    // Toggle on click
     if (toggle) {
       toggle.addEventListener('click', () => {
         applyLang(lang === 'en' ? 'et' : 'en');
       });
     }
+  })();
+
+  // ── Project filter bar + Load More / Show Less ───────────────────────────
+  (function () {
+    const pills    = document.querySelectorAll<HTMLButtonElement>('.filter-pill');
+    const rows     = document.querySelectorAll<HTMLElement>('.project-index-row');
+    const toggleEl = document.getElementById('work-index-toggle');
+    const btn      = document.getElementById('work-toggle-btn') as HTMLButtonElement | null;
+    const label    = document.getElementById('work-toggle-label');
+    const icon     = document.getElementById('work-toggle-icon');
+
+    const INITIAL_VISIBLE = 3;
+    let activeFilter = 'all';
+    let expanded     = false;
+
+    // ── Core render function ──────────────────────────────────────────────
+    function render() {
+      rows.forEach(row => {
+        const idx     = parseInt(row.dataset.index ?? '0', 10);
+        const rawTags = row.dataset.filterTags ?? '';
+        const tags    = rawTags === '' ? [] : rawTags.split(',').map(t => t.trim());
+        const matches = activeFilter === 'all' || tags.includes(activeFilter);
+        const visible = matches && (activeFilter !== 'all' || idx < INITIAL_VISIBLE || expanded);
+
+        row.style.display = visible ? 'grid' : 'none';
+        row.setAttribute('aria-hidden', visible ? 'false' : 'true');
+      });
+
+      if (toggleEl) {
+        toggleEl.style.display = (activeFilter === 'all' && rows.length > INITIAL_VISIBLE) ? '' : 'none';
+      }
+
+      if (btn)   btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      if (label) label.textContent = expanded ? 'Show Less' : 'Load More';
+      if (icon)  icon.textContent  = expanded ? '↑' : '↓';
+    }
+
+    // ── Filter pills ──────────────────────────────────────────────────────
+    pills.forEach(pill => {
+      function activate() {
+        activeFilter = pill.dataset.filter ?? 'all';
+        // When switching to a specific filter, reset expanded so returning
+        // to 'all' starts collapsed again
+        if (activeFilter !== 'all') expanded = false;
+
+        pills.forEach(p => {
+          const isActive = p.dataset.filter === activeFilter;
+          p.classList.toggle('filter-pill--active', isActive);
+          p.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        });
+
+        render();
+      }
+
+      pill.addEventListener('click', activate);
+      pill.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate(); }
+      });
+    });
+
+    // ── Load More / Show Less button ──────────────────────────────────────
+    if (btn) {
+      btn.addEventListener('click', () => {
+        expanded = !expanded;
+        render();
+        if (!expanded) {
+          const section = document.getElementById('section-work');
+          if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    // ── Initial render ────────────────────────────────────────────────────
+    render();
   })();
 
   // ── Pill nav: smooth scroll + active state ──────────────────────────────────
@@ -262,7 +464,7 @@ const menuItems = sortedProjects.map((project) => ({
     navItems.forEach((item) => {
       item.addEventListener('click', (e) => {
         e.preventDefault();
-        const targetId = item.getAttribute('href')?.slice(1);
+        const targetId = (item as HTMLAnchorElement).getAttribute('href')?.slice(1);
         if (!targetId) return;
         const target =
           document.getElementById(targetId) ||
@@ -302,4 +504,6 @@ const menuItems = sortedProjects.map((project) => ({
       if (el) observer.observe(el);
     });
   })();
+
+  }); // end astro:page-load
 </script>

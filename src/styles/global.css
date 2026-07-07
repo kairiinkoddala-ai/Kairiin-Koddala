@@ -3,10 +3,10 @@
 /* Jacob Turner Template - Warm Retro Palette */
 :root {
   /* Colors — light cream / dusty pink / dark brownish-green */
-  --color-bg: #F2EDE6;
+  --color-bg: #FAF8F5;
   --color-bg-secondary: #2E2D1E;
   --color-text: #1e1c14;
-  --color-text-muted: #4a4535;
+  --color-text-muted: #3a3525;
   --color-text-dim: #7a7260;
   --color-border: #d6cfc4;
   --color-accent: #C97FA8;
@@ -26,8 +26,10 @@
   --max-width: 1400px;
   
   /* Typography */
-  --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Forum', Georgia, serif;
+  /* --font-body is an alias for --font-sans — Poppins 300 for body text */
+  --font-body: var(--font-sans);
   
   /* Transitions */
   --ease: cubic-bezier(0.19, 1, 0.22, 1);
@@ -104,14 +106,14 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
   font-family: var(--font-serif);
   font-size: clamp(3rem, 10vw, 8rem);
-  font-style: italic;
+  font-style: normal;
   line-height: 0.95;
 }
 
 h2 {
   font-family: var(--font-serif);
   font-size: clamp(2rem, 6vw, 5rem);
-  font-style: italic;
+  font-style: normal;
   line-height: 1;
 }
 
@@ -122,6 +124,7 @@ h3 {
 }
 
 p {
+  font-family: var(--font-body);
   font-size: 14px;
   line-height: 1.7;
   color: var(--color-text-muted);
@@ -176,7 +179,7 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   gap: 0;
-  background: #F2EDE6;
+  background: #FAF8F5;
   border-radius: 999px;
   padding: 0 var(--space-xl);
   height: 48px;
@@ -242,7 +245,7 @@ a:hover {
 
 .pill-nav-lang:hover {
   background: var(--color-accent);
-  color: #F2EDE6;
+  color: #FAF8F5;
 }
 
 @media (max-width: 480px) {
@@ -385,11 +388,17 @@ a:hover {
 .hero-content {
   position: relative;
   z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
 }
 
 .hero-content h1 {
   margin-bottom: 0;
   color: #C97FA8;
+  font-size: clamp(5rem, 14vw, 13rem);
+  line-height: 0.88;
+  grid-column: 1;
 }
 
 .hero-line {
@@ -398,11 +407,22 @@ a:hover {
 }
 
 .hero-subtitle {
-  margin-top: var(--space-xl);
+  margin-top: 0;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 0.15em;
   color: rgba(201, 127, 168, 0.55);
+  grid-column: 2;
+  align-self: end;
+}
+
+@media (max-width: 640px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+  }
+  .hero-subtitle {
+    grid-column: 1;
+  }
 }
 
 /* Remove old static-image blob styles */
@@ -429,11 +449,110 @@ a:hover {
 }
 
 /* ========================================
-   SELECTED WORK / PROJECTS
+   FILTER BAR — Selected Work section
    ======================================== */
-.projects-section {
-  padding: 0;
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg) var(--container-padding);
+  border-bottom: 1px solid var(--color-border);
 }
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  cursor: pointer;
+  transition:
+    background-color 0.3s var(--ease),
+    border-color 0.3s var(--ease),
+    color 0.3s var(--ease),
+    transform 0.2s var(--ease);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.filter-pill:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.filter-pill--active {
+  background-color: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #FAF8F5;
+}
+
+.filter-pill--active:hover {
+  background-color: #b86a94;
+  border-color: #b86a94;
+  color: #FAF8F5;
+}
+
+.filter-pill:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+
+
+
+.skill-pills,
+.skills-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.skills-block__label {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--color-text-dim);
+  text-transform: uppercase;
+  font-weight: 400;
+  margin-bottom: var(--space-lg);
+}
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #C97FA8;
+  background-color: rgba(201, 127, 168, 0.08);
+  border: 1px solid rgba(201, 127, 168, 0.35);
+  border-radius: 999px;
+  transition:
+    background-color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease),
+    color var(--duration) var(--ease);
+  cursor: default;
+  user-select: none;
+}
+
+.skill-pill:hover {
+  background-color: rgba(201, 127, 168, 0.18);
+  border-color: rgba(201, 127, 168, 0.65);
+  color: #b86a94;
+}
+
+
+
+
 
 .project-row {
   display: block;
@@ -458,7 +577,7 @@ a:hover {
 .project-row:hover .project-number,
 .project-row:hover .project-tags,
 .project-row:hover .project-view {
-  color: #F2EDE6;
+  color: #FAF8F5;
 }
 
 .project-row-inner {
@@ -547,8 +666,11 @@ a:hover {
 }
 
 /* ========================================
-   FLOWING MENU
+   SELECTED WORK / PROJECTS (legacy rows — used on project detail pages)
    ======================================== */
+.projects-section {
+  padding: 0;
+}
 .flowing-menu-wrap {
   height: 70vh;
   position: relative;
@@ -597,8 +719,10 @@ a:hover {
 
 .about-content p,
 .about-bio-text p {
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
-  line-height: 1.8;
+  font-family: var(--font-body);
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
+  font-weight: 300;
+  line-height: 1.85;
   color: var(--color-text-muted);
   margin-bottom: var(--space-lg);
 }
@@ -638,7 +762,7 @@ a:hover {
 .contact-title {
   font-family: var(--font-serif);
   font-size: clamp(2.5rem, 8vw, 6rem);
-  font-style: italic;
+  font-style: normal;
   text-transform: uppercase;
   margin-bottom: var(--space-3xl);
   line-height: 1;
@@ -799,7 +923,7 @@ a:hover {
 
 /* Title — light variant for dark background */
 .project-detail-title--light {
-  color: #F2EDE6 !important;
+  color: #FAF8F5 !important;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.3);
 }
 
@@ -828,7 +952,7 @@ a:hover {
 .project-detail-title {
   font-family: var(--font-serif);
   font-size: clamp(2.5rem, 8vw, 6rem);
-  font-style: italic;
+  font-style: normal;
   text-transform: uppercase;
   line-height: 0.95;
   margin-bottom: var(--space-lg);
@@ -881,8 +1005,10 @@ a:hover {
 }
 
 .project-detail-content p {
+  font-family: var(--font-body);
   font-size: 15px;
-  line-height: 1.8;
+  font-weight: 300;
+  line-height: 1.85;
   color: var(--color-text-muted);
   margin-bottom: var(--space-lg);
 }
@@ -1002,62 +1128,104 @@ a:hover {
   padding-bottom: var(--space-4xl);
 }
 
-.cv-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-3xl);
+.cv-doc {
   padding: 0 var(--container-padding);
 }
 
-@media (min-width: 768px) {
-  .cv-grid {
+/* Two-column grid row */
+.cv-doc__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 640px) {
+  .cv-doc__grid {
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-2xl);
   }
 }
 
-.cv-column-label {
+.cv-doc__grid--border {
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Column — generous padding for premium feel */
+.cv-col {
+  padding: clamp(28px, 3vw, 40px) 0;
+}
+
+@media (min-width: 640px) {
+  .cv-col:first-child {
+    padding-right: clamp(32px, 4vw, 56px);
+    border-right: 1px solid var(--color-border);
+  }
+  .cv-col:last-child {
+    padding-left: clamp(32px, 4vw, 56px);
+  }
+}
+
+.cv-col__label {
   font-size: 11px;
   letter-spacing: 0.15em;
   color: var(--color-text-dim);
-  margin-bottom: var(--space-lg);
   text-transform: uppercase;
   font-weight: 400;
+  margin-bottom: var(--space-lg);
 }
 
+/* Entries */
 .cv-entry {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-md);
-  padding: var(--space-lg) 0;
+  padding: clamp(12px, 1.5vw, 18px) 0;
   border-top: 1px solid var(--color-border);
+  border-left: none;
+  border-right: none;
+  box-shadow: none;
+}
+
+.cv-entry:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.cv-entry--plain {
+  border-top: none;
+  padding: 4px 0;
 }
 
 .cv-entry-main {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  gap: 4px;
 }
 
+/* Role / job title — bold and prominent */
 .cv-entry-role {
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-text);
+  line-height: 1.7;
 }
 
+/* Company / institution — lighter, readable */
 .cv-entry-company {
   font-size: 12px;
+  font-weight: 400;
   color: var(--color-text-muted);
   letter-spacing: 0.03em;
+  line-height: 1.7;
 }
 
 .cv-entry-years {
   font-size: 11px;
   color: var(--color-text-dim);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   white-space: nowrap;
   flex-shrink: 0;
 }
@@ -1165,7 +1333,7 @@ a:hover {
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #F2EDE6;
+  color: #FAF8F5;
 }
 
 .other-work-desc {
@@ -1204,5 +1372,256 @@ a:hover {
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation: none;
+  }
+}
+
+/* ========================================
+   EDITORIAL LAYOUT — Work Index & CV
+   ======================================== */
+
+/* Work Index — full-width container */
+.work-index {
+  width: 100%;
+  padding: 0;
+  background: none;
+}
+
+/* Project Index Row — asymmetric three-column editorial grid
+   Col 1 (left):   20% — tiny muted category label
+   Col 2 (middle): 1fr — title + description + learn more
+   Col 3 (right):  30% — landscape thumbnail
+*/
+.project-index-row {
+  display: grid;
+  grid-template-columns: 20% 1fr 30%;
+  gap: var(--space-xl);
+  align-items: start;
+  border-top: 1px solid var(--color-border);
+  transition: opacity 0.35s var(--ease);
+  padding: var(--space-xl) var(--container-padding);
+}
+
+/* Left track — tiny muted metadata/category label */
+.project-index-row__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 4px;
+}
+
+.project-index-row__meta {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-dim);
+  line-height: 1.6;
+}
+
+/* Middle track — title, description, learn more */
+.project-index-row__middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: var(--space-md);
+}
+
+/* Right track — flush thumbnail */
+.project-index-row__right {
+  display: flex;
+  align-items: stretch;
+}
+
+/* Project title — editorial serif in the middle column */
+.project-index-row__title {
+  font-size: clamp(1.25rem, 2.5vw, 2.5rem);
+  font-family: var(--font-serif);
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+}
+
+.project-index-row__title-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-index-row__title-link:hover .project-index-row__title {
+  color: var(--color-text-muted);
+}
+
+/* Description — editorial magazine body text */
+.project-index-row__desc {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--color-text-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Learn More — bare uppercase link, no box or icon */
+.project-index-row__learn-more {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--color-text-dim);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 2px;
+  align-self: flex-start;
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+
+.project-index-row__learn-more:hover {
+  color: var(--color-text);
+  border-color: var(--color-text);
+}
+
+/* Project cover image — flush, no radius, no shadow */
+.project-index-row__image {
+  object-fit: cover;
+  min-height: 200px;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  box-shadow: none;
+  display: block;
+}
+
+/* Legacy tag class — kept for any remaining references */
+.project-index-tag {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-dim);
+}
+
+/* CV Editorial — asymmetric two-column grid */
+.cv-editorial {
+  display: grid;
+  grid-template-columns: minmax(0, 28%) 1fr;
+  gap: 0;
+  padding: 0 var(--container-padding);
+}
+
+/* CV left column — header label */
+.cv-editorial__header {
+  padding: clamp(28px, 3vw, 40px) clamp(16px, 2vw, 32px) clamp(28px, 3vw, 40px) 0;
+}
+
+/* CV right column — entries */
+.cv-editorial__entries {
+  padding: clamp(28px, 3vw, 40px) 0 clamp(28px, 3vw, 40px) clamp(16px, 2vw, 32px);
+}
+
+/* Milestone divider — single horizontal rule between CV blocks */
+.milestone-divider {
+  width: 100%;
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 2rem 0;
+}
+
+/* CV editorial — single-column on small screens */
+@media (max-width: 640px) {
+  .cv-editorial {
+    grid-template-columns: 1fr;
+  }
+  .cv-editorial__header {
+    padding-bottom: 0;
+  }
+}
+
+/* Reduced motion — disable project row transition */
+@media (prefers-reduced-motion: reduce) {
+  .project-index-row {
+    transition: none;
+  }
+}
+
+/* Toggle button container */
+.work-index-toggle {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-xl) var(--container-padding);
+  border-top: 1px solid var(--color-border);
+}
+
+.work-index-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 10px 28px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    border-color 0.3s var(--ease),
+    color 0.3s var(--ease),
+    background-color 0.3s var(--ease);
+}
+
+.work-index-toggle__btn:hover {
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+
+.work-index-toggle__btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.work-index-toggle__icon {
+  font-size: 13px;
+  line-height: 1;
+  transition: transform 0.3s var(--ease);
+}
+
+.work-index-toggle__btn[aria-expanded="true"] .work-index-toggle__icon {
+  transform: rotate(180deg);
+}
+
+/* ========================================
+   RESPONSIVE — Project Index Row (< 768px)
+   ======================================== */
+@media (max-width: 767px) {
+  .project-index-row {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: var(--space-md);
+  }
+
+  .project-index-row__left {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .project-index-row__middle {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .project-index-row__right {
+    grid-column: 1;
+    grid-row: 3;
   }
 }

@@ -279,6 +279,9 @@ export default function Footer() {
                     aria-label={`Call ${CONTACT.phone.display}`}
                   >
                     {CONTACT.phone.display}
+                    <svg className="footer-contact-item__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                      <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
                   </a>
                 </li>
               </ul>

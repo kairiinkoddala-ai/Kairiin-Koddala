@@ -33,16 +33,10 @@ experience:
     startYear: 2015
 ---
 
-I design experiences for people — and I believe the best way to do that is to first understand them from the front line.
+I grew up in the countryside, where life naturally revolves around small-knit communities, shared rituals, and looking out for one another. That upbringing completely shapes how I approach design. To me, systems aren't just blocks of logic — they are digital neighborhoods where people should feel seen, supported, and safe, especially when things get overwhelming.
 
-Over the past 10 years I've worked directly with customers in high-pressure, high-volume environments: managing 20 tables solo on a surprise rush day, de-escalating difficult situations in real time, and learning that most service failures aren't people problems — they're system problems. That lens has made me a sharper designer.
+Design-wise, I am deeply curious. I don't like staying on the surface; I want to sink my teeth into a topic, sit with the data, and truly understand the analytical why behind human behavior. But I also believe you can't design a meaningful system from a distance.
 
-At the Estonian Tax and Customs Board, I redesigned the internal Confluence environment used across all digital product teams, and prototyped the Customs Duty Calculator mobile view — which shipped to production. I cut redundant development work by introducing component-level animations and interactive states directly in Figma, eliminating the outdated practice of building new frames for every micro-interaction.
+For the past decade, I've spent my time on the front lines of customer service — handling high-pressure rushes solo, de-escalating stressful moments in real time, and learning that when a system fails, it's rarely a people problem; it's an empathy problem. Whether I'm mapping out dual-use crisis logic for national emergency apps, restructuring workflows for a beloved local garden bar like Botik, or smoothing out internal data systems, my goal is always to design with clarity and care.
 
-On the Ole Valmis crisis preparedness app, a user during testing told me: "Why do I need a trash bag? I'm not sorting trash if there's a war." That moment rewired the entire product direction. The list wasn't the problem — the missing context was. I redesigned the feature to educate users on dual-use logic (a trash bag doubles as an emergency raincoat or sleeping bag barrier), and the client's development specialist reached out directly for continued collaboration.
-
-At Botik, I own the full content strategy: I designed and execute a data-driven social media system that grew inquiry volume 27.3%, retained +98.7% of incoming traffic, and moved our Google position from 9.5 to 6.2 — a 29.8% organic traffic increase. I initiated quarterly statistical overviews for ownership, built an inventory feedback loop with the bar team, and redesigned front-of-house workflow before peak season.
-
-I'm now targeting Customer Support and Customer Success roles at product companies — deliberately. The fastest way to become a highly effective in-house UX or Service Designer is to spend time where unfiltered user pain hits first. I'm not waiting for a junior design title. I'm going to earn product intuition from the inside.
-
-If you're building a product team that values designers who have actually talked to users for a decade — let's connect.
+I don't just want to build efficient products; I want to build thoughtful experiences that honor the people using them. If you value a deeply analytical, endlessly curious designer who brings a decade of unfiltered human insight to the table — let's create something meaningful together.

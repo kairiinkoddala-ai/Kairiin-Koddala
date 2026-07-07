@@ -15,6 +15,8 @@ tags:
   - Service Design
   - UX Research
   - Social Impact
+filterTags:
+  - UX/UI
 tools:
   - Figma
   - Miro

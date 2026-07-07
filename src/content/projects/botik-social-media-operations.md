@@ -17,6 +17,8 @@ tags:
   - Growth
   - Content Strategy
   - Information Architecture
+filterTags:
+  - Business Strategy
 tools:
   - Google Analytics
   - Meta Business Suite

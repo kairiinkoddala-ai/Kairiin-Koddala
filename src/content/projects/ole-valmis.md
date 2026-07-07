@@ -19,6 +19,8 @@ tags:
   - Prototyping
   - Service Design
   - Mobile Design
+filterTags:
+  - UX/UI
 tools:
   - Figma
   - Miro
