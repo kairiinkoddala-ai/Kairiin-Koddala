@@ -15,6 +15,10 @@ const items = [
     descEn: 'Art direction & styling',
     descEt: 'Kunstiline juhtimine ja stilistika',
     modifier: 'tall',
+    conceptEn: 'Exploring identity through light and shadow',
+    conceptEt: 'Identiteedi uurimine valguse ja varju kaudu',
+    toolsEn: ['Photography', 'Art Direction', 'Styling'],
+    toolsEt: ['Fotograafia', 'Kunstiline juhtimine', 'Stilistika'],
   },
   {
     src: `${BASE}/other-tartu-poster.jpg`,
@@ -25,6 +29,10 @@ const items = [
     descEn: 'Internship — Eesti Filmi Instituut',
     descEt: 'Praktika — Eesti Filmi Instituut',
     modifier: '',
+    conceptEn: 'Visual identity for an international film festival',
+    conceptEt: 'Visuaalne identiteet rahvusvahelisele filmifestivalile',
+    toolsEn: ['Illustrator', 'InDesign'],
+    toolsEt: ['Illustrator', 'InDesign'],
   },
   {
     src: `${BASE}/other-tartu-billboard.jpg`,
@@ -35,6 +43,10 @@ const items = [
     descEn: 'Tartu city billboard',
     descEt: 'Tartu välireklaam',
     modifier: '',
+    conceptEn: 'Seeing the design live in the city',
+    conceptEt: 'Disain elamas linnaruumis',
+    toolsEn: ['Print Design'],
+    toolsEt: ['Trükidisain'],
   },
   {
     src: `${BASE}/animation1.gif`,
@@ -45,6 +57,10 @@ const items = [
     descEn: 'Frame-by-frame illustration',
     descEt: 'Kaader-kaadri haaval illustratsioon',
     modifier: 'gif',
+    conceptEn: 'Pencil-on-paper brought to life frame by frame',
+    conceptEt: 'Pliiats paberil, ellu äratatud kaader kaadri haaval',
+    toolsEn: ['Procreate', 'Frame-by-frame'],
+    toolsEt: ['Procreate', 'Kaader-kaadri haaval'],
   },
   {
     src: `${BASE}/animation2.gif`,
@@ -55,6 +71,10 @@ const items = [
     descEn: 'Frame-by-frame illustration',
     descEt: 'Kaader-kaadri haaval illustratsioon',
     modifier: 'gif wide',
+    conceptEn: 'Expressive movement through minimal line work',
+    conceptEt: 'Väljendusrikas liikumine minimaalse joonega',
+    toolsEn: ['Procreate', 'Frame-by-frame'],
+    toolsEt: ['Procreate', 'Kaader-kaadri haaval'],
   },
   {
     src: `${BASE}/animated-interactive-filter.mp4`,
@@ -65,6 +85,10 @@ const items = [
     descEn: 'HTML · CSS · React',
     descEt: 'HTML · CSS · React',
     modifier: 'wide',
+    conceptEn: 'Full-stack portfolio built from scratch',
+    conceptEt: 'Täislahendusena nullist ehitatud portfoolio',
+    toolsEn: ['HTML', 'CSS', 'React'],
+    toolsEt: ['HTML', 'CSS', 'React'],
   },
   {
     src: `${BASE}/other-painting.jpg`,
@@ -75,6 +99,10 @@ const items = [
     descEn: 'Oil on canvas',
     descEt: 'Õlivärv lõuendil',
     modifier: '',
+    conceptEn: 'Stillness and colour as emotional language',
+    conceptEt: 'Vaikus ja värvus emotsionaalse keelena',
+    toolsEn: ['Oil Paint', 'Canvas'],
+    toolsEt: ['Õlivärv', 'Lõuend'],
   },
 ];
 ---
@@ -96,9 +124,9 @@ const items = [
       </p>
     </header>
 
-    <div class="other-work-grid">
-      {items.map((item) => (
-        <div class={`other-work-item${item.modifier ? ' other-work-item--' + item.modifier.split(' ').join(' other-work-item--') : ''}`}>
+    <div class="other-work-grid" data-items={JSON.stringify(items)}>
+      {items.map((item, index) => (
+        <div class={`other-work-item${item.modifier ? ' other-work-item--' + item.modifier.split(' ').join(' other-work-item--') : ''}`} data-index={index}>
           <div class="other-work-media">
             {item.type === 'video' ? (
               <video
@@ -110,16 +138,41 @@ const items = [
                 aria-label={item.alt}
               />
             ) : (
+              /* NOTE: GIF animations cannot be paused via CSS or JS — known platform limitation */
               <img
                 src={item.src}
                 alt={item.alt}
-                loading="lazy"
+                loading="eager"
               />
             )}
           </div>
-          <div class="other-work-caption">
-            <span class="other-work-label" data-label-en={item.labelEn} data-label-et={item.labelEt}>{item.labelEn}</span>
-            <span class="other-work-desc" data-desc-en={item.descEn} data-desc-et={item.descEt}>{item.descEn}</span>
+          <div class="other-work-overlay" aria-hidden="true">
+            <div class="other-work-overlay__inner">
+              <span class="other-work-overlay__label"
+                    data-label-en={item.labelEn}
+                    data-label-et={item.labelEt}>
+                {item.labelEn}
+              </span>
+              <span class="other-work-overlay__desc"
+                    data-desc-en={item.descEn}
+                    data-desc-et={item.descEt}>
+                {item.descEn}
+              </span>
+              <p class="other-work-overlay__concept"
+                 data-concept-en={item.conceptEn}
+                 data-concept-et={item.conceptEt}>
+                {item.conceptEn}
+              </p>
+              <div class="other-work-overlay__tools">
+                {item.toolsEn?.map((tool, i) => (
+                  <span class="skill-pill"
+                        data-tool-en={tool}
+                        data-tool-et={item.toolsEt?.[i]}>
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       ))}
@@ -131,7 +184,28 @@ const items = [
 </Layout>
 
 <script>
-  // ── i18n for Other Work page ──────────────────────────────────────────────
+  // ── Type definition ───────────────────────────────────────────────────────
+  interface GalleryItem {
+    src: string;
+    type: 'image' | 'gif' | 'video';
+    alt: string;
+    labelEn: string;
+    labelEt: string;
+    descEn: string;
+    descEt: string;
+    modifier: string;
+    conceptEn?: string;
+    conceptEt?: string;
+    toolsEn?: string[];
+    toolsEt?: string[];
+  }
+
+  // ── Items data (serialised from Astro frontmatter) ────────────────────────
+  const ITEMS: GalleryItem[] = JSON.parse(
+    document.querySelector<HTMLElement>('.other-work-grid')!.dataset.items!
+  );
+
+  // ── i18n ──────────────────────────────────────────────────────────────────
   const translations: Record<string, Record<string, string>> = {
     en: {
       nav_back: '← Home',
@@ -160,15 +234,28 @@ const items = [
         if (t[key] !== undefined) el.textContent = t[key];
       });
 
-      // Update item labels and descs
-      document.querySelectorAll('.other-work-label').forEach((el) => {
+      // Update overlay labels and descs
+      document.querySelectorAll('.other-work-overlay__label').forEach((el) => {
         const htmlEl = el as HTMLElement;
         const val = l === 'et' ? htmlEl.dataset.labelEt : htmlEl.dataset.labelEn;
         if (val) el.textContent = val;
       });
-      document.querySelectorAll('.other-work-desc').forEach((el) => {
+      document.querySelectorAll('.other-work-overlay__desc').forEach((el) => {
         const htmlEl = el as HTMLElement;
         const val = l === 'et' ? htmlEl.dataset.descEt : htmlEl.dataset.descEn;
+        if (val) el.textContent = val;
+      });
+
+      // Update concept paragraphs
+      document.querySelectorAll('.other-work-overlay__concept').forEach((el) => {
+        const htmlEl = el as HTMLElement;
+        const val = l === 'et' ? htmlEl.dataset.conceptEt : htmlEl.dataset.conceptEn;
+        if (val) el.textContent = val;
+      });
+
+      // Update tool pills
+      document.querySelectorAll<HTMLElement>('.skill-pill[data-tool-en]').forEach((el) => {
+        const val = l === 'et' ? el.dataset.toolEt : el.dataset.toolEn;
         if (val) el.textContent = val;
       });
 
@@ -185,6 +272,149 @@ const items = [
       });
     }
   })();
+
+  // ── LightboxController ────────────────────────────────────────────────────
+  class LightboxController {
+    private el: HTMLElement;
+    private mediaSlot: HTMLElement;
+    private currentIndex: number = 0;
+    private triggerEl: HTMLElement | null = null;
+    private readonly focusableSelectors = 'button, [href], input, [tabindex]:not([tabindex="-1"])';
+
+    constructor(private items: GalleryItem[]) {
+      this.el = this.buildDOM();
+      this.mediaSlot = this.el.querySelector<HTMLElement>('.ow-lightbox__media')!;
+      document.body.appendChild(this.el);
+      this.bindEvents();
+    }
+
+    private buildDOM(): HTMLElement {
+      const lb = document.createElement('div');
+      lb.id = 'ow-lightbox';
+      lb.className = 'ow-lightbox';
+      lb.setAttribute('role', 'dialog');
+      lb.setAttribute('aria-modal', 'true');
+      lb.setAttribute('aria-hidden', 'true');
+      lb.setAttribute('aria-label', '');
+
+      lb.innerHTML = `
+        <div class="ow-lightbox__backdrop"></div>
+        <div class="ow-lightbox__container">
+          <button class="ow-lightbox__close" aria-label="Close lightbox" type="button">&#215;</button>
+          <button class="ow-lightbox__prev" aria-label="Previous item" type="button">&#8592;</button>
+          <button class="ow-lightbox__next" aria-label="Next item" type="button">&#8594;</button>
+          <div class="ow-lightbox__media"></div>
+        </div>
+      `;
+      return lb;
+    }
+
+    open(index: number, trigger: HTMLElement): void {
+      this.currentIndex = index;
+      this.triggerEl = trigger;
+      this.renderMedia(index);
+      const item = this.items[index];
+      this.el.setAttribute('aria-label', item.alt || item.labelEn);
+      this.el.setAttribute('aria-hidden', 'false');
+      this.el.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      // Focus close button after CSS transition starts
+      requestAnimationFrame(() => {
+        this.el.querySelector<HTMLElement>('.ow-lightbox__close')?.focus();
+      });
+    }
+
+    close(): void {
+      this.el.classList.remove('is-open');
+      this.el.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      this.triggerEl?.focus();
+      // Clean up media after transition completes
+      setTimeout(() => {
+        this.mediaSlot.innerHTML = '';
+      }, 400);
+    }
+
+    navigate(direction: 1 | -1): void {
+      this.currentIndex = (this.currentIndex + direction + this.items.length) % this.items.length;
+      this.renderMedia(this.currentIndex);
+      const item = this.items[this.currentIndex];
+      this.el.setAttribute('aria-label', item.alt || item.labelEn);
+    }
+
+    private renderMedia(index: number): void {
+      const item = this.items[index];
+      this.mediaSlot.innerHTML = '';
+
+      if (item.type === 'video') {
+        const v = document.createElement('video');
+        v.src = item.src;
+        v.autoplay = true;
+        v.loop = true;
+        v.muted = true;
+        v.setAttribute('playsinline', '');
+        v.controls = true;
+        v.setAttribute('aria-label', item.alt);
+        this.mediaSlot.appendChild(v);
+      } else {
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.alt;
+        this.mediaSlot.appendChild(img);
+      }
+    }
+
+    private trapFocus(e: KeyboardEvent): void {
+      if (e.key !== 'Tab') return;
+      const focusable = Array.from(
+        this.el.querySelectorAll<HTMLElement>(this.focusableSelectors)
+      ).filter(el => !el.hasAttribute('disabled'));
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    private bindEvents(): void {
+      this.el.querySelector('.ow-lightbox__close')?.addEventListener('click', () => this.close());
+      this.el.querySelector('.ow-lightbox__backdrop')?.addEventListener('click', () => this.close());
+      this.el.querySelector('.ow-lightbox__prev')?.addEventListener('click', () => this.navigate(-1));
+      this.el.querySelector('.ow-lightbox__next')?.addEventListener('click', () => this.navigate(1));
+
+      document.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (!this.el.classList.contains('is-open')) return;
+        if (e.key === 'Escape') { e.preventDefault(); this.close(); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); this.navigate(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); this.navigate(1); }
+        this.trapFocus(e);
+      });
+    }
+  }
+
+  // ── Initialise lightbox and wire up gallery click handlers ────────────────
+  const lightbox = new LightboxController(ITEMS);
+
+  document.querySelectorAll<HTMLElement>('.other-work-item').forEach((el) => {
+    el.addEventListener('click', () => {
+      const index = parseInt(el.dataset.index ?? '0', 10);
+      lightbox.open(index, el);
+    });
+  });
+
+  // ── Reduced motion: pause all videos on page load ─────────────────────────
+  // NOTE: GIF animations cannot be paused via CSS or JavaScript.
+  // The browser controls GIF playback natively. Users who require
+  // reduced motion will still see GIFs animate — this is a known
+  // platform limitation with no reliable cross-browser workaround.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLVideoElement>('video').forEach(v => v.pause());
+  }
 </script>
 
 <style>
@@ -195,7 +425,7 @@ const items = [
   .other-work-page__h1 {
     font-family: var(--font-serif);
     font-size: clamp(2rem, 6vw, 5rem);
-    font-style: italic;
+    font-style: normal;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: -0.02em;
@@ -208,5 +438,248 @@ const items = [
     font-size: 14px;
     color: var(--color-text-muted);
     line-height: 1.7;
+  }
+
+  .other-work-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 0 var(--container-padding) var(--space-2xl);
+  }
+
+  @media (min-width: 1024px) {
+    .other-work-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Fashion Photography — tall hero, spans 2 cols × 2 rows */
+    .other-work-item:nth-child(1) {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    /* Balti Filmipäevad poster — spans 2 cols */
+    .other-work-item:nth-child(2) {
+      grid-column: span 2;
+    }
+
+    /* Wide items (video, wide GIF) — spans 2 cols */
+    .other-work-item--wide {
+      grid-column: span 2;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .other-work-item {
+      grid-column: 1 / -1 !important;
+      grid-row: auto !important;
+    }
+  }
+
+  /* ── Gallery card — scale on hover ── */
+  .other-work-item {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .other-work-item:hover {
+    transform: scale(1.03);
+  }
+
+  /* Media fills the card */
+  .other-work-media {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .other-work-media img,
+  .other-work-media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── Hover overlay — fades in on hover ── */
+  .other-work-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(46, 45, 30, 0.90);
+    display: flex;
+    align-items: flex-end;
+    opacity: 0;
+    transition: opacity 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    pointer-events: none;
+  }
+
+  .other-work-item:hover .other-work-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .other-work-overlay__inner {
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .other-work-overlay__label {
+    font-family: var(--font-serif);
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--color-bg);
+    line-height: 1.1;
+  }
+
+  .other-work-overlay__desc,
+  .other-work-overlay__concept {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(242, 237, 230, 0.7);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .other-work-overlay__tools {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+  }
+
+  /* Touch devices — overlay always visible */
+  @media (hover: none) {
+    .other-work-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  /* Reduced motion — suppress all transitions and scale */
+  @media (prefers-reduced-motion: reduce) {
+    .other-work-item,
+    .other-work-overlay {
+      transition: none;
+    }
+
+    .other-work-item:hover {
+      transform: none;
+    }
+  }
+
+  /* ── Lightbox modal ── */
+  .ow-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 300ms var(--ease);
+  }
+
+  .ow-lightbox.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .ow-lightbox__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 28, 20, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .ow-lightbox__container {
+    position: relative;
+    z-index: 1;
+    max-width: min(90vw, 1200px);
+    max-height: 90vh;
+    transform: scale(0.85);
+    transition: transform 400ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+
+  .ow-lightbox.is-open .ow-lightbox__container {
+    transform: scale(1.0);
+  }
+
+  .ow-lightbox__media img,
+  .ow-lightbox__media video {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    display: block;
+  }
+
+  .ow-lightbox__close {
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
+    background: none;
+    border: none;
+    color: var(--color-bg);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--space-sm);
+    line-height: 1;
+    opacity: 0.8;
+    transition: opacity 200ms var(--ease);
+  }
+
+  .ow-lightbox__close:hover {
+    opacity: 1;
+  }
+
+  .ow-lightbox__prev,
+  .ow-lightbox__next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(46, 45, 30, 0.6);
+    border: 1px solid rgba(242, 237, 230, 0.2);
+    color: var(--color-bg);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 2px;
+    transition: background 200ms var(--ease);
+  }
+
+  .ow-lightbox__prev {
+    left: -3.5rem;
+  }
+
+  .ow-lightbox__next {
+    right: -3.5rem;
+  }
+
+  .ow-lightbox__prev:hover,
+  .ow-lightbox__next:hover {
+    background: rgba(46, 45, 30, 0.9);
+  }
+
+  /* Reduced motion — suppress lightbox animations */
+  @media (prefers-reduced-motion: reduce) {
+    .ow-lightbox,
+    .ow-lightbox__container {
+      transition: none;
+    }
+
+    .ow-lightbox__container {
+      transform: scale(1.0);
+    }
   }
 </style>

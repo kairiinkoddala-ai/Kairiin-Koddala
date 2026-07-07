@@ -20,7 +20,7 @@ import './KultuurimälestistedCaseStudy.css';
         <p class="km-overview__val">Service design and digital transformation sprint executed for the National Heritage Board of Estonia (Muinsuskaitseamet) under the EKA LAETUS framework.</p>
       </div>
       <div class="km-overview__item">
-        <span class="km-overview__key">Team</span>
+        <span class="km-overview__key">The Team</span>
         <p class="km-overview__val">EKA LAETUS Collaborative Design Cohort</p>
       </div>
     </div>
@@ -153,3 +153,320 @@ import './KultuurimälestistedCaseStudy.css';
 
       </div>
     </details>
+
+    <!-- ── STAGE 3 ─────────────────────────────────────── -->
+    <details class="km-stage" role="listitem">
+      <summary class="km-stage__summary">
+        <span class="km-stage__num">03</span>
+        <span class="km-stage__title">Research Methodology &amp; Data Triangulation</span>
+        <span class="km-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="km-stage__body">
+
+        <div class="km-prose">
+          <h3 class="km-subheading">Research Streams</h3>
+          <p>To build a valid evidence base for a structural redesign recommendation, we deployed a mixed-methods research framework integrating three concurrent investigative streams. This triangulation approach ensured that no single data source could produce a misleading finding — each stream was designed to validate, challenge, or enrich the outputs of the others.</p>
+        </div>
+
+        <div class="km-method-grid">
+          <div class="km-method-card">
+            <div class="km-method-card__badge">Stream 1</div>
+            <h3 class="km-subheading">Systemic Expert Interviews</h3>
+            <p>In-depth structured interviews with heritage inspectors, architects, property developers, and legal consultants who interact with the registry professionally. Sessions mapped actual workflow patterns, identified recurring failure points, and surfaced the gap between the system's intended use model and its real-world operational reality.</p>
+          </div>
+          <div class="km-method-card">
+            <div class="km-method-card__badge">Stream 2</div>
+            <h3 class="km-subheading">Observational UX Auditing</h3>
+            <p>Live task-based usability sessions with representative users from all three stakeholder segments. Participants were asked to complete realistic registry tasks — locating a specific monument, interpreting restriction data, and initiating a permit application — while thinking aloud. Sessions were recorded and coded for friction events, abandonment points, and error recovery patterns.</p>
+          </div>
+          <div class="km-method-card">
+            <div class="km-method-card__badge">Stream 3</div>
+            <h3 class="km-subheading">Regulatory Compliance Desk Research</h3>
+            <p>Systematic analysis of the Heritage Conservation Act (Muinsuskaitse seadus) and associated regulatory frameworks to map the legal obligations the registry must fulfil. This stream identified the non-negotiable compliance constraints that any redesign solution must accommodate — distinguishing between structural legal requirements and legacy design decisions that could be safely changed.</p>
+          </div>
+        </div>
+
+        <div class="km-prose">
+          <h3 class="km-subheading">Research Limitations &amp; Design Constraints</h3>
+          <ul class="km-list">
+            <li><strong>Regulatory Non-Negotiables:</strong> Certain data fields, audit trail requirements, and access control structures are mandated by the Heritage Conservation Act and cannot be altered regardless of UX findings. The redesign scope was bounded by these legal constraints from the outset.</li>
+            <li><strong>X-Road Integration Dependencies:</strong> The registry's backend data infrastructure is deeply integrated with Estonia's X-Road state data exchange layer. Any frontend redesign must maintain full compatibility with existing X-Road API contracts — limiting the degree of structural data reorganisation possible in a first-phase intervention.</li>
+            <li><strong>Institutional Change Velocity:</strong> Public sector digital transformation operates on significantly longer decision and procurement cycles than commercial product development. The design recommendations were calibrated to be achievable within realistic institutional timelines, not idealised startup-speed delivery models.</li>
+          </ul>
+        </div>
+
+        <!-- TODO: REPLACE WITH matrix displaying research methodologies and stakeholder interaction sessions -->
+        <figure class="km-media">
+          <div class="km-media__placeholder">
+            <span class="km-media__icon">⬜</span>
+            <span class="km-media__text">Matrix displaying research methodologies and stakeholder interaction sessions</span>
+            <span class="km-media__file">Kultuurimälestiste registri redesign_II rühm.pdf — research methodology spread</span>
+          </div>
+          <figcaption>Research methodology matrix — mixed-methods framework and stakeholder interaction session documentation</figcaption>
+        </figure>
+
+      </div>
+    </details>
+
+    <!-- ── STAGE 4 ─────────────────────────────────────── -->
+    <details class="km-stage" role="listitem">
+      <summary class="km-stage__summary">
+        <span class="km-stage__num">04</span>
+        <span class="km-stage__title">Data Analysis &amp; Synthesis — The Systemic Pivot</span>
+        <span class="km-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="km-stage__body">
+
+        <div class="km-prose">
+          <p>The project was initially briefed as a cosmetic UI refresh — a visual update to modernise the registry's appearance while preserving its underlying information architecture. The research data disproved this framing entirely.</p>
+          <p>Synthesis of the three research streams revealed that the registry's problems were not aesthetic. They were structural. The information architecture itself — the way data was categorised, labelled, and made accessible — was the primary source of user failure. A visual refresh applied to a broken structure would produce a more attractive broken structure.</p>
+          <p>This finding forced a <strong>Suunamuutus</strong> — a total directional shift — from cosmetic redesign to structural service transformation. The brief was rewritten accordingly.</p>
+        </div>
+
+        <!-- Comparison matrix -->
+        <div class="km-comparison">
+          <div class="km-comparison__header">
+            <span class="km-comparison__title">System State Comparison Matrix</span>
+            <span class="km-comparison__sub">Legacy State Archive vs. Redesigned User Portal</span>
+          </div>
+          <div class="km-comparison__grid">
+            <div class="km-comparison__card km-comparison__card--legacy">
+              <div class="km-comparison__card-label">Legacy State Archive</div>
+              <div class="km-comparison__card-focus">
+                <span class="km-comparison__focus-label">Focus</span>
+                <p>Rigid tables, cryptic jargon, internal utility</p>
+              </div>
+              <ul class="km-comparison__list">
+                <li>Database-first information architecture</li>
+                <li>Legal and technical language throughout</li>
+                <li>No contextual guidance or plain-language translation</li>
+                <li>Siloed data with no cross-referencing</li>
+                <li>No permit status visibility for applicants</li>
+                <li>Search requires exact identifier knowledge</li>
+              </ul>
+              <div class="km-comparison__verdict km-comparison__verdict--legacy">User Impact: High anxiety, phone support loops, siloed data</div>
+            </div>
+            <div class="km-comparison__divider">→</div>
+            <div class="km-comparison__card km-comparison__card--redesign">
+              <div class="km-comparison__card-label">Redesigned User Portal</div>
+              <div class="km-comparison__card-focus">
+                <span class="km-comparison__focus-label">Focus</span>
+                <p>Contextual address search, plain-language indicators, role-specific guidance</p>
+              </div>
+              <ul class="km-comparison__list">
+                <li>User-intent-first information architecture</li>
+                <li>Plain-language compliance summaries</li>
+                <li>Contextual guidance at every decision point</li>
+                <li>Integrated spatial and legal data layers</li>
+                <li>Real-time permit tracking and status updates</li>
+                <li>Address-based search with map integration</li>
+              </ul>
+              <div class="km-comparison__verdict km-comparison__verdict--redesign">User Impact: Immediate clarity, autonomous tracking, engaging stories</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="km-prose">
+          <h3 class="km-subheading">Core Systemic Realities Uncovered</h3>
+        </div>
+
+        <div class="km-insights-grid">
+          <div class="km-insight-card">
+            <div class="km-insight-card__num">01</div>
+            <h4 class="km-insight-card__title">The "Black Box" Permitting Process</h4>
+            <p>Once a permit application enters the system, applicants receive no status updates, no estimated timelines, and no visibility into where their application sits in the review queue. The process is entirely opaque — generating anxiety, repeated phone enquiries, and a perception of institutional indifference that erodes public trust in the heritage protection system.</p>
+          </div>
+          <div class="km-insight-card km-insight-card--accent">
+            <div class="km-insight-card__num">02</div>
+            <h4 class="km-insight-card__title">The Spatial Data Disconnect</h4>
+            <p>Heritage restriction data and spatial/geographic data exist in separate, non-integrated systems. A property owner cannot simply enter their address and receive a consolidated view of all applicable heritage restrictions. They must navigate between multiple databases, cross-reference identifiers manually, and interpret legal text without contextual support — a process that routinely produces errors and omissions.</p>
+          </div>
+          <div class="km-insight-card">
+            <div class="km-insight-card__num">03</div>
+            <h4 class="km-insight-card__title">Cryptic Legal Language</h4>
+            <p>The registry presents all restriction and compliance information in the precise legal register of the Heritage Conservation Act — language that is accurate and legally defensible but entirely inaccessible to non-specialist users. There is no plain-language translation layer, no contextual explanation of what restrictions mean in practical terms, and no guidance on what actions are permitted or prohibited for a specific asset type.</p>
+          </div>
+          <div class="km-insight-card">
+            <div class="km-insight-card__num">04</div>
+            <h4 class="km-insight-card__title">Fragmented Data Entry Fields</h4>
+            <p>The data entry interface for heritage professionals contains fragmented, inconsistently labelled fields that do not map intuitively to the underlying data model. This produces systematic data quality issues — incomplete records, inconsistent categorisation, and duplicate entries — that compound over time and degrade the reliability of the registry as an authoritative source.</p>
+          </div>
+        </div>
+
+      </div>
+    </details>
+
+    <!-- ── STAGE 5 ─────────────────────────────────────── -->
+    <details class="km-stage" role="listitem">
+      <summary class="km-stage__summary">
+        <span class="km-stage__num">05</span>
+        <span class="km-stage__title">Systems &amp; Experience Mapping</span>
+        <span class="km-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="km-stage__body">
+
+        <div class="km-prose">
+          <h3 class="km-subheading">As-Is Experience Map (Hetkel kehtiv kasutaja teekond)</h3>
+          <p>The current-state user journey was mapped across four sequential stages, each representing a distinct phase of the user's interaction with the heritage registry system. The mapping process revealed that friction is not concentrated at a single point — it is distributed across the entire journey, compounding at each stage.</p>
+        </div>
+
+        <!-- Horizontal journey map -->
+        <div class="km-journey">
+          <div class="km-journey__track">
+            <div class="km-journey__step">
+              <div class="km-journey__step-num">1</div>
+              <div class="km-journey__step-title">Search &amp; Identify</div>
+              <div class="km-journey__step-label">Otsing ja tuvastamine</div>
+              <div class="km-journey__step-desc">User attempts to locate their property or a specific monument in the registry. Requires knowledge of exact cadastral identifiers or monument registration numbers. Address-based search is unreliable or absent. Users frequently cannot confirm whether their property is heritage-listed at all.</div>
+              <div class="km-journey__step-friction">Friction: No address search, identifier knowledge required, zero onboarding guidance</div>
+            </div>
+            <div class="km-journey__connector" aria-hidden="true">──►</div>
+            <div class="km-journey__step">
+              <div class="km-journey__step-num">2</div>
+              <div class="km-journey__step-title">Interpret Restrictions</div>
+              <div class="km-journey__step-label">Kitsenduste mõistmine</div>
+              <div class="km-journey__step-desc">User attempts to understand what heritage status means for their specific property — what is permitted, what is prohibited, and what requires a permit. All information is presented in legal register language with no plain-language translation. Users cannot determine practical implications without specialist knowledge.</div>
+              <div class="km-journey__step-friction">Friction: Legal jargon, no contextual guidance, no plain-language summaries</div>
+            </div>
+            <div class="km-journey__connector" aria-hidden="true">──►</div>
+            <div class="km-journey__step">
+              <div class="km-journey__step-num">3</div>
+              <div class="km-journey__step-title">Apply for Permit</div>
+              <div class="km-journey__step-label">Taotluse esitamine</div>
+              <div class="km-journey__step-desc">User attempts to submit a permit application for planned works on a heritage asset. The application process requires navigating multiple disconnected systems, assembling documentation without clear guidance on requirements, and submitting through a form interface that provides no confirmation of completeness or correctness.</div>
+              <div class="km-journey__step-friction">Friction: Disconnected systems, unclear documentation requirements, no completeness validation</div>
+            </div>
+            <div class="km-journey__connector" aria-hidden="true">──►</div>
+            <div class="km-journey__step">
+              <div class="km-journey__step-num">4</div>
+              <div class="km-journey__step-title">Wait &amp; Wonder</div>
+              <div class="km-journey__step-label">Ootus ja tagasiside</div>
+              <div class="km-journey__step-desc">User waits for a decision on their permit application with no status visibility, no estimated timeline, and no proactive communication from the Heritage Board. The only recourse is to call the Muinsuskaitseamet helpline — which is frequently overloaded as a direct consequence of the system's opacity.</div>
+              <div class="km-journey__step-friction">Friction: Zero status visibility, no timeline estimates, phone-support dependency</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="km-prose">
+          <h3 class="km-subheading">The Re-engineered Service Prompt (Lähteülesande ümbersõnastamine)</h3>
+          <p>The synthesis process produced a fundamental reframing of the design challenge. The original brief asked for a visual refresh. The evidence demanded something more ambitious:</p>
+        </div>
+
+        <blockquote class="km-callout">
+          <p class="km-callout__quote">How might we redesign the Kultuurimälestiste register so that any citizen — regardless of legal literacy or technical expertise — can independently understand their heritage obligations, track their permit status, and engage with Estonia's cultural heritage as a living, meaningful part of their community?</p>
+        </blockquote>
+
+        <!-- TODO: REPLACE WITH detailed current-state user journey mapping board -->
+        <figure class="km-media">
+          <div class="km-media__placeholder">
+            <span class="km-media__icon">⬜</span>
+            <span class="km-media__text">Detailed current-state user journey mapping board with color-coded sticky notes</span>
+            <span class="km-media__file">Kultuurimälestiste registri redesign_II rühm.pdf — journey mapping spread</span>
+          </div>
+          <figcaption>As-is user journey map — current-state experience mapping board with friction point annotations</figcaption>
+        </figure>
+
+      </div>
+    </details>
+
+    <!-- ── STAGE 6 ─────────────────────────────────────── -->
+    <details class="km-stage" role="listitem">
+      <summary class="km-stage__summary">
+        <span class="km-stage__num">06</span>
+        <span class="km-stage__title">Reframed System Architecture &amp; Strategic Features</span>
+        <span class="km-stage__icon" aria-hidden="true"></span>
+      </summary>
+      <div class="km-stage__body">
+
+        <!-- System architecture diagram -->
+        <div class="km-arch">
+          <div class="km-arch__label">Redesigned Service Architecture — Data Flow</div>
+          <div class="km-arch__top-row">
+            <div class="km-arch__node km-arch__node--public">
+              <div class="km-arch__node-title">Public Landing Exp.</div>
+              <div class="km-arch__node-sub">Address search · Heritage stories · Plain-language guides · Property status overview</div>
+            </div>
+            <div class="km-arch__node km-arch__node--b2b">
+              <div class="km-arch__node-title">B2B Spec. Dashboard</div>
+              <div class="km-arch__node-sub">Bulk restriction lookups · Permit pipeline tracking · Professional data exports · API access</div>
+            </div>
+          </div>
+          <div class="km-arch__arrow-down" aria-hidden="true">▼</div>
+          <div class="km-arch__middle-row">
+            <div class="km-arch__node km-arch__node--validation">
+              <div class="km-arch__node-title">Contextual Validation Layer</div>
+              <div class="km-arch__node-sub">Plain-language compliance filter · Role-specific content routing · Permit status engine · Spatial data integration</div>
+            </div>
+          </div>
+          <div class="km-arch__arrow-down" aria-hidden="true">▼</div>
+          <div class="km-arch__bottom-row">
+            <div class="km-arch__node km-arch__node--backend">
+              <div class="km-arch__node-title">Secure State Auth / X-Road Data Loops</div>
+              <div class="km-arch__node-sub">Muinsuskaitseamet registry database · X-Road state data exchange · Maa-amet spatial data · ID-kaart / Smart-ID authentication</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="km-prose">
+          <h3 class="km-subheading">Strategic Feature Modules &amp; Future Directions</h3>
+        </div>
+
+        <div class="km-features-grid">
+          <div class="km-feature-card">
+            <div class="km-feature-card__num">01</div>
+            <h4 class="km-feature-card__title">The Contextual Address Hub</h4>
+            <p class="km-feature-card__desc">A unified address-based entry point that allows any user to enter a street address and immediately receive a consolidated view of all applicable heritage restrictions, protection categories, and relevant contacts — without requiring knowledge of cadastral identifiers or monument registration numbers. Integrates Maa-amet spatial data with the Muinsuskaitseamet registry in a single query.</p>
+          </div>
+          <div class="km-feature-card km-feature-card--accent">
+            <div class="km-feature-card__num">02</div>
+            <h4 class="km-feature-card__title">Step-by-Step Permit Tracking Engines</h4>
+            <p class="km-feature-card__desc">A transparent permit lifecycle dashboard that gives applicants real-time visibility into their application status, current review stage, estimated decision timeline, and any outstanding documentation requirements. Eliminates the "black box" experience and reduces helpline call volume by making the process legible and predictable for all parties.</p>
+          </div>
+          <div class="km-feature-card">
+            <div class="km-feature-card__num">03</div>
+            <h4 class="km-feature-card__title">The Plain-Language Compliance Filter</h4>
+            <p class="km-feature-card__desc">An intelligent content layer that translates legal restriction text into plain-language summaries calibrated to the user's role and context. A homeowner receives a different explanation of the same restriction than an architect — both accurate, both legally grounded, but each optimised for the recipient's decision-making needs and knowledge baseline.</p>
+          </div>
+          <div class="km-feature-card">
+            <div class="km-feature-card__num">04</div>
+            <h4 class="km-feature-card__title">Engaging Cultural Storytelling Elements (Lähtelood)</h4>
+            <p class="km-feature-card__desc">A narrative content layer that contextualises heritage assets within their historical, cultural, and community significance — transforming the registry from a dry legal database into a living cultural resource. Each monument entry includes accessible storytelling content that connects the asset to its broader heritage context, increasing public engagement and voluntary compliance with protection requirements.</p>
+          </div>
+        </div>
+
+        <!-- TODO: REPLACE WITH low-fidelity interaction wireframes and map-search flow layouts -->
+        <figure class="km-media">
+          <div class="km-media__placeholder">
+            <span class="km-media__icon">⬜</span>
+            <span class="km-media__text">Low-Fidelity Interaction Wireframes and Map-Search Flow Layouts</span>
+            <span class="km-media__file">Kultuurimälestiste registri redesign_II rühm.pdf — wireframe spreads</span>
+          </div>
+          <figcaption>Low-fidelity wireframes — address hub, map-search interface, and permit tracking flow layouts</figcaption>
+        </figure>
+
+        <!-- TODO: REPLACE WITH high-fidelity desktop UI mockups -->
+        <figure class="km-media">
+          <div class="km-media__placeholder">
+            <span class="km-media__icon">⬜</span>
+            <span class="km-media__text">High-Fidelity Desktop UI Mockups — Redesigned Registry Portal Interface Views</span>
+            <span class="km-media__file">Kultuurimälestiste registri redesign_II rühm.pdf — hi-fi mockup spreads</span>
+          </div>
+          <figcaption>High-fidelity mockups — redesigned registry portal desktop interface views</figcaption>
+        </figure>
+
+        <!-- TODO: REPLACE WITH chronological project launch timeline and technical implementation milestone map -->
+        <figure class="km-media">
+          <div class="km-media__placeholder">
+            <span class="km-media__icon">⬜</span>
+            <span class="km-media__text">Chronological Project Launch Timeline and Technical Implementation Milestone Map</span>
+            <span class="km-media__file">Kultuurimälestiste registri redesign_II rühm.pdf — implementation roadmap spread</span>
+          </div>
+          <figcaption>Implementation roadmap — chronological launch timeline and technical milestone architecture</figcaption>
+        </figure>
+
+      </div>
+    </details>
+
+  </div><!-- /km-accordion -->
+
+</div><!-- /km -->

@@ -67,8 +67,8 @@
 /* Main heading */
 .footer-cta__heading {
   font-family: var(--font-serif);
-  font-size: clamp(3.5rem, 12vw, 10rem);
-  font-style: italic;
+  font-size: clamp(2.5rem, 8vw, 7rem);
+  font-style: normal;
   font-weight: 400;
   line-height: 0.92;
   text-transform: uppercase;
@@ -129,7 +129,7 @@
 .footer-main__heading {
   font-family: var(--font-serif);
   font-size: clamp(1.25rem, 3vw, 2rem);
-  font-style: italic;
+  font-style: normal;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: -0.01em;
@@ -178,10 +178,10 @@
 
 /* Card label (eyebrow) */
 .footer-card__label {
-  font-size: 10px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: rgba(201, 127, 168, 0.45);
+  color: rgba(201, 127, 168, 0.75);
 }
 
 /* Decorative dot */
@@ -221,7 +221,7 @@
 .footer-card__desc {
   font-size: 13px;
   line-height: 1.7;
-  color: rgba(201, 127, 168, 0.55);
+  color: rgba(201, 127, 168, 0.85);
   flex: 1;
 }
 
@@ -324,7 +324,7 @@
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: rgba(201, 127, 168, 0.4);
+  color: rgba(201, 127, 168, 0.65);
 }
 
 /* Contact link */
@@ -339,7 +339,7 @@
   text-decoration: none;
   position: relative;
   width: fit-content;
-  transition: color 0.4s var(--ease), gap 0.4s var(--ease);
+  transition: color 0.4s var(--ease), gap 0.4s var(--ease), opacity 0.4s var(--ease);
 }
 
 /* Underline slide-in on hover */
@@ -355,8 +355,9 @@
 }
 
 .footer-contact-item__link:hover {
-  color: #C97FA8;
+  color: #e8a0c8;
   gap: 10px;
+  opacity: 0.85;
 }
 
 .footer-contact-item__link:hover::after {

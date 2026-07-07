@@ -15,6 +15,8 @@ tags:
   - Service Design
   - Information Architecture
   - Government Services
+filterTags:
+  - UX/UI
 tools:
   - Figma
   - Confluence

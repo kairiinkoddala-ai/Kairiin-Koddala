@@ -60,6 +60,7 @@ const projects = defineCollection({
         )
         .optional(),
       tags: z.array(z.string()),
+      filterTags: z.array(z.string()).optional(),
       tools: z.array(z.string()),
       role: z.string(),
       roleEt: z.string().optional(),

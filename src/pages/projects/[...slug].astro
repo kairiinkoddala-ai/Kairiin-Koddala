@@ -5,6 +5,8 @@ import PillNav from "../../components/PillNav/PillNav.astro";
 import FlowingMenu from "../../components/FlowingMenu/FlowingMenu.jsx";
 import TransparentCaseStudy from "../../components/CaseStudy/TransparentCaseStudy.astro";
 import OleValmisCaseStudy from "../../components/CaseStudy/OleValmisCaseStudy.astro";
+import KultuurimälestistedCaseStudy from "../../components/CaseStudy/KultuurimälestistedCaseStudy.astro";
+import MullastCaseStudy from "../../components/CaseStudy/MullastCaseStudy.astro";
 import FooterSecondary from "../../components/Footer/FooterSecondary.astro";
 
 export async function getStaticPaths() {
@@ -82,8 +84,8 @@ const formatDateEt = (date: Date) =>
       </div>
     </section>
 
-    <!-- Project Meta — hidden for Transparent and Ole Valmis (case study components cover it) -->
-    {project.id !== 'transparent-gender-pay-gap' && project.id !== 'ole-valmis' && (
+    <!-- Project Meta — hidden for projects with rich case study components -->
+    {project.id !== 'transparent-gender-pay-gap' && project.id !== 'ole-valmis' && project.id !== 'kultuurimalestised-registry-redesign' && project.id !== 'mullast-installation' && (
     <div class="project-detail-meta">
       <div class="project-meta-item">
         <span class="project-meta-label" data-i18n="meta_role">/ Role</span>
@@ -133,8 +135,8 @@ const formatDateEt = (date: Date) =>
     </div>
     )}
 
-    <!-- About the Project — hidden for Transparent and Ole Valmis (case study components cover it) -->
-    {project.id !== 'transparent-gender-pay-gap' && project.id !== 'ole-valmis' && (
+    <!-- About the Project — hidden for projects with rich case study components -->
+    {project.id !== 'transparent-gender-pay-gap' && project.id !== 'ole-valmis' && project.id !== 'kultuurimalestised-registry-redesign' && project.id !== 'mullast-installation' && (
       <section class="project-detail-content">
         <h2 data-i18n="section_about">/ About the Project</h2>
         <p
@@ -170,8 +172,8 @@ const formatDateEt = (date: Date) =>
       </section>
     )}
 
-    <!-- Markdown body — hidden for Transparent and Ole Valmis (case study components cover it) -->
-    {project.id !== 'transparent-gender-pay-gap' && project.id !== 'ole-valmis' && (
+    <!-- Markdown body — hidden for projects with rich case study components -->
+    {project.id !== 'transparent-gender-pay-gap' && project.id !== 'ole-valmis' && project.id !== 'kultuurimalestised-registry-redesign' && project.id !== 'mullast-installation' && (
       <section class="project-detail-content" style="border-top: 1px solid var(--color-border); padding-top: var(--space-3xl);">
         <Content />
       </section>
@@ -185,6 +187,16 @@ const formatDateEt = (date: Date) =>
     <!-- Rich case study — only rendered for Ole Valmis -->
     {project.id === 'ole-valmis' && (
       <OleValmisCaseStudy />
+    )}
+
+    <!-- Rich case study — only rendered for Kultuurimälestiste registry redesign -->
+    {project.id === 'kultuurimalestised-registry-redesign' && (
+      <KultuurimälestistedCaseStudy />
+    )}
+
+    <!-- Rich case study — only rendered for Mullast installation -->
+    {project.id === 'mullast-installation' && (
+      <MullastCaseStudy />
     )}
 
     <!-- Other Projects — FlowingMenu, identical to homepage but visually secondary -->

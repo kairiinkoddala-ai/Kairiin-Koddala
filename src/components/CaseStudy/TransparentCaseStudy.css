@@ -196,7 +196,7 @@
 .cs-stat__num {
   font-family: var(--font-serif);
   font-size: clamp(1.75rem, 4vw, 3rem);
-  font-style: italic; font-weight: 400;
+  font-style: normal; font-weight: 400;
   color: var(--color-text); line-height: 1;
 }
 
@@ -325,7 +325,7 @@
 .cs-research-card__stat {
   font-family: var(--font-serif);
   font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-  font-style: italic; color: var(--color-text); line-height: 1; margin: 0;
+  font-style: normal; color: var(--color-text); line-height: 1; margin: 0;
 }
 
 .cs-research-card p {
@@ -407,7 +407,7 @@
 .cs-comparison__question {
   font-family: var(--font-serif);
   font-size: clamp(1rem, 2.2vw, 1.5rem);
-  font-style: italic; color: #F2EDE6; line-height: 1.2;
+  font-style: normal; color: #F2EDE6; line-height: 1.2;
 }
 
 .cs-comparison__sub {
@@ -459,7 +459,7 @@
 .cs-comparison__divider {
   display: flex; align-items: center; justify-content: center;
   padding: 0 14px;
-  font-family: var(--font-serif); font-style: italic;
+  font-family: var(--font-serif); font-style: normal;
   font-size: 1.4rem; color: var(--color-text-dim);
   border-left: 1px solid var(--color-border);
   border-right: 1px solid var(--color-border);

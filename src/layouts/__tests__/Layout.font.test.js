@@ -14,12 +14,12 @@ const layoutContent = readFileSync(layoutPath, 'utf-8');
 const cssContent = readFileSync(cssPath, 'utf-8');
 
 describe('Layout.astro — Google Fonts URL', () => {
-  it('contains family=Outfit in the Google Fonts URL', () => {
-    expect(layoutContent).toContain('family=Outfit');
+  it('contains family=Forum in the Google Fonts URL', () => {
+    expect(layoutContent).toContain('family=Forum');
   });
 
-  it('contains family=Fraunces in the Google Fonts URL', () => {
-    expect(layoutContent).toContain('family=Fraunces');
+  it('contains family=Poppins in the Google Fonts URL', () => {
+    expect(layoutContent).toContain('family=Poppins');
   });
 
   it('does NOT contain Space+Grotesk', () => {
@@ -44,19 +44,19 @@ describe('Layout.astro — Google Fonts URL', () => {
 });
 
 describe('global.css — CSS custom properties', () => {
-  it('--font-sans value starts with Outfit', () => {
+  it('--font-sans value starts with Poppins', () => {
     // Match the line that sets --font-sans
     const match = cssContent.match(/--font-sans\s*:\s*([^;]+);/);
     expect(match).not.toBeNull();
     const value = match[1].trim();
-    expect(value.startsWith("'Outfit'")).toBe(true);
+    expect(value.startsWith("'Poppins'")).toBe(true);
   });
 
-  it('--font-serif value starts with Fraunces and includes Georgia', () => {
+  it('--font-serif value starts with Forum and includes Georgia', () => {
     const match = cssContent.match(/--font-serif\s*:\s*([^;]+);/);
     expect(match).not.toBeNull();
     const value = match[1].trim();
-    expect(value.startsWith("'Fraunces'")).toBe(true);
+    expect(value.startsWith("'Forum'")).toBe(true);
     expect(value).toContain('Georgia');
   });
 });
